@@ -1,0 +1,46 @@
+﻿{
+    "title": "words",
+    "description": "A list of words and phrases the bot can use to decide where or not to reply",
+    "words":  {
+        
+        /* Anything above 0.7 should trigger the Bot to reply*/
+
+        "/u/cfb_betbot": 1.0,
+        "cfb_betbot": 1.0,
+        
+        /* Anything below this line is going to require multiple matches */
+        
+        "flair bet": 0.61,
+        "sig bet": 0.61,
+        "signature bet": 0.61,
+        "signature bets": 0.61,
+        "change my flair": 0.51,
+        "change your flair":  0.51,
+        "bet": 0.41,
+        "wager": 0.41,
+        "if": 0.11,
+        "beat us": 0.1,
+        "beat you": 0.1,
+        "beats":  0.1,
+        "win": 0.1,
+        "lose":  0.1,
+        "wins": 0.1,
+        "loses": 0.1,
+        "doesn't win": 0.1,
+        "does not win": 0.1,
+        "doesn't lose": 0.1,
+        "does not win": 0.1,
+        "i will": 0.1,
+        "i'll": 0.1,
+        "up for": 0.1,
+        "wanna make a": 0.1,
+        "want to make a": 0.1,
+        "loser": 0.1,
+        "winner":  0.1,
+        "season": 0.1,
+        "week": 0.1,
+        "post a video": 0.1,
+        "make a video": 0.1,
+        "flair":  0.1
+    }
+}

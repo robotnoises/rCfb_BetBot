@@ -1,0 +1,14 @@
+C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\bin\Debug\RedditBet.Bot.exe.config
+C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\bin\Debug\RedditBet.Bot.exe
+C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\bin\Debug\RedditBet.Bot.pdb
+C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\bin\Debug\HtmlAgilityPack.dll
+C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\bin\Debug\HtmlAgilityPack.xml
+C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\obj\Debug\RedditBet.Bot.csprojResolveAssemblyReference.cache
+C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\obj\Debug\RedditBet.Bot.exe
+C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\obj\Debug\RedditBet.Bot.pdb
+C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\bin\Debug\Newtonsoft.Json.dll
+C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\bin\Debug\Newtonsoft.Json.xml
+C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\obj\Debug\RedditBet.Bot.g.resources
+C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\obj\Debug\RedditBet.Bot.Properties.Resources.resources
+C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\obj\Debug\RedditBet.Bot.csproj.GenerateResource.Cache

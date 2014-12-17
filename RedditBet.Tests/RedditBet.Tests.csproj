@@ -103,7 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RedditBet.API\RedditBet.API.csproj">
-      <Project>{C83DF9D3-F980-40DF-B032-5D7160F1E9D9}</Project>
+      <Project>{5811cec5-3f93-48de-8907-96c245a4cfd7}</Project>
       <Name>RedditBet.API</Name>
     </ProjectReference>
   </ItemGroup>

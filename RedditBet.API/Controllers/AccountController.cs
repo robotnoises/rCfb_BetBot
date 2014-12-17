@@ -14,8 +14,10 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using RedditBet.API.Models;
-using RedditBet.API.Providers;
-using RedditBet.API.Results;
+using RedditBet.Providers;
+using RedditBet.Results;
+using RedditBet.API;
+using RedditBet.API.Models;
 
 namespace RedditBet.API.Controllers
 {

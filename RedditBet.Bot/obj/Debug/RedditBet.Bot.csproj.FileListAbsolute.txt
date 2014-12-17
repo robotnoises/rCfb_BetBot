@@ -12,3 +12,5 @@ C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\bin\Debug\Newtonsoft.Jso
 C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\obj\Debug\RedditBet.Bot.g.resources
 C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\obj\Debug\RedditBet.Bot.Properties.Resources.resources
 C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\obj\Debug\RedditBet.Bot.csproj.GenerateResource.Cache
+C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\bin\Debug\RestSharp.dll
+C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Bot\bin\Debug\RestSharp.xml

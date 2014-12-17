@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace RedditBet.API.Areas.HelpPage.ModelDescriptions
+namespace RedditBet.Areas.HelpPage.ModelDescriptions
 {
     internal static class ModelNameHelper
     {

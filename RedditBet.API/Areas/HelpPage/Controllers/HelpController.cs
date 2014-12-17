@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using RedditBet.API.Areas.HelpPage.ModelDescriptions;
-using RedditBet.API.Areas.HelpPage.Models;
+using RedditBet.Areas.HelpPage.ModelDescriptions;
+using RedditBet.Areas.HelpPage.Models;
 
-namespace RedditBet.API.Areas.HelpPage.Controllers
+namespace RedditBet.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

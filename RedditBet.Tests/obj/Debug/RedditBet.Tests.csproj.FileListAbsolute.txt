@@ -53,7 +53,6 @@ C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\RedditBet.Te
 C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\RedditBet.Tests.pdb
 C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\Microsoft.Web.Infrastructure.dll
 C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\Newtonsoft.Json.dll
-C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\RedditBet.dll
 C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\System.Net.Http.Formatting.dll
 C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\System.Web.Helpers.dll
 C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\System.Web.Http.dll
@@ -74,7 +73,6 @@ C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\Microsoft.Ow
 C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\EntityFramework.dll
 C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\Microsoft.Owin.Security.Cookies.dll
 C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\System.Web.Http.Owin.dll
-C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\RedditBet.pdb
 C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\Newtonsoft.Json.xml
 C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\System.Net.Http.Formatting.xml
 C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\System.Web.Helpers.xml
@@ -98,3 +96,5 @@ C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\System.Web.H
 C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\obj\Debug\RedditBet.Tests.csprojResolveAssemblyReference.cache
 C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\obj\Debug\RedditBet.Tests.dll
 C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\obj\Debug\RedditBet.Tests.pdb
+C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\RedditBet.API.dll
+C:\Users\nichols\Documents\Work\RedditBet\RedditBet.Tests\bin\Debug\RedditBet.API.pdb

@@ -6,15 +6,25 @@ using System.Threading.Tasks;
 using HtmlAgilityPack;
 using System.Configuration;
 using System.Net;
+using Newtonsoft.Json;
+using RedditBet.Bot.Models;
 
 namespace RedditBet.Bot.Utils
 {
     public static class Config
     {
+        // Private fields
+
         private static string _baseUrl { get { return ConfigurationManager.AppSettings["baseUrl"]; } }
+        private static string _apiBaseUrl { get { return ConfigurationManager.AppSettings["apiBaseUrl"]; } }
         private static string _filter { get { return ConfigurationManager.AppSettings["crawlerFilter"]; } }
 
-        public static List<string> GetUrls()
+        private static string _api_Tasks { get { return ConfigurationManager.AppSettings["api_Tasks"]; } }
+        private static string _api_Tasks_Incomplete { get { return ConfigurationManager.AppSettings["api_Tasks_Incomplete"]; } }
+                
+        // Public methods
+
+        public static List<string> GetCrawlerUrls()
         {
             var urls = new List<string>();
             var doc = new HtmlDocument();
@@ -31,6 +41,31 @@ namespace RedditBet.Bot.Utils
 
             return urls;
         }
+
+        public static Dictionary<string, double> GetTargetWords()
+        {
+            var json = JsonConvert.DeserializeObject<Words>(RedditBet.Bot.Properties.Resources.words);
+            return json.words;
+        }
+
+        public static string Api_Base()
+        {
+            return _apiBaseUrl;
+        }
+
+        public static string Api_Tasks(bool getAll)
+        {
+            if (getAll)
+            {
+                return _api_Tasks;
+            }
+            else
+            {
+                return _api_Tasks_Incomplete;
+            }
+        }
+
+        // Private methods
 
         private static string GetPage(string url = null)
         {

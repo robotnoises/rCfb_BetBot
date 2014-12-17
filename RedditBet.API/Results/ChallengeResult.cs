@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace RedditBet.API.Results
+namespace RedditBet.Results
 {
     public class ChallengeResult : IHttpActionResult
     {

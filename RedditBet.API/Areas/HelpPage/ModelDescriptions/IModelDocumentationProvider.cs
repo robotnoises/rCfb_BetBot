@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace RedditBet.API.Areas.HelpPage.ModelDescriptions
+namespace RedditBet.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider
     {

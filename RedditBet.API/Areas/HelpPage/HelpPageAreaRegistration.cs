@@ -1,7 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace RedditBet.API.Areas.HelpPage
+namespace RedditBet.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {

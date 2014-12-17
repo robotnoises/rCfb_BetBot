@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace RedditBet.API.Areas.HelpPage
+namespace RedditBet.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {

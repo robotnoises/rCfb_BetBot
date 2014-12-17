@@ -12,6 +12,7 @@ using System.Web;
 using System.Reflection;
 using System.Configuration;
 using RedditBet.Bot.Utils;
+using RedditBet.Bot.Data;
 
 namespace RedditBet.Bot
 {
@@ -33,35 +34,26 @@ namespace RedditBet.Bot
             
             var comments = new Comments();
 
-            foreach (var url in Config.GetUrls())
+            foreach (var url in Config.GetCrawlerUrls())
             {
                 Log.Info("Fetching URLs.");
 
-                var crawler = new Crawler(@"http://rc.reddit.com/r/CFB/comments/1rkt6s/week_14_user_friendly_bet_thread/");
-                // var crawler = new Crawler(url);
-                var matches = crawler.GetMatchedComments("class", "entry", GetWords(), 0.7);
+                // http://rc.reddit.com/r/CFB/comments/1rkt6s/week_14_user_friendly_bet_thread/
+                var crawler = new Crawler(url);
+                var matches = crawler.GetMatchedComments("class", "entry", Config.GetTargetWords(), 0.7);
 
                 Log.Info(string.Format("Found {0} matches in {1}", matches.Count, url));
                 
                 comments.AddRange(matches);
             }
+
+            var api = new Api();
+
+            api.Get();
             
             Log.Info("Bot has finished");
             Console.ReadKey();
         }
-
-        static Dictionary<string, double> GetWords()
-        {
-            var json = JsonConvert.DeserializeObject<Words>(RedditBet.Bot.Properties.Resources.words);
-            return json.words;
-        }
-    }
-
-    public class Words
-    {
-        public string title { get; set; }
-        public string description { get; set; }
-        public Dictionary<string, double> words { get; set; }
     }
 }
 

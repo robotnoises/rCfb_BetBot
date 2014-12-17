@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using RedditBet.API.Areas.HelpPage.ModelDescriptions;
-using RedditBet.API.Areas.HelpPage.Models;
+using RedditBet.Areas.HelpPage.ModelDescriptions;
+using RedditBet.Areas.HelpPage.Models;
 
-namespace RedditBet.API.Areas.HelpPage
+namespace RedditBet.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

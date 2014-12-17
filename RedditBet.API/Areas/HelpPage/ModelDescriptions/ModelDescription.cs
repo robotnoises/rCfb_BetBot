@@ -1,6 +1,6 @@
 using System;
 
-namespace RedditBet.API.Areas.HelpPage.ModelDescriptions
+namespace RedditBet.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Describes a type model.

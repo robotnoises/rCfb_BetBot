@@ -30,9 +30,10 @@ namespace RedditBet.Bot.Utils
             var matches = new Comments();
             var nodes = _doc.DocumentNode.SelectNodes("//*[contains(concat(' ', normalize-space(@" + attribute + "), ' '), ' " + attributeValue + " ')]");
 
-            // If there aren't any comments beyond the OP, there is not needs to continue
+            // If there aren't any comments beyond the OP, there is no need to continue
             if (nodes.Count <= 1) return matches;
-                        
+            
+            // Keep track of the Xpath of the last unmatched node
             var topNodeXpath = nodes[1].XPath;
             var targetNodeXpath = topNodeXpath;
 
@@ -46,6 +47,7 @@ namespace RedditBet.Bot.Utils
 
                 var parser = new CommentParser(textToParse);
 
+                // Break-out if nothing is matched
                 if (!parser.Contains(wordsToMatch)) continue;
 
                 foreach (var word in parser.GetMatchedWords(wordsToMatch))

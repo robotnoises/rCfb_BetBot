@@ -26,7 +26,7 @@ namespace RedditBet.Bot
             Log.Info("Bot has finished");
         }
 
-        public void AddTasks(BotTasks tasks)
+        public void AssignTasks(BotTasks tasks)
         {
             _tasks = tasks;
         }

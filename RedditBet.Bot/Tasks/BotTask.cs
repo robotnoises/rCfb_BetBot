@@ -24,10 +24,10 @@ namespace RedditBet.Bot.Tasks
 
         public void Execute()
         {
+            Log.Info("Fetching URLs.");
+
             foreach (var url in Config.GetCrawlerUrls())
             {
-                Log.Info("Fetching URLs.");
-
                 var crawler = new Crawler(url);
                 var matches = crawler.GetMatchedComments("class", "entry", Config.GetTargetWords(), 0.7);
 
@@ -95,9 +95,9 @@ namespace RedditBet.Bot.Tasks
         }
 
         /// <summary>
-        /// Will fetch only incomplete Tasks
+        /// Will fetch only incomplete Tasks (can't think of a good reason for it to get anything but incomplete...)
         /// </summary>
-        public void Fetch()
+        public void Get()
         { 
             // Todo: grab tasks from database (API)
         }

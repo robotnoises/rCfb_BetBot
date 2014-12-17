@@ -18,30 +18,20 @@ namespace RedditBet.Bot.Utils
 
         private static string _baseUrl { get { return ConfigurationManager.AppSettings["baseUrl"]; } }
         private static string _subReddit { get { return ConfigurationManager.AppSettings["subReddit"]; } }
-        // private static string _apiBaseUrl { get { return ConfigurationManager.AppSettings["apiBaseUrl"]; } }
+        private static string _apiBaseUrl { get { return ConfigurationManager.AppSettings["apiBaseUrl"]; } }
         private static string _filter { get { return ConfigurationManager.AppSettings["crawlerFilter"]; } }
         private static string _api_Tasks { get { return ConfigurationManager.AppSettings["api_Tasks"]; } }
         private static string _api_Tasks_Incomplete { get { return ConfigurationManager.AppSettings["api_Tasks_Incomplete"]; } }
                 
         // Public methods
 
-        //public static string GetBaseUrl()
-        //{
-        //    return _baseUrl;
-        //}
-
-        //public static string GetSubRedditUrl()
-        //{
-        //    return string.Format("{0}{1}", _baseUrl, _subReddit);
-        //}
-
         public static List<string> GetCrawlerUrls()
         {
-            var urls = new List<string>();
-            var r = new Requester("http://www.reddit.com/r/cfb.json?limit=100"); // TODO: add this to a config
-            var response = r.GetResponse();
-
+            var requester = new Requester(string.Format("{0}{1}.json?limit=100", _baseUrl, _subReddit));
+            var response = requester.GetResponse();
             var json = JsonConvert.DeserializeObject<RedditJSON>(response.Content);
+
+            var urls = new List<string>();
 
             foreach (var item in json.data.children)
             {
@@ -56,24 +46,7 @@ namespace RedditBet.Bot.Utils
             var json = JsonConvert.DeserializeObject<Words>(RedditBet.Bot.Properties.Resources.words);
             return json.words;
         }
-
-        //public static string Api_Base()
-        //{
-        //    return _apiBaseUrl;
-        //}
-
-        public static string Api_Tasks(bool getAll)
-        {
-            if (getAll)
-            {
-                return _api_Tasks;
-            }
-            else
-            {
-                return _api_Tasks_Incomplete;
-            }
-        }
-
+                
         // Private methods
 
         private static string GetPage(string url = null)

@@ -1,9 +1,13 @@
-# ignore bin directories
+# bin directories
 
 bin/
 
-# ignore obj directories
+# obj directories
 
 obj/
+
+# extra stuff
+
+extras/
 
 

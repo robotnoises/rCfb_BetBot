@@ -21,15 +21,20 @@ namespace RedditBet.Bot
     {
         /* Bot stuff: */
 
+        // Todo: Bot (Crawling) need to be able to get the "thing" id for replies 
         // Todo: Bot needs to be able to pick up "Tasks" beyond just searching comments
         // Todo: Bot needs to be able to send DMs
         // Todo: Bot needs to be able to update replies
         // Todo: Bot needs to accept arguments to either Crawl or pick up tasks from the API
         // Todo: Bot needs a TaskFactory to carry-out various tasks via a common task interface
+        // Todo: Bot needs to be able to check if logged into reddit, and log in
+        // Todo: Bot needs to time itself
 
         /* Other stuff: */
 
         // Add Tables for Comments (user), Tasks (for bot to carry out), Replies (Bot-only replies)
+        // Add Logging
+        // Add new Web project to serve (initially) as the place where users confirm bets
 
         static void Main(string[] args)
         {

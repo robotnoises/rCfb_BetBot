@@ -28,15 +28,17 @@ namespace RedditBet.Bot.Utils
         public static List<string> GetUrls()
         {
             var urls = new List<string>();
-            var r = new Requester("http://www.reddit.com/r/cfb.json?limit=100"); // TODO: add this to a config
-            var response = r.GetResponse();
+            //var r = new Requester("http://www.reddit.com/r/cfb.json?limit=100"); // TODO: add this to a config
+            //var response = r.GetResponse();
 
-            var json = JsonConvert.DeserializeObject<RedditJSON>(response.Content);
+            //var json = JsonConvert.DeserializeObject<RedditJSON>(response.Content);
 
-            foreach (var item in json.data.children)
-            {
-                urls.Add(string.Format("{0}{1}", _baseUrl, item.data.permalink));
-            }
+            //foreach (var item in json.data.children)
+            //{
+            //    urls.Add(string.Format("{0}{1}", _baseUrl, item.data.permalink));
+            //}
+
+            urls.Add("http://rc.reddit.com/r/CFB/comments/1rkt6s/week_14_user_friendly_bet_thread/");
             
             return urls;
         }

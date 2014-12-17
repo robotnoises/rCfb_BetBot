@@ -13,18 +13,19 @@ namespace RedditBet.Bot.Utils
         public void AddComment(Comment c)
         {
             if (this.Any(x => x.GetPermaLinkId() == c.GetPermaLinkId())) return;
-            // if (this.Any(x => x.GetAuthor() == c.GetAuthor())) return; // Note: not sure if a single user can have multiple bets...
+            
             this.Add(c);
         }
     }
 
     public class Comment
     {
-        private string _permaLinkId;
         private string _author;
         private string _permaLink;
-        private double _confidence;
+        private string _thingId;
         private int _upVotes;
+        private double _confidence;
+        private string _permaLinkId;
 
         // Todo, need a handle on the Bot's reply url?
 
@@ -32,6 +33,7 @@ namespace RedditBet.Bot.Utils
         {
             _author = author;
             _permaLink = permaLink;
+            _thingId = CreateThingIdFromPermaLink(permaLink);
             _upVotes = upVotes;
             _confidence = confidence;
             _permaLinkId = CreatePermaLinkId(permaLink);
@@ -50,6 +52,11 @@ namespace RedditBet.Bot.Utils
         public string GetPermaLink()
         {
             return _permaLink;
+        }
+
+        public string GetThingId()
+        {
+            return _thingId;
         }
 
         public double GetConfidence()
@@ -71,7 +78,7 @@ namespace RedditBet.Bot.Utils
         {
             /* 
              * Note: It is assumed that the permalink is guaranteed unique. This should not be used as a primary key, but given the
-             * temporary nature of these records it should be safe to be used as a quick lookup value or potentially part of a url.
+             * temporary nature of these records it should be safe to be used as a key for quick lookups or potentially part of a temp url.
             */
 
             var id = "";
@@ -84,9 +91,9 @@ namespace RedditBet.Bot.Utils
                     var hash = hasher.ComputeHash(bytes);
                     var sb = new StringBuilder(hash.Length * 2);
 
-                    foreach (var h in hash)
+                    foreach (var b in hash)
                     {
-                        sb.Append(h.ToString("X2"));
+                        sb.Append(b.ToString("X2"));
                     }
 
                     id = sb.ToString();
@@ -98,6 +105,14 @@ namespace RedditBet.Bot.Utils
             }
 
             return id;
+        }
+
+        private string CreateThingIdFromPermaLink(string permaLink)
+        {
+            var parts = permaLink.Split('/');
+            var lastPart = parts.Length - 1;
+            
+            return string.Format("t1_{0}", parts[lastPart]);
         }
     }
 
@@ -114,8 +129,12 @@ namespace RedditBet.Bot.Utils
 
             try
             {
+                // Originally captured as "### points", so chop-off the " points..."
                 var uv = upVotes.InnerText.Split(' ')[0];
-                return new Comment(author.InnerText, permaLink.Attributes["href"].Value, Convert.ToInt32(uv), confidence);
+                // ... and Convert to int
+                var uvInt = Convert.ToInt32(uv);
+                
+                return new Comment(author.InnerText, permaLink.Attributes["href"].Value, uvInt, confidence);
             }
             catch (Exception ex)
             {

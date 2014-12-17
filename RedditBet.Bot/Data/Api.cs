@@ -13,17 +13,17 @@ namespace RedditBet.Bot.Data
     {
         public void Get()
         {
-            var client = new RestClient();
+            //var client = new RestClient();
 
-            client.BaseUrl = Converter.ToUri(Config.Api_Base());
+            //client.BaseUrl = Converter.ToUri(Config.Api_Base());
 
-            var request = new RestRequest(Method.GET);
+            //var request = new RestRequest(Method.GET);
 
-            request.Resource = Config.Api_Tasks(false);
+            //request.Resource = Config.Api_Tasks(false);
 
-            var response = client.Execute(request);
+            //var response = client.Execute(request);
 
-            var foo = "bar";
+            //var foo = "bar";
             
         }
 

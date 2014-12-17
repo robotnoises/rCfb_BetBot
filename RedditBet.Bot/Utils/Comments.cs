@@ -22,21 +22,19 @@ namespace RedditBet.Bot.Utils
     {
         private string _author;
         private string _permaLink;
+        private string _permaLinkId;
         private string _thingId;
         private int _upVotes;
         private double _confidence;
-        private string _permaLinkId;
-
-        // Todo, need a handle on the Bot's reply url?
-
+        
         public Comment(string author, string permaLink, int upVotes, double confidence)
         {
             _author = author;
             _permaLink = permaLink;
+            _permaLinkId = CreatePermaLinkId(permaLink);
             _thingId = CreateThingIdFromPermaLink(permaLink);
             _upVotes = upVotes;
             _confidence = confidence;
-            _permaLinkId = CreatePermaLinkId(permaLink);
         }
 
         public string GetPermaLinkId()

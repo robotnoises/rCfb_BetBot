@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using RedditBet.Bot.Models;
+using RedditBet.Bot.Tasks;
+using RedditBet.Bot.Utils;
 
 namespace RedditBet.Bot
 {
@@ -10,30 +11,35 @@ namespace RedditBet.Bot
     {
         // Private fields
 
-        private List<BotTask> _tasks;
-
-        // Constructor 
-
-        public Bot()
-        {
-            _tasks = new List<BotTask>();
-        }
+        private BotTasks _tasks;
 
         // Public methods
 
-        public bool WakeUp()
+        public void WakeUp()
         {
-            throw new NotImplementedException();
+            // Todo: init anything related directly to the Bot here
+            Log.Info("Bot is starting.");
         }
 
         public void Sleep()
         {
-            throw new NotImplementedException();
+            Log.Info("Bot has finished");
         }
 
-        public void AddTasks(List<BotTask> tasks)
+        public void AddTasks(BotTasks tasks)
         {
-            _tasks.AddRange(tasks);
+            _tasks = tasks;
         }
+
+        public void PerformTasks()
+        {
+            // todo make Parallel?
+            
+            foreach (var task in _tasks)
+            {
+                task.Execute();
+            }
+        }
+        
     }
 }

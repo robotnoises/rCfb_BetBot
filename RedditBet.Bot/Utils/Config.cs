@@ -7,7 +7,7 @@ using HtmlAgilityPack;
 using System.Configuration;
 using System.Net;
 using Newtonsoft.Json;
-using RedditBet.Bot.Models;
+using RedditBet.Bot.Tasks;
 using RestSharp;
 
 namespace RedditBet.Bot.Utils
@@ -17,28 +17,36 @@ namespace RedditBet.Bot.Utils
         // Private fields
 
         private static string _baseUrl { get { return ConfigurationManager.AppSettings["baseUrl"]; } }
-        private static string _apiBaseUrl { get { return ConfigurationManager.AppSettings["apiBaseUrl"]; } }
+        private static string _subReddit { get { return ConfigurationManager.AppSettings["subReddit"]; } }
+        // private static string _apiBaseUrl { get { return ConfigurationManager.AppSettings["apiBaseUrl"]; } }
         private static string _filter { get { return ConfigurationManager.AppSettings["crawlerFilter"]; } }
-
         private static string _api_Tasks { get { return ConfigurationManager.AppSettings["api_Tasks"]; } }
         private static string _api_Tasks_Incomplete { get { return ConfigurationManager.AppSettings["api_Tasks_Incomplete"]; } }
                 
         // Public methods
 
-        public static List<string> GetUrls()
+        //public static string GetBaseUrl()
+        //{
+        //    return _baseUrl;
+        //}
+
+        //public static string GetSubRedditUrl()
+        //{
+        //    return string.Format("{0}{1}", _baseUrl, _subReddit);
+        //}
+
+        public static List<string> GetCrawlerUrls()
         {
             var urls = new List<string>();
-            //var r = new Requester("http://www.reddit.com/r/cfb.json?limit=100"); // TODO: add this to a config
-            //var response = r.GetResponse();
+            var r = new Requester("http://www.reddit.com/r/cfb.json?limit=100"); // TODO: add this to a config
+            var response = r.GetResponse();
 
-            //var json = JsonConvert.DeserializeObject<RedditJSON>(response.Content);
+            var json = JsonConvert.DeserializeObject<RedditJSON>(response.Content);
 
-            //foreach (var item in json.data.children)
-            //{
-            //    urls.Add(string.Format("{0}{1}", _baseUrl, item.data.permalink));
-            //}
-
-            urls.Add("http://rc.reddit.com/r/CFB/comments/1rkt6s/week_14_user_friendly_bet_thread/");
+            foreach (var item in json.data.children)
+            {
+                urls.Add(string.Format("{0}{1}", _baseUrl, item.data.permalink));
+            }
             
             return urls;
         }
@@ -49,10 +57,10 @@ namespace RedditBet.Bot.Utils
             return json.words;
         }
 
-        public static string Api_Base()
-        {
-            return _apiBaseUrl;
-        }
+        //public static string Api_Base()
+        //{
+        //    return _apiBaseUrl;
+        //}
 
         public static string Api_Tasks(bool getAll)
         {

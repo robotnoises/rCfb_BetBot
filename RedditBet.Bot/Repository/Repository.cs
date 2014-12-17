@@ -1,4 +1,4 @@
-﻿using RedditBet.Bot.Models;
+﻿using RedditBet.Bot.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;

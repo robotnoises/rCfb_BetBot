@@ -1,19 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HtmlAgilityPack;
-using System.IO;
-using Newtonsoft.Json;
-using System.Security.Cryptography;
-using System.Net;
-using System.Web;
-using System.Reflection;
-using System.Configuration;
-using RedditBet.Bot.Utils;
-using RedditBet.Bot.Data;
-using RedditBet.Bot.Enums;
+using RedditBet.Bot.Tasks;
 
 namespace RedditBet.Bot
 {
@@ -35,26 +21,23 @@ namespace RedditBet.Bot
         // Add Tables for Comments (user), Tasks (for bot to carry out), Replies (Bot-only replies)
         // Add Logging
         // Add new Web project to serve (initially) as the place where users confirm bets
-
+        // Need to be able to track how many Reddit API calls there will be in a given run, as there is rate-limiting in play (30/60 per minute for unauth/auth)
+        
         static void Main(string[] args)
         {
-            Log.Info("Bot is starting.");
-            
-            var comments = new Comments();
+            var robot = new Bot();
+            var tasks = new BotTasks();
 
-            foreach (var url in Config.GetUrls())
-            {
-                Log.Info("Fetching URLs.");
+            // Not implemented yet
+            // tasks.Fetch();
 
-                var crawler = new Crawler(url);
-                var matches = crawler.GetMatchedComments("class", "entry", Config.GetTargetWords(), 0.7);
+            robot.WakeUp();
 
-                Log.Info(string.Format("Found {0} matches in {1}", matches.Count, url));
-                
-                comments.AddRange(matches);
-            }
+            robot.AddTasks(tasks);
 
-            Log.Info("Bot has finished");
+            robot.PerformTasks();
+
+            robot.Sleep();
         }
     }
 }

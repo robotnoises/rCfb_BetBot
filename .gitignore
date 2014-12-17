@@ -1,0 +1,6 @@
+
+# ignore obj directory
+RedditBet.Bot/obj/
+RedditBet.Api/obj/
+RedditBet.Tests/obj/
+

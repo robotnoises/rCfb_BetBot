@@ -29,6 +29,10 @@ namespace RedditBet.Bot.Utils
         {
             var matches = new Comments();
             var nodes = _doc.DocumentNode.SelectNodes("//*[contains(concat(' ', normalize-space(@" + attribute + "), ' '), ' " + attributeValue + " ')]");
+
+            // If there aren't any comments beyond the OP, there is not needs to continue
+            if (nodes.Count <= 1) return matches;
+                        
             var topNodeXpath = nodes[1].XPath;
             var targetNodeXpath = topNodeXpath;
 

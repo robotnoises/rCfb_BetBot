@@ -56,6 +56,7 @@
     <Compile Include="Bot.cs" />
     <Compile Include="Enums\TaskType.cs" />
     <Compile Include="Models\BotTask.cs" />
+    <Compile Include="Models\Reddit.cs" />
     <Compile Include="Models\Words.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Utils\Parse.cs" />
     <Compile Include="Utils\Crawler.cs" />
     <Compile Include="Utils\Comments.cs" />
+    <Compile Include="Utils\Requester.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

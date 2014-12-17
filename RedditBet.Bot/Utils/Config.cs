@@ -8,6 +8,7 @@ using System.Configuration;
 using System.Net;
 using Newtonsoft.Json;
 using RedditBet.Bot.Models;
+using RestSharp;
 
 namespace RedditBet.Bot.Utils
 {
@@ -24,21 +25,19 @@ namespace RedditBet.Bot.Utils
                 
         // Public methods
 
-        public static List<string> GetCrawlerUrls()
+        public static List<string> GetUrls()
         {
             var urls = new List<string>();
-            var doc = new HtmlDocument();
-            doc.LoadHtml(GetPage());
+            var r = new Requester("http://www.reddit.com/r/cfb.json?limit=100"); // TODO: add this to a config
+            var response = r.GetResponse();
 
-            foreach (var node in doc.DocumentNode.SelectNodes("//a[@href]"))
+            var json = JsonConvert.DeserializeObject<RedditJSON>(response.Content);
+
+            foreach (var item in json.data.children)
             {
-                var href = node.Attributes["href"].Value;
-                if (href.Contains(_filter) && href.Contains("http://"))
-                {
-                    urls.Add(href);
-                }
+                urls.Add(string.Format("{0}{1}", _baseUrl, item.data.permalink));
             }
-
+            
             return urls;
         }
 

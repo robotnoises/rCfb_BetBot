@@ -13,6 +13,7 @@ using System.Reflection;
 using System.Configuration;
 using RedditBet.Bot.Utils;
 using RedditBet.Bot.Data;
+using RedditBet.Bot.Enums;
 
 namespace RedditBet.Bot
 {
@@ -34,11 +35,10 @@ namespace RedditBet.Bot
             
             var comments = new Comments();
 
-            foreach (var url in Config.GetCrawlerUrls())
+            foreach (var url in Config.GetUrls())
             {
                 Log.Info("Fetching URLs.");
 
-                // http://rc.reddit.com/r/CFB/comments/1rkt6s/week_14_user_friendly_bet_thread/
                 var crawler = new Crawler(url);
                 var matches = crawler.GetMatchedComments("class", "entry", Config.GetTargetWords(), 0.7);
 
@@ -47,12 +47,7 @@ namespace RedditBet.Bot
                 comments.AddRange(matches);
             }
 
-            var api = new Api();
-
-            api.Get();
-            
             Log.Info("Bot has finished");
-            Console.ReadKey();
         }
     }
 }

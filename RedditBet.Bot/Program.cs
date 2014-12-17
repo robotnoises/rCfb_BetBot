@@ -24,6 +24,8 @@ namespace RedditBet.Bot
         // Todo: Bot needs to be able to pick up "Tasks" beyond just searching comments
         // Todo: Bot needs to be able to send DMs
         // Todo: Bot needs to be able to update replies
+        // Todo: Bot needs to accept arguments to either Crawl or pick up tasks from the API
+        // Todo: Bot needs a TaskFactory to carry-out various tasks via a common task interface
 
         /* Other stuff: */
 

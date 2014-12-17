@@ -54,7 +54,7 @@
   <ItemGroup>
     <Compile Include="Data\Api.cs" />
     <Compile Include="Bot.cs" />
-    <Compile Include="Enums\TaskType.cs" />
+    <Compile Include="Enums\Tasks.cs" />
     <Compile Include="Models\BotTask.cs" />
     <Compile Include="Models\Reddit.cs" />
     <Compile Include="Models\Words.cs" />

@@ -1,6 +1,9 @@
+# ignore bin directories
 
-# ignore obj directory
-RedditBet.Bot/obj/
-RedditBet.Api/obj/
-RedditBet.Tests/obj/
+bin/
+
+# ignore obj directories
+
+obj/
+
 

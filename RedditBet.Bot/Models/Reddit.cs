@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RedditBet.Bot.Tasks
+namespace RedditBet.Bot.Models
 {
     public class RedditJSON
     {

@@ -15,7 +15,7 @@ namespace RedditBet.API.Data
         public RedditBetDataContext() : base("RedditBet", throwIfV1Schema: false) { }
 
         // Entities
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<BotTask> Tasks { get; set; }
 
     }
     public static class DatabaseContext

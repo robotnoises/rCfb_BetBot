@@ -21,22 +21,28 @@ namespace RedditBet.Bot
         // Add Tables for Comments (user), Tasks (for bot to carry out), Replies (Bot-only replies)
         // Add Logging
         // Add new Web project to serve (initially) as the place where users confirm bets
-        // Need to be able to track how many Reddit API calls there will be in a given run, as there is rate-limiting in play (30/60 per minute for unauth/auth)
+
+        // Note: Need to add a global tracker to keep a running count of how many Reddit API calls there are in a given run...
+        // ... there is rate-limiting in play (30/60 per minute for unauth/auth)
         
         static void Main()
         {
             var robot = new Bot();
             var tasks = new BotTasks();
 
-            // Not implemented yet
-            // tasks.Get();
+            // Load tasks to be carried-out by the bot (incomplete)
+            tasks.Load();
 
+            // Init Bot
             robot.WakeUp();
 
+            // Assign the tasks
             robot.AssignTasks(tasks);
 
+            // Perform each task
             robot.PerformTasks();
 
+            // Night-night
             robot.Sleep();
         }
     }

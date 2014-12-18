@@ -62,7 +62,8 @@ namespace RedditBet.Bot.Utils
                     }
                 }
 
-                if (confidence > confidenceFloor && currentNode.XPath.Length <= targetNodeXpath.Length) // Checking the length is probably dumb... todo
+                // Checking the length is probably dumb... todo
+                if (confidence > confidenceFloor && currentNode.XPath.Length <= targetNodeXpath.Length) 
                 {
                     var comment = Builder.Comment(currentNode, confidence);
 

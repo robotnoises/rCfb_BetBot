@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RedditBet.API.Models
 {
-    public class Task
+    public class BotTask
     {
         [Key]
         public int TaskId { get; set; }

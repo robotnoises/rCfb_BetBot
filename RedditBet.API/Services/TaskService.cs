@@ -17,21 +17,21 @@ namespace RedditBet.API.Services
             _repository = new TaskRepository(DatabaseContext.Create());
         }
 
-        public IEnumerable<Task> GetAll() {
+        public IEnumerable<BotTask> GetAll() {
             return _repository.GetAll();
         }
 
-        public IEnumerable<Task> GetIncomplete()
+        public IEnumerable<BotTask> GetIncomplete()
         {
             return _repository.GetAll().Where(x => !x.Completed);
         }
 
-        public Task Get(int id)
+        public BotTask Get(int id)
         {
             return _repository.Get(id);
         }
 
-        public void Create(Task t)
+        public void Create(BotTask t)
         {
             t.TimeAssigned = DateTime.UtcNow;
             t.TimeCompleted = null;
@@ -40,7 +40,7 @@ namespace RedditBet.API.Services
             _repository.Add(t);
         }
 
-        public void Update(Task t)
+        public void Update(BotTask t)
         {
             _repository.Update(t);
         }

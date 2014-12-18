@@ -14,24 +14,25 @@ using RedditBet.API.Services;
 
 namespace RedditBet.API.Controllers
 {
+    [RoutePrefix("api/Tasks")]
     public class TasksController : ApiController
     {
         private TaskService _service = new TaskService();
 
         // GET: api/Tasks
-        public IEnumerable<Task> GetTasks()
+        public IEnumerable<BotTask> GetTasks()
         {
             return _service.GetAll();
         }
 
         [Route("Incomplete")]
-        public IEnumerable<Task> GetTasksIncomplete()
+        public IEnumerable<BotTask> GetTasksIncomplete()
         {
             return _service.GetIncomplete();
         }
 
         // GET: api/Tasks/5
-        [ResponseType(typeof(Task))]
+        [ResponseType(typeof(BotTask))]
         public IHttpActionResult GetTask(int id)
         {
             var task = _service.Get(id);
@@ -46,7 +47,7 @@ namespace RedditBet.API.Controllers
 
         // PUT: api/Tasks/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutTask(Task task)
+        public IHttpActionResult PutTask(BotTask task)
         {
             if (!ModelState.IsValid)
             {
@@ -64,8 +65,8 @@ namespace RedditBet.API.Controllers
         }
 
         // POST: api/Tasks
-        [ResponseType(typeof(Task))]
-        public IHttpActionResult PostTask(Task task)
+        [ResponseType(typeof(BotTask))]
+        public IHttpActionResult PostTask(BotTask task)
         {
             if (!ModelState.IsValid)
             {
@@ -78,7 +79,7 @@ namespace RedditBet.API.Controllers
         }
 
         // DELETE: api/Tasks/5
-        [ResponseType(typeof(Task))]
+        [ResponseType(typeof(BotTask))]
         public IHttpActionResult DeleteTask(int id)
         {
             _service.Remove(id);

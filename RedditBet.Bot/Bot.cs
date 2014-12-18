@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using RedditBet.Bot.Tasks;
 using RedditBet.Bot.Utils;
 
@@ -12,18 +13,25 @@ namespace RedditBet.Bot
         // Private fields
 
         private BotTasks _tasks;
+        private Stopwatch _stopWatch;
 
         // Public methods
 
         public void WakeUp()
         {
-            // Todo: init anything related directly to the Bot here
             Log.Info("Bot is starting.");
+            
+            _stopWatch = new Stopwatch();
+            _stopWatch.Start();
         }
 
         public void Sleep()
         {
             Log.Info("Bot has finished");
+            
+            _stopWatch.Stop();
+
+            Log.Info(string.Format("Bot finished in {0}.", _stopWatch.Elapsed));
         }
 
         public void AssignTasks(BotTasks tasks)
@@ -40,6 +48,5 @@ namespace RedditBet.Bot
                 task.Execute();
             }
         }
-        
     }
 }

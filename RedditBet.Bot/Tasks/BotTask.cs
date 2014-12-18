@@ -42,6 +42,9 @@ namespace RedditBet.Bot.Tasks
         }
     }
 
+    /// <summary>
+    /// Replies to a comment
+    /// </summary>
     public class Reply : IBotTask
     {
         private string _targetUrl;
@@ -61,6 +64,9 @@ namespace RedditBet.Bot.Tasks
         }
     }
 
+    /// <summary>
+    /// Updates an existing reply
+    /// </summary>
     public class UpdateReply : IBotTask
     {
         private string _targetUrl;
@@ -80,6 +86,9 @@ namespace RedditBet.Bot.Tasks
         }
     }
 
+    /// <summary>
+    /// Sends a direct message to a reddit user
+    /// </summary>
     public class DirectMessage : IBotTask
     {
         private string _targetUrl;
@@ -99,6 +108,9 @@ namespace RedditBet.Bot.Tasks
         }
     }
 
+    /// <summary>
+    /// A list of BotTasks
+    /// </summary>
     public class BotTasks : List<IBotTask>
     {
         public BotTasks()

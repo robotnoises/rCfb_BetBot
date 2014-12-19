@@ -1,9 +1,9 @@
 ﻿using System;
 using RedditBet.Bot.Enums;
 using RedditBet.Bot.Utils;
-using RedditBet.Bot.DataContext;
-using System.Collections.Generic;
+using RedditBet.Bot.DataHelpers;
 using RedditBet.Bot.Models;
+using System.Collections.Generic;
 
 namespace RedditBet.Bot.Tasks
 {

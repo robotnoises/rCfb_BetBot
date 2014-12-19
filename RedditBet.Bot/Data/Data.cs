@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using Newtonsoft;
 using Newtonsoft.Json;
-using RestSharp;
 using RedditBet.Bot.Tasks;
 using RedditBet.Bot.Utils;
 using RedditBet.Bot.Models;
 
-namespace RedditBet.Bot.DataContext
+namespace RedditBet.Bot.DataHelpers
 {
     public static class Data
     {
+        #region Local Resources 
+
         /// <summary>
         /// Gets all the URLs to crawl.
         /// </summary>
         /// <returns>A List of URLs</returns>
-        
         public static List<string> GetCrawlerUrls()
         {
             var requester = new Requester(string.Format("{0}{1}.json?limit=100", Config.BaseUrl, Config.SubReddit));
@@ -35,13 +35,20 @@ namespace RedditBet.Bot.DataContext
         /// Gets a Dictionary of key words, to be matched within blocks of text. Each has an associated value.
         /// </summary>
         /// <returns>A Dictionary of key words and their values</returns>
-        
         public static Dictionary<string, double> GetMatchWords()
         {
             var json = JsonConvert.DeserializeObject<Words>(RedditBet.Bot.Properties.Resources.words);
             return json.words;
         }
 
+        #endregion
+
+        #region BetBot.API
+
+        /// <summary>
+        /// Todo
+        /// </summary>
+        /// <returns></returns>
         public static List<IBotTask> GetIncompleteTasks()
         {
             var requester = new Requester(string.Format("{0}{1}", Config.ApiUrl, Config.Api_Tasks_Incomplete));
@@ -57,16 +64,6 @@ namespace RedditBet.Bot.DataContext
             return tasks;
         }
 
-        // Private methods
-
-        //private static string GetPage(string url = null)
-        //{
-        //    var urlToGet = url ?? _baseUrl;
-
-        //    using (var client = new WebClient())
-        //    {
-        //        return client.DownloadString(urlToGet);
-        //    }
-        //}
+        #endregion
     }
 }

@@ -13,7 +13,7 @@ namespace RedditBet.Bot
         // Private fields
 
         private BotTasks _tasks;
-        private Stopwatch _stopWatch;
+        private Stopwatch _timer;
 
         // Public methods
 
@@ -21,17 +21,15 @@ namespace RedditBet.Bot
         {
             Log.Info("Bot is starting.");
             
-            _stopWatch = new Stopwatch();
-            _stopWatch.Start();
+            _timer = new Stopwatch();
+            _timer.Start();
         }
 
         public void Sleep()
         {
-            Log.Info("Bot has finished");
-            
-            _stopWatch.Stop();
+            _timer.Stop();
 
-            Log.Info(string.Format("Bot finished in {0}.", _stopWatch.Elapsed));
+            Log.Info(string.Format("Bot finished {0} tasks in {0}.", _tasks.Count, _timer.Elapsed));
         }
 
         public void AssignTasks(BotTasks tasks)

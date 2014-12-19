@@ -5,10 +5,10 @@ angular.module('redditBet.routes', ['ngRoute'])
     $routeProvider
     .when('/bet', {
       controller: 'tempController',
-      templateUrl: 'views/bet.html'
+      templateUrl: '/views/bet.html'
     })
     .otherwise({
       controller: 'errorController',
-      templateUrl: 'views/404.html'
+      templateUrl: '/views/404.html'
     });
   }]);

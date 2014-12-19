@@ -14,6 +14,8 @@ using RedditBet.API.Services;
 
 namespace RedditBet.API.Controllers
 {
+    // Todo make async
+
     [RoutePrefix("api/Tasks")]
     public class TasksController : ApiController
     {
@@ -46,23 +48,23 @@ namespace RedditBet.API.Controllers
         }
 
         // PUT: api/Tasks/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutTask(BotTask task)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutTask(BotTask task)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            // if (id != task.TaskId)
-            // {
-            //     return BadRequest();
-            // }
+        //    // if (id != task.TaskId)
+        //    // {
+        //    //     return BadRequest();
+        //    // }
 
-            _service.Update(task);
+        //    _service.Update(task);
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
         // POST: api/Tasks
         [ResponseType(typeof(BotTask))]
@@ -79,13 +81,13 @@ namespace RedditBet.API.Controllers
         }
 
         // DELETE: api/Tasks/5
-        [ResponseType(typeof(BotTask))]
-        public IHttpActionResult DeleteTask(int id)
-        {
-            _service.Remove(id);
+        //[ResponseType(typeof(BotTask))]
+        //public IHttpActionResult DeleteTask(int id)
+        //{
+        //    _service.Remove(id);
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
         //protected override void Dispose(bool disposing)
         //{

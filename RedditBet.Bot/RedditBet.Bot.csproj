@@ -56,7 +56,7 @@
     <Compile Include="Bot.cs" />
     <Compile Include="Enums\TaskType.cs" />
     <Compile Include="Models\Task.cs" />
-    <Compile Include="Tasks\BotTask.cs" />
+    <Compile Include="Tasks\BotTasks.cs" />
     <Compile Include="Models\Reddit.cs" />
     <Compile Include="Models\Words.cs" />
     <Compile Include="Program.cs" />

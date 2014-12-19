@@ -35,6 +35,7 @@ namespace RedditBet.Bot.Tasks
                 var crawler = new Crawler(url);
                 var matches = crawler.GetMatchedComments("class", "entry", Data.GetMatchWords(), 0.7);
 
+                // todo, probably shouldn't og this to the db
                 Log.Info(string.Format("Found {0} matches in {1}", matches.Count, url));
 
                 _matchedComments.AddRange(matches);

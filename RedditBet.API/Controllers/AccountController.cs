@@ -17,7 +17,6 @@ using RedditBet.API.Models;
 using RedditBet.Providers;
 using RedditBet.Results;
 using RedditBet.API;
-using RedditBet.API.Models;
 
 namespace RedditBet.API.Controllers
 {

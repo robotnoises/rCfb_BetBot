@@ -1,2 +1,110 @@
-﻿body {
+﻿/* Positioning */
+
+.block-centered {
+  display: block;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
+
+/* Padding and Margins */
+
+.margin-5 {
+  margin: 5px;
+}
+
+.margin-10 {
+  margin: 10px;
+}
+
+.margin-25 {
+  margin: 25px;
+}
+
+.margin-50 {
+  margin: 50px;
+}
+
+.margin-100 {
+  margin: 100px;
+}
+
+/* Shadows */
+
+.shadow {
+  border-top: 1px solid #fafafa;
+  border-right: 1px solid #eee;
+  border-bottom: 1px solid #ccc;
+  border-left: 1px solid #eee;
+  box-shadow: 2px 2px 3px #666;
+}
+
+/* Borders & Rulers */
+
+.border-bottom {
+  border-bottom: 1px solid #808080 !important;
+}
+		
+hr.fancy-ruler {
+  width: 80%;
+  padding: 0;
+  border: none;
+  border-top: medium double #333;
+  margin-bottom: 30px;
+  color: #333;
+  text-align: center;
+}
+
+hr.fancy-ruler:after {
+    content: "§";
+    display: inline-block;
+    position: relative; 
+    top: -0.7em;  
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: url('../assets/images/paper.png') repeat;
+}
+
+/* Bet page */
+
+.bet-contract-wrapper {
+  width: 600px;
+  min-height: 600px;
+}
+
+  .bet-contract-wrapper h1, h2, p, textarea {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+  }
+
+  .bet-contract-wrapper .parchment {
+    background: url('../assets/images/paper.png') repeat;
+    font-family: 'Old Standard TT', serif;
+  }
+
+  .parchment h1 {
+    font-family: 'Old Standard TT', serif;
+    font-weight: 700;
+    margin-top: 30px;
+    font-size: 3em;
+  }
+
+  .bet-contract-wrapper textarea {
+    display: block;
+    width: 100%;
+    min-height: 300px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    border: none;
+    background-color: transparent;
+    resize: vertical;
+  }
+
+   .bet-contract-wrapper input[type=text] {
+    display: inline;
+    min-width: 50px;
+    border: none;
+    background-color: transparent;
+  }
+
+  

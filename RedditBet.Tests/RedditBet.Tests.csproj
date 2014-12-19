@@ -91,6 +91,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BotTests.cs" />
     <Compile Include="CoreTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -104,6 +105,10 @@
     <ProjectReference Include="..\RedditBet.API\RedditBet.API.csproj">
       <Project>{5811cec5-3f93-48de-8907-96c245a4cfd7}</Project>
       <Name>RedditBet.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RedditBet.Bot\RedditBet.Bot.csproj">
+      <Project>{1138cbb1-46ec-4d1b-a485-9296dc946d2c}</Project>
+      <Name>RedditBet.Bot</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using RedditBet.Bot.Tasks;
 using RedditBet.Bot.Utils;
 using RedditBet.Bot.Models;
+using RedditBet.Bot.Enums;
 
 namespace RedditBet.Bot.DataHelpers
 {
@@ -63,6 +64,49 @@ namespace RedditBet.Bot.DataHelpers
 
             return tasks;
         }
+
+        #endregion
+
+        #region Reddit API
+
+        public static string DoRedditLogin(string username, string password)
+        {
+            var user = GetRedditUser();
+
+            if (!user.IsLoggedIn())
+            {
+                var loginData = new Login(username, password);
+                var loginRequester = new Requester(Config.RedditApi_Login, "", RequestMethod.POST, loginData);
+                var loginResponse = loginRequester.GetResponse();
+                var cookie = loginResponse.Cookies;
+
+                // Todo do something with the cookie
+                
+                var loggedInUser = GetRedditUser();
+                var poop = "";
+            }
+
+            return "";
+        }
+
+        private static RedditUser GetRedditUser()
+        {
+            var requester = new Requester(Config.RedditApi_GetUser);
+            var response = requester.GetResponse();
+            var user = JsonConvert.DeserializeObject<RedditUser>(response.Content);
+
+            return user;
+        }
+
+        //private static bool BotIsLoggedIn(string username, string password)
+        //{
+        //    var url = Config.RedditApi_CheckLogin;
+        //    var requester = new Requester(url);
+        //    var response = requester.GetResponse();
+        //    var user = JsonConvert.DeserializeObject<RedditUser>(response.Content);
+
+        //    return user.IsLoggedIn();
+        //}
 
         #endregion
     }

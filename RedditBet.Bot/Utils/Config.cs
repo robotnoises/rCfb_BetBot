@@ -11,5 +11,11 @@ namespace RedditBet.Bot.Utils
         public static string ApiUrl { get { return ConfigurationManager.AppSettings["apiBaseUrl"]; } }
         public static string Api_Tasks { get { return ConfigurationManager.AppSettings["api_Tasks"]; } }
         public static string Api_Tasks_Incomplete { get { return ConfigurationManager.AppSettings["api_Tasks_Incomplete"]; } }
+
+        public static string Reddit_Username { get { return ConfigurationManager.AppSettings["redditUsername"]; } }
+        public static string Reddit_Password { get { return ConfigurationManager.AppSettings["redditPassword"]; } }
+
+        public static string RedditApi_GetUser { get { return BaseUrl + ConfigurationManager.AppSettings["redditApi_getUser"]; } }
+        public static string RedditApi_Login { get { return BaseUrl + ConfigurationManager.AppSettings["redditApi_login"]; } }
     }
 }

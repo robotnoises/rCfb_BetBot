@@ -61,7 +61,7 @@ namespace RedditBet.Bot.Tasks
 
         public void Execute()
         {
-            // throw new NotImplementedException();
+            var user = Data.DoRedditLogin(Config.Reddit_Username, Config.Reddit_Password);
         }
     }
 
@@ -117,7 +117,7 @@ namespace RedditBet.Bot.Tasks
         public BotTasks()
         {
             // Crawl is always run once
-            this.Add(new Crawl());
+            // this.Add(new Crawl());
         }
 
         /// <summary>

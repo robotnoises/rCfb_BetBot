@@ -1,0 +1,12 @@
+﻿{
+    "messages": {
+        "reply": {
+            "summoned": "You rang?[newline]",
+            "confident": "Did somebody say",
+            "notConfident": "Hmmm",
+            "confirmed": "",
+            "apology": "Opps, sorry about that.",
+            "unsubscribe": "You have been unsubscribed. You will not recieve any further communication from this bot."
+        },
+    }
+}

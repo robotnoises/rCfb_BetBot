@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Data\Data.cs" />
     <Compile Include="Bot.cs" />
+    <Compile Include="Enums\RequestTypes.cs" />
     <Compile Include="Enums\TaskType.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Tasks\BotTasks.cs" />
@@ -82,6 +83,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Resources\messages.json" />
     <Resource Include="Resources\words.json" />
   </ItemGroup>
   <ItemGroup>

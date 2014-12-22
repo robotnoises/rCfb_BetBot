@@ -17,7 +17,7 @@ namespace RedditBet.API
         {
             ConfigureAuth(app);
 
-            var isDebug = ConfigurationManager.AppSettings["RedditBet.API.DropDatabaseIfModelChanges"] == "true" ? true : false;
+            var isDebug = ConfigurationManager.AppSettings["mode"] == "debug";
             if (isDebug) Database.SetInitializer<RedditBetDataContext>(new DropCreateDatabaseIfModelChanges<RedditBetDataContext>());
 
         }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace RedditBet.Bot.Enums
 {
+    [Flags]
     public enum TaskType
     {
         Crawl,

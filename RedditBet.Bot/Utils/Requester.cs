@@ -56,13 +56,7 @@ namespace RedditBet.Bot.Utils
 
             request.AddHeader("user-agent", _userAgent);
             request.RequestFormat = DataFormat.Json;
-            request.AddCookie("__cfduid", "da45b6233659c5efdb44109e01ae097e11419025763"); // temp, need to persist this
-
-            //if (!string.IsNullOrEmpty(_cookieValue))
-            //{
-            //    
-            //    request.AddCookie("__cfduid", "");
-            //}
+            // request.AddCookie("__cfduid", "da45b6233659c5efdb44109e01ae097e11419025763"); // temp, need to persist this
 
             if (_data != null)
             {

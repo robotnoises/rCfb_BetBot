@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using HtmlAgilityPack;
+using RedditBet.Bot.Models;
 
 namespace RedditBet.Bot.Utils
 {
@@ -58,6 +59,18 @@ namespace RedditBet.Bot.Utils
         public int GetUpVotes()
         {
             return _upVotes;
+        }
+
+        public BotTask ToBotTask(Enums.TaskType taskType = Enums.TaskType.Reply)
+        {
+            var bt = new BotTask();
+
+            bt.TaskType = taskType;
+            bt.TargetUrl = _permaLink;
+            bt.HashId = _hashId;
+            bt.Message = ""; // Todo, create msg based on TaskType and confidence
+
+            return bt;
         }
 
         /// <summary>

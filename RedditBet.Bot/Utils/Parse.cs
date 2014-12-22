@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace RedditBet.Bot.Utils
 {
-    
     public class CommentParser
     {
         // Private fields
@@ -91,6 +90,32 @@ namespace RedditBet.Bot.Utils
         private static HashSet<string> ToHashSet(List<string> input)
         {
             return new HashSet<string>(input);
+        }
+    }
+
+    public class PermaLinkParser
+    {
+        private string _permaLink;
+        
+        public PermaLinkParser(string permalink)
+        {
+            _permaLink = permalink;
+        }
+        
+        public string GetNameId()
+        {
+            var parts = _permaLink.Split('/');
+            var lastPart = parts.Length - 1;
+
+            return string.Format("t1_{0}", parts[lastPart]);
+        }
+
+        public string GetLinkId()
+        {
+            var parts = _permaLink.Split('/');
+            var index = Array.IndexOf(parts, "comments") + 1;
+
+            return string.Format("t3_{0}", parts[index]);
         }
     }
 }

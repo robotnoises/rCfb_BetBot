@@ -12,7 +12,7 @@ namespace RedditBet.Bot.Utils
     {
         public void AddComment(Comment c)
         {
-            if (this.Any(x => x.GetPermaLinkId() == c.GetPermaLinkId())) return;
+            if (this.Any(x => x.GetHashId() == c.GetHashId())) return;
             
             this.Add(c);
         }
@@ -22,8 +22,7 @@ namespace RedditBet.Bot.Utils
     {
         private string _author;
         private string _permaLink;
-        private string _permaLinkId;
-        private string _thingId;
+        private string _hashId;
         private int _upVotes;
         private double _confidence;
         
@@ -31,15 +30,14 @@ namespace RedditBet.Bot.Utils
         {
             _author = author;
             _permaLink = permaLink;
-            _permaLinkId = CreatePermaLinkId(permaLink);
-            _thingId = CreateThingIdFromPermaLink(permaLink);
+            _hashId = CreateHashId(permaLink);
             _upVotes = upVotes;
             _confidence = confidence;
         }
 
-        public string GetPermaLinkId()
+        public string GetHashId()
         {
-            return _permaLinkId;
+            return _hashId;
         }
 
         public string GetAuthor()
@@ -50,11 +48,6 @@ namespace RedditBet.Bot.Utils
         public string GetPermaLink()
         {
             return _permaLink;
-        }
-
-        public string GetThingId()
-        {
-            return _thingId;
         }
 
         public double GetConfidence()
@@ -72,7 +65,7 @@ namespace RedditBet.Bot.Utils
         /// </summary>
         /// <param name="permaLink">Takes the permaLink, hashes it, and then creates a string from it.</param>
         /// <returns>string</returns>
-        private string CreatePermaLinkId(string permaLink)
+        private string CreateHashId(string permaLink)
         {
             /* 
              * Note: It is assumed that the permalink is guaranteed unique. This should not be used as a primary key, but given the
@@ -104,14 +97,6 @@ namespace RedditBet.Bot.Utils
 
             return id;
         }
-
-        private string CreateThingIdFromPermaLink(string permaLink)
-        {
-            var parts = permaLink.Split('/');
-            var lastPart = parts.Length - 1;
-            
-            return string.Format("t1_{0}", parts[lastPart]);
-        }
     }
 
     /// <summary>
@@ -127,8 +112,9 @@ namespace RedditBet.Bot.Utils
 
             try
             {
-                // Originally captured as "### points", so chop-off the " points..."
+                // Originally captured as "### points", so chop-off the " points"
                 var uv = upVotes.InnerText.Split(' ')[0];
+                
                 // ... and Convert to int
                 var uvInt = Convert.ToInt32(uv);
                 

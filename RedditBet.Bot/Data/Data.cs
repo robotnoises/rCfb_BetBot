@@ -6,10 +6,11 @@ using RedditBet.Bot.Tasks;
 using RedditBet.Bot.Utils;
 using RedditBet.Bot.Models;
 using RedditBet.Bot.Enums;
+using RedditSharp;
 
 namespace RedditBet.Bot.DataHelpers
 {
-    public static class Data
+    public static class Api
     {
         #region Local Resources 
 
@@ -19,7 +20,7 @@ namespace RedditBet.Bot.DataHelpers
         /// <returns>A List of URLs</returns>
         public static List<string> GetCrawlerUrls()
         {
-            var requester = new Requester(string.Format("{0}{1}.json?limit=100", Config.BaseUrl, Config.SubReddit));
+            var requester = new Requester(string.Format("{0}/r/{1}.json?limit=100", Config.BaseUrl, Config.SubReddit));
             var response = requester.GetResponse();
             var json = JsonConvert.DeserializeObject<RedditJSON>(response.Content);
             var urls = new List<string>();
@@ -66,48 +67,19 @@ namespace RedditBet.Bot.DataHelpers
         }
 
         #endregion
+    }
 
-        #region Reddit API
-
-        public static string DoRedditLogin(string username, string password)
+    /// <summary>
+    /// Returns a new RedditSharp "Reddit" instance
+    /// </summary>
+    public static class RedditApi
+    {
+        public static Reddit Init(string username, string password)
         {
-            var user = GetRedditUser();
+            var reddit = new Reddit();
+            var user = reddit.LogIn(username, password);
 
-            if (!user.IsLoggedIn())
-            {
-                var loginData = new Login(username, password);
-                var loginRequester = new Requester(Config.RedditApi_Login, "", RequestMethod.POST, loginData);
-                var loginResponse = loginRequester.GetResponse();
-                var cookie = loginResponse.Cookies;
-
-                // Todo do something with the cookie
-                
-                var loggedInUser = GetRedditUser();
-                var poop = "";
-            }
-
-            return "";
+            return reddit;
         }
-
-        private static RedditUser GetRedditUser()
-        {
-            var requester = new Requester(Config.RedditApi_GetUser);
-            var response = requester.GetResponse();
-            var user = JsonConvert.DeserializeObject<RedditUser>(response.Content);
-
-            return user;
-        }
-
-        //private static bool BotIsLoggedIn(string username, string password)
-        //{
-        //    var url = Config.RedditApi_CheckLogin;
-        //    var requester = new Requester(url);
-        //    var response = requester.GetResponse();
-        //    var user = JsonConvert.DeserializeObject<RedditUser>(response.Content);
-
-        //    return user.IsLoggedIn();
-        //}
-
-        #endregion
     }
 }

@@ -21,7 +21,7 @@ namespace RedditBet.Bot.Utils
 
         // Constants
 
-        private const string _userAgent = "cfb_betbot 0.1 @robotnoises";
+        private const string _userAgent = Config.Bot_UserAgent;
 
         public Requester(string url, object data = null)
         {

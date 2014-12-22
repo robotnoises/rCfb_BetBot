@@ -7,9 +7,28 @@ using System.Collections.Generic;
 
 namespace RedditBet.Bot.Tasks
 {
+    /// <summary>
+    /// Interface for all Bot Tasks
+    /// </summary>
     public interface IBotTask
     {
         void Execute();
+    }
+
+    /// <summary>
+    /// Static RedditSharp context to be used for each Task instance
+    /// </summary>
+    public class RedditBotTask
+    {
+        protected static RedditSharp.Reddit _redditContext;
+
+        static RedditBotTask()
+        {
+            if (_redditContext == null)
+            {
+                _redditContext = RedditApi.Init(Config.Reddit_Username, Config.Reddit_Password);
+            }
+        }
     }
     
     /// <summary>
@@ -30,10 +49,10 @@ namespace RedditBet.Bot.Tasks
         {
             Log.Info("Fetching URLs.");
 
-            foreach (var url in Data.GetCrawlerUrls())
+            foreach (var url in Api.GetCrawlerUrls())
             {
                 var crawler = new Crawler(url);
-                var matches = crawler.GetMatchedComments("class", "entry", Data.GetMatchWords(), 0.7);
+                var matches = crawler.GetMatchedComments("class", "entry", Api.GetMatchWords(), 0.7);
 
                 // todo, probably shouldn't og this to the db
                 Log.Info(string.Format("Found {0} matches in {1}", matches.Count, url));
@@ -46,66 +65,76 @@ namespace RedditBet.Bot.Tasks
     /// <summary>
     /// Replies to a comment
     /// </summary>
-    public class Reply : IBotTask
+    public class Reply : RedditBotTask, IBotTask
     {
-        private string _targetUrl;
-        private bool _completed;
+        private string _permaLink;
         private string _message;
+        private string _name;
+        private string _linkName;
 
         public Reply(BotTask task)
         {
-            _targetUrl = task.TargetUrl;
-            _completed = false;
+            var parser = new PermaLinkParser(task.TargetUrl);
+            
+            _permaLink = task.TargetUrl;
             _message = task.Message;
+            _name = parser.GetNameId();
+            _linkName = parser.GetLinkId();
         }
 
         public void Execute()
         {
-            var user = Data.DoRedditLogin(Config.Reddit_Username, Config.Reddit_Password);
+            var user = _redditContext.GetUser(Config.Reddit_Username);
+
+            var comment = _redditContext.GetComment(Config.SubReddit, _name, _linkName);
         }
     }
 
     /// <summary>
     /// Updates an existing reply
     /// </summary>
-    public class UpdateReply : IBotTask
+    public class UpdateReply : RedditBotTask, IBotTask
     {
         private string _targetUrl;
-        private bool _completed;
         private string _message;
+        private string _name;
+        private string _linkName;
 
         public UpdateReply(BotTask task)
         {
+            var parser = new PermaLinkParser(task.TargetUrl);
+
             _targetUrl = task.TargetUrl;
-            _completed = false;
             _message = task.Message;
+            _name = parser.GetNameId();
+            _linkName = parser.GetLinkId();
         }
 
         public void Execute()
         {
-            // throw new NotImplementedException();
+            var comment = _redditContext.GetComment(Config.SubReddit, _name, _linkName);
+
+            // comment.Reply(_message);
         }
     }
 
     /// <summary>
-    /// Sends a direct message to a reddit user
+    /// Send a direct message to a reddit user
     /// </summary>
     public class DirectMessage : IBotTask
     {
         private string _targetUrl;
-        private bool _completed;
         private string _message;
 
         public DirectMessage(BotTask task)
         {
             _targetUrl = task.TargetUrl;
-            _completed = false;
             _message = task.Message;
         }
 
         public void Execute()
         {
-            // throw new NotImplementedException();
+            // todo
         }
     }
 
@@ -125,7 +154,7 @@ namespace RedditBet.Bot.Tasks
         /// </summary>
         public void Load()
         {
-            this.AddRange(Data.GetIncompleteTasks());
+            this.AddRange(Api.GetIncompleteTasks());
         }
     }
 }

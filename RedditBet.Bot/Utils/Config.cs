@@ -17,5 +17,7 @@ namespace RedditBet.Bot.Utils
 
         public static string RedditApi_GetUser { get { return BaseUrl + ConfigurationManager.AppSettings["redditApi_getUser"]; } }
         public static string RedditApi_Login { get { return BaseUrl + ConfigurationManager.AppSettings["redditApi_login"]; } }
+
+        public const string Bot_UserAgent = "cfb_betbot 0.1 @robotnoises";
     }
 }

@@ -10,6 +10,7 @@ namespace RedditBet.API.Models
     {
         [Key]
         public int TaskId { get; set; }
+        public string HashId { get; set; }
         public int TaskType { get; set; }
         public DateTime TimeAssigned { get; set; }
         public DateTime? TimeCompleted { get; set; }

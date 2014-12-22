@@ -52,13 +52,15 @@ namespace RedditBet.Bot.Tasks
             foreach (var url in Api.GetCrawlerUrls())
             {
                 var crawler = new Crawler(url);
-                var matches = crawler.GetMatchedComments("class", "entry", Api.GetMatchWords(), 0.7);
+                var matches = crawler.GetMatchedComments("class", "entry", Api.GetMatchWords(), 0.7); // todo add confidence to config
 
                 // todo, probably shouldn't og this to the db
                 Log.Info(string.Format("Found {0} matches in {1}", matches.Count, url));
 
                 _matchedComments.AddRange(matches);
             }
+
+            Api.AddUpdateComments(_matchedComments);
         }
     }
 
@@ -87,6 +89,8 @@ namespace RedditBet.Bot.Tasks
             var user = _redditContext.GetUser(Config.Reddit_Username);
 
             var comment = _redditContext.GetComment(Config.SubReddit, _name, _linkName);
+
+            var foo = "bar";
         }
     }
 
@@ -115,6 +119,8 @@ namespace RedditBet.Bot.Tasks
             var comment = _redditContext.GetComment(Config.SubReddit, _name, _linkName);
 
             // comment.Reply(_message);
+
+            var foo = "bar";
         }
     }
 
@@ -146,7 +152,7 @@ namespace RedditBet.Bot.Tasks
         public BotTasks()
         {
             // Crawl is always run once
-            // this.Add(new Crawl());
+            this.Add(new Crawl());
         }
 
         /// <summary>

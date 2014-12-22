@@ -30,6 +30,8 @@ namespace RedditBet.Bot.DataHelpers
                 urls.Add(string.Format("{0}{1}", Config.BaseUrl, item.data.permalink));
             }
 
+            // urls.Add("http://rc.reddit.com/r/CFB/comments/1rkt6s/week_14_user_friendly_bet_thread/");
+
             return urls;
         }
 
@@ -64,6 +66,22 @@ namespace RedditBet.Bot.DataHelpers
             }
 
             return tasks;
+        }
+
+        /// <summary>
+        /// Todo
+        /// </summary>
+        /// <param name="comments"></param>
+        public static void AddUpdateComments(Comments comments)
+        {
+            foreach (var comment in comments)
+            {
+                var task = comment.ToBotTask(TaskType.Reply);
+                var requester = new Requester(string.Format("{0}{1}", Config.ApiUrl, Config.Api_Tasks), RequestMethod.POST, task);
+                var response = requester.GetResponse();
+                
+                // if (response.StatusCode == OK)
+            }
         }
 
         #endregion

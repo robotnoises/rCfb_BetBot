@@ -18,10 +18,7 @@ namespace RedditBet.Bot.Utils
         private Uri _url;
         private string _cookieValue;
         private object _data;
-
-        // Constants
-
-        private const string _userAgent = Config.Bot_UserAgent;
+        private readonly string _userAgent = Config.Bot_UserAgent;
 
         public Requester(string url, object data = null)
         {
@@ -56,8 +53,7 @@ namespace RedditBet.Bot.Utils
 
             request.AddHeader("user-agent", _userAgent);
             request.RequestFormat = DataFormat.Json;
-            // request.AddCookie("__cfduid", "da45b6233659c5efdb44109e01ae097e11419025763"); // temp, need to persist this
-
+            
             if (_data != null)
             {
                 request.AddBody(_data);

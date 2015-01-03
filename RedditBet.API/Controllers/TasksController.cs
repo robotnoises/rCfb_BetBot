@@ -48,23 +48,18 @@ namespace RedditBet.API.Controllers
         }
 
         // PUT: api/Tasks/5
-        //[ResponseType(typeof(void))]
-        //public IHttpActionResult PutTask(BotTask task)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutTask(BotTask task)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    // if (id != task.TaskId)
-        //    // {
-        //    //     return BadRequest();
-        //    // }
+            _service.Update(task);
 
-        //    _service.Update(task);
-
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
+            return StatusCode(HttpStatusCode.NoContent);
+        }
 
         // POST: api/Tasks
         [ResponseType(typeof(BotTask))]
@@ -79,8 +74,6 @@ namespace RedditBet.API.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = task.TaskId }, task);
         }
-
-
 
         // DELETE: api/Tasks/5
         //[ResponseType(typeof(BotTask))]

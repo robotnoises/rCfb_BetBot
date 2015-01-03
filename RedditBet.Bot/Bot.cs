@@ -37,7 +37,7 @@ namespace RedditBet.Bot
             _tasks = tasks;
         }
 
-        public void PerformTasks()
+        public void PerformAssignedTasks()
         {
             // todo make Parallel?
             

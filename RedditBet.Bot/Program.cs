@@ -20,7 +20,7 @@ namespace RedditBet.Bot
             robot.AssignTasks(tasks);
 
             // Perform each task
-            robot.PerformTasks();
+            robot.PerformAssignedTasks();
 
             // Night-night
             robot.Sleep();

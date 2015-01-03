@@ -49,8 +49,7 @@ namespace RedditBet.Bot.Utils
             var matches = r.Matches(_textToParse).Cast<Match>().Select(match => match.Value).ToList();
             // Running match list
             var matchList = new List<string>();
-            // confidence score
-            
+                        
             foreach (var match in matches)
             {
                 if (!matchList.Contains(match)) 

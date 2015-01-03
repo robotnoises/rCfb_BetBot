@@ -10,7 +10,7 @@ using RedditSharp;
 
 namespace RedditBet.Bot.DataHelpers
 {
-    public static class Api
+    public static class Data
     {
         #region Local Resources 
 
@@ -20,7 +20,7 @@ namespace RedditBet.Bot.DataHelpers
         /// <returns>A List of URLs</returns>
         public static List<string> GetCrawlerUrls()
         {
-            var requester = new Requester(string.Format("{0}/r/{1}.json?limit=100", Config.BaseUrl, Config.SubReddit));
+            var requester = new Requester(string.Format("{0}/r/{1}.json?limit={2}", Config.BaseUrl, Config.SubReddit, Config.UrlLimit));
             var response = requester.GetResponse();
             var json = JsonConvert.DeserializeObject<RedditJSON>(response.Content);
             var urls = new List<string>();
@@ -39,9 +39,10 @@ namespace RedditBet.Bot.DataHelpers
         /// Gets a Dictionary of key words, to be matched within blocks of text. Each has an associated value.
         /// </summary>
         /// <returns>A Dictionary of key words and their values</returns>
-        public static Dictionary<string, double> GetMatchWords()
+        public static Dictionary<string, double> GetWordsToMatch()
         {
             var json = JsonConvert.DeserializeObject<Words>(RedditBet.Bot.Properties.Resources.words);
+            
             return json.words;
         }
 
@@ -55,7 +56,7 @@ namespace RedditBet.Bot.DataHelpers
         /// <returns></returns>
         public static List<IBotTask> GetIncompleteTasks()
         {
-            var requester = new Requester(string.Format("{0}{1}", Config.ApiUrl, Config.Api_Tasks_Incomplete));
+            var requester = new Requester(string.Format("{0}{1}", Config.ApiUrl, Config.Api_Tasks_GetIncomplete));
             var response = requester.GetResponse();
             var json = JsonConvert.DeserializeObject<List<BotTask>>(response.Content);
             var tasks = new List<IBotTask>();
@@ -72,7 +73,7 @@ namespace RedditBet.Bot.DataHelpers
         /// Todo
         /// </summary>
         /// <param name="comments"></param>
-        public static void AddUpdateComments(Comments comments)
+        public static void SaveComment(Comments comments)
         {
             foreach (var comment in comments)
             {
@@ -95,7 +96,15 @@ namespace RedditBet.Bot.DataHelpers
         public static Reddit Init(string username, string password)
         {
             var reddit = new Reddit();
+            
+            reddit.AddUserAgent(Config.Bot_UserAgent);
+
             var user = reddit.LogIn(username, password);
+            
+            if (user != null)
+            {
+                Log.Info(string.Format("Successfully logged-in as {0}", user.FullName));
+            }
 
             return reddit;
         }

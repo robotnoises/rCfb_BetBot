@@ -4,6 +4,7 @@ using RedditBet.Bot.Utils;
 using RedditBet.Bot.DataHelpers;
 using RedditBet.Bot.Models;
 using System.Collections.Generic;
+using RedditSharp;
 
 namespace RedditBet.Bot.Tasks
 {
@@ -49,10 +50,10 @@ namespace RedditBet.Bot.Tasks
         {
             Log.Info("Fetching URLs.");
 
-            foreach (var url in Api.GetCrawlerUrls())
+            foreach (var url in Data.GetCrawlerUrls())
             {
                 var crawler = new Crawler(url);
-                var matches = crawler.GetMatchedComments("class", "entry", Api.GetMatchWords(), 0.7); // todo add confidence to config
+                var matches = crawler.GetMatchedComments("class", "entry", Data.GetWordsToMatch(), 0.7); // todo add confidence to config
 
                 // todo, probably shouldn't og this to the db
                 Log.Info(string.Format("Found {0} matches in {1}", matches.Count, url));
@@ -60,7 +61,7 @@ namespace RedditBet.Bot.Tasks
                 _matchedComments.AddRange(matches);
             }
 
-            Api.AddUpdateComments(_matchedComments);
+            Data.SaveComment(_matchedComments);
         }
     }
 
@@ -90,7 +91,22 @@ namespace RedditBet.Bot.Tasks
 
             var comment = _redditContext.GetComment(Config.SubReddit, _name, _linkName);
 
-            var foo = "bar";
+            try
+            {
+                var botComment = comment.Reply(Message.Test());
+            }
+            catch (RateLimitException ex)
+            {
+                // Todo log?
+                var foo = ex.TimeToReset;
+            }
+            catch (Exception ex)
+            { 
+            
+            }
+            
+            // Todo, mark task as complete
+            // Data.
         }
     }
 
@@ -152,7 +168,7 @@ namespace RedditBet.Bot.Tasks
         public BotTasks()
         {
             // Crawl is always run once
-            this.Add(new Crawl());
+            // this.Add(new Crawl());
         }
 
         /// <summary>
@@ -160,7 +176,7 @@ namespace RedditBet.Bot.Tasks
         /// </summary>
         public void Load()
         {
-            this.AddRange(Api.GetIncompleteTasks());
+            this.AddRange(Data.GetIncompleteTasks());
         }
     }
 }

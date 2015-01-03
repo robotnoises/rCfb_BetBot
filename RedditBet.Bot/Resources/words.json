@@ -1,28 +1,32 @@
 ﻿{
     "title": "words",
     "description": "A list of words and phrases the bot can use to decide where or not to reply",
-    "words":  {
-        
+    "words": {
+        /*  Note: this json will be consumed and placed into a dictionary, so no spaces. A space 
+            should be represented by an underscore character (_).
+        */
+
         /* Anything above 0.7 should trigger the Bot to reply*/
 
         "/u/cfb_betbot": 1.0,
         "cfb_betbot": 1.0,
-        
+        "aksdxxpLllsfo9 zidjl": 1.0, /* Test */
+
         /* Anything below this line is going to require multiple matches */
-        
+
         "flair bet": 0.5,
         "sig bet": 0.5,
         "signature bet": 0.5,
         "signature bets": 0.5,
         "change my flair": 0.5,
-        "change your flair":  0.5,
+        "change your flair": 0.5,
         "bet": 0.5,
         "wager": 0.5,
         "beat us": 0.11,
         "beat you": 0.11,
-        "beats":  0.11,
+        "beats": 0.11,
         "win": 0.11,
-        "lose":  0.11,
+        "lose": 0.11,
         "wins": 0.11,
         "loses": 0.11,
         "doesn't win": 0.11,
@@ -33,7 +37,7 @@
         "wanna make a": 0.11,
         "want to make a": 0.11,
         "loser": 0.11,
-        "winner":  0.11,
+        "winner": 0.11,
         "season": 0.11,
         "week": 0.11,
         "post a video": 0.11,

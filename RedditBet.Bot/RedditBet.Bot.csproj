@@ -71,12 +71,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Repository\Repository.cs" />
-    <Compile Include="Services\Services.cs" />
     <Compile Include="Tasks\TaskFactory.cs" />
     <Compile Include="Utils\Config.cs" />
     <Compile Include="Utils\Convert.cs" />
     <Compile Include="Utils\Log.cs" />
+    <Compile Include="Utils\Markdown.cs" />
+    <Compile Include="Utils\Message.cs" />
     <Compile Include="Utils\Parse.cs" />
     <Compile Include="Utils\Crawler.cs" />
     <Compile Include="Utils\Comments.cs" />

@@ -61,23 +61,44 @@ namespace RedditBet.Bot.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to # This is a header
+        ///
+        ///Hello, world!
+        ///
+        ///* Foo
+        ///* Bar
+        ///* Baz
+        ///
+        ///&gt; This is a test of a thing
+        ///   
+        ///
+        ///   This is a code block
+        ///   See?
+        ///
+        ///End of message..
+        /// </summary>
+        internal static string test {
+            get {
+                return ResourceManager.GetString("test", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {
         ///    &quot;title&quot;: &quot;words&quot;,
         ///    &quot;description&quot;: &quot;A list of words and phrases the bot can use to decide where or not to reply&quot;,
-        ///    &quot;words&quot;:  {
-        ///        
+        ///    &quot;words&quot;: {
+        ///        /*  Note: this json will be consumed and placed into a dictionary, so no spaces. A space 
+        ///            should be represented by an underscore character (_).
+        ///        */
+        ///
         ///        /* Anything above 0.7 should trigger the Bot to reply*/
         ///
         ///        &quot;/u/cfb_betbot&quot;: 1.0,
         ///        &quot;cfb_betbot&quot;: 1.0,
-        ///        
-        ///        /* Anything below this line is going to require multiple matches */
-        ///        
-        ///        &quot;flair bet&quot;: 0.61,
-        ///        &quot;sig bet&quot;: 0.61,
-        ///        &quot;signature bet&quot;: 0.61,
-        ///        &quot;signature bets&quot;: 0.61,
-        ///        &quot;change my [rest of string was truncated]&quot;;.
+        ///        &quot;aksdxxpLllsfo9 zidjl&quot;: 1.0, /* Test */
+        ///
+        ///        /* Any [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string words {
             get {

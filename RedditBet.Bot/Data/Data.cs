@@ -6,9 +6,11 @@ using RedditBet.Bot.Tasks;
 using RedditBet.Bot.Utils;
 using RedditBet.Bot.Models;
 using RedditBet.Bot.Enums;
+using Local = RedditBet.Bot.Properties;
 using RedditSharp;
 
-namespace RedditBet.Bot.DataHelpers
+
+namespace RedditBet.Bot.DataResources
 {
     public static class Data
     {
@@ -46,6 +48,10 @@ namespace RedditBet.Bot.DataHelpers
             return json.words;
         }
 
+        // Begin Markdown files
+
+        public static string MarkDown_Test = Local.Resources.test;
+                
         #endregion
 
         #region BetBot.API

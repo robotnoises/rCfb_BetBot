@@ -1,7 +1,7 @@
 ﻿using System;
 using RedditBet.Bot.Enums;
 using RedditBet.Bot.Utils;
-using RedditBet.Bot.DataHelpers;
+using RedditBet.Bot.DataResources;
 using RedditBet.Bot.Models;
 using System.Collections.Generic;
 using RedditSharp;
@@ -93,7 +93,7 @@ namespace RedditBet.Bot.Tasks
 
             try
             {
-                var botComment = comment.Reply(Message.Test());
+                var botComment = comment.Reply(Data.MarkDown_Test);
             }
             catch (RateLimitException ex)
             {

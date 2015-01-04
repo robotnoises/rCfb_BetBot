@@ -41,7 +41,6 @@ namespace RedditBet.Bot.Utils
             foreach (var item in listItems)
             {
                 sb.Append(string.Format("* {0}{1}", item, LINE_BREAK));
-                // sb.AppendLine(string.Format("* {0}", item));
             }
 
             return sb.ToString();

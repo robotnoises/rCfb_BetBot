@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RedditBet.Bot;
-using RedditBet.Bot.DataHelpers;
+using RedditBet.Bot.DataResources;
 
 namespace RedditBet.Tests
 {

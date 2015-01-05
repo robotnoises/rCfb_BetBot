@@ -6,10 +6,12 @@ Hello, world!
 * Bar
 * Baz
 
-> This is a test of a thing
-   
+> This is a blockquote
+> Simple.
+  
+    This is a code block
+    See?
 
-   This is a code block
-   See?
+%link01%
 
 End of message.

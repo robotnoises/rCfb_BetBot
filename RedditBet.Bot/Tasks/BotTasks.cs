@@ -88,12 +88,11 @@ namespace RedditBet.Bot.Tasks
         public void Execute()
         {
             var user = _redditContext.GetUser(Config.Reddit_Username);
-
             var comment = _redditContext.GetComment(Config.SubReddit, _name, _linkName);
 
             try
             {
-                var botComment = comment.Reply(Data.MarkDown_Test);
+                var botComment = comment.Reply(Message.Test());
             }
             catch (RateLimitException ex)
             {

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace RedditBet.Bot.Utils
 {
+    // Todo: Need to do deep investigation on whether or not this class is useful now that I'm using the Phraze method to match comments
     public class CommentParser
     {
         // Private fields
@@ -27,7 +28,7 @@ namespace RedditBet.Bot.Utils
         /// </summary>
         /// <param name="input">A list of strings, which can be single worlds or entire phrases.</param>
         /// <returns>A bool representing that the parsed text contains at least one match.</returns>
-        public bool Contains(List<string> input) // int minimumMatches = 1?
+        public bool Contains(ICollection<string> input) 
         {
             var hash = ToHashSet(input);
             var r = new Regex(RegexBuilder(hash), RegexOptions.IgnoreCase);
@@ -86,7 +87,7 @@ namespace RedditBet.Bot.Utils
             return sb.ToString().TrimEnd('|');
         }
         
-        private static HashSet<string> ToHashSet(List<string> input)
+        private static HashSet<string> ToHashSet(ICollection<string> input)
         {
             return new HashSet<string>(input);
         }

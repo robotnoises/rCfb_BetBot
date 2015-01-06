@@ -52,10 +52,12 @@ namespace RedditBet.Bot.Tasks
 
             foreach (var url in Data.GetCrawlerUrls())
             {
+                // var url = "http://rc.reddit.com/r/CFB/comments/1rkt6s/week_14_user_friendly_bet_thread/";
                 var crawler = new Crawler(url);
-                var matches = crawler.GetMatchedComments("class", "entry", Data.GetWordsToMatch(), 0.7); // todo add confidence to config
 
-                // todo, probably shouldn't og this to the db
+                var matches = crawler.GetMatchedComments("class", "entry", Data.GetPhrasesToMatch());    
+                
+                // todo, probably shouldn't log this to the db
                 Log.Info(string.Format("Found {0} matches in {1}", matches.Count, url));
 
                 _matchedComments.AddRange(matches);
@@ -167,7 +169,7 @@ namespace RedditBet.Bot.Tasks
         public BotTasks()
         {
             // Crawl is always run once
-            // this.Add(new Crawl());
+            this.Add(new Crawl());
         }
 
         /// <summary>
@@ -175,7 +177,7 @@ namespace RedditBet.Bot.Tasks
         /// </summary>
         public void Load()
         {
-            this.AddRange(Data.GetIncompleteTasks());
+            // this.AddRange(Data.GetIncompleteTasks());
         }
     }
 }

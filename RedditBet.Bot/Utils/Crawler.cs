@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Configuration;
 using HtmlAgilityPack;
 using System.Net;
+using Phraze;
 
 namespace RedditBet.Bot.Utils
 {
@@ -25,58 +26,37 @@ namespace RedditBet.Bot.Utils
             _doc.LoadHtml(page);
         }
 
-        public Comments GetMatchedComments(string attribute, string attributeValue, Dictionary<string, double> keyWords, double confidenceFloor)
+        public Comments GetMatchedComments(string attribute, string attributeValue, ICollection<string> keyPhrases)
         {
             var matches = new Comments();
             var nodes = _doc.DocumentNode.SelectNodes("//*[contains(concat(' ', normalize-space(@" + attribute + "), ' '), ' " + attributeValue + " ')]");
+            var phrazes = new PhraseCollection(keyPhrases);
 
             // If there aren't any comments beyond the OP, there is no need to continue
             if (nodes.Count <= 1) return matches;
-            
+
             // Keep track of the Xpath of the last unmatched node
             var topNodeXpath = nodes[1].XPath;
             var targetNodeXpath = topNodeXpath;
-
+            
             // Exclude the top node, as this is the parent comment for the entire thread
             for (var i = 1; i < nodes.Count; i++)
             {
                 var currentNode = nodes[i];
-                var textToParse = currentNode.InnerText;
-                var wordsToMatch = keyWords.Keys.ToList();
-                var confidence = 0.0;
 
-                var parser = new CommentParser(textToParse);
-
-                // Break-out if nothing is matched
-                if (!parser.Contains(wordsToMatch)) continue;
-
-                foreach (var word in parser.GetMatchedWords(wordsToMatch))
-                {
-                    var key = word.ToLower();
-
-                    if (ContainsKeyWithSpaces(keyWords, key))
-                    {
-                        // Each keyword is assoc. w/a value
-                        confidence = confidence + GetValueForKeyWithSpaces(keyWords, key);
-                        if (confidence >= 1.0) break;
-                    }
-                }
-
-                // Checking the length is probably dumb... todo
-                if (confidence > confidenceFloor && currentNode.XPath.Length <= targetNodeXpath.Length) 
-                {
-                    var comment = Builder.Comment(currentNode, confidence);
-
-                    targetNodeXpath = topNodeXpath;
-
-                    if (comment != null)
-                    {
-                        matches.AddComment(comment);
-                    }
-                }
-                else
+                if (currentNode.XPath.Length > targetNodeXpath.Length)  // Todo: Need to do a deep comparison of Xpaths, not just a length check
                 {
                     targetNodeXpath = currentNode.XPath;
+                    continue;
+                }
+                
+                var textToParse = currentNode.InnerText;
+                var hasMatch = phrazes.HasMatch(textToParse);
+                    
+                if (hasMatch)
+                {
+                    matches.AddComment(Builder.Comment(currentNode));
+                    targetNodeXpath = topNodeXpath;
                 }
             }
 

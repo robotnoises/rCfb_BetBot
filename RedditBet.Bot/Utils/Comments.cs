@@ -13,6 +13,7 @@ namespace RedditBet.Bot.Utils
     {
         public void AddComment(Comment c)
         {
+            if (c == null) return;
             if (this.Any(x => x.GetHashId() == c.GetHashId())) return;
             
             this.Add(c);
@@ -117,7 +118,7 @@ namespace RedditBet.Bot.Utils
     /// </summary>
     public static class Builder
     {
-        public static Comment Comment(HtmlNode node, double confidence)
+        public static Comment Comment(HtmlNode node, double confidence = 1.0)
         {
             var author = node.SelectSingleNode(".//a[contains(concat(' ', normalize-space(@class), ' '), ' author ')]");
             var permaLink = node.SelectSingleNode(".//a[contains(concat(' ', normalize-space(@class), ' '), ' bylink ')]");
@@ -128,6 +129,8 @@ namespace RedditBet.Bot.Utils
                 // Originally captured as "### points", so chop-off the " points"
                 var uv = upVotes.InnerText.Split(' ')[0];
                 
+                // var ifAuthorDeleted = author.InnerText ?? "";
+
                 // ... and Convert to int
                 var uvInt = Convert.ToInt32(uv);
                 

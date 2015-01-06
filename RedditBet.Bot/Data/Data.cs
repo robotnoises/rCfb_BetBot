@@ -48,6 +48,17 @@ namespace RedditBet.Bot.DataResources
             return json.words;
         }
 
+        /// <summary>
+        /// Gets a Dictionary of key words, to be matched within blocks of text. Each has an associated value.
+        /// </summary>
+        /// <returns>A Dictionary of key words and their values</returns>
+        public static ICollection<string> GetPhrasesToMatch()
+        {
+            var json = JsonConvert.DeserializeObject<Phrases>(RedditBet.Bot.Properties.Resources.phrases);
+
+            return json.phrases;
+        }
+
         // Begin Markdown files
 
         public static string MarkDown_Test = Local.Resources.test;

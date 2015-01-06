@@ -39,6 +39,9 @@
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Phraze">
+      <HintPath>..\packages\Phraze\Phraze.dll</HintPath>
+    </Reference>
     <Reference Include="RedditSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\RedditSharp\RedditSharp.dll</HintPath>
@@ -88,6 +91,7 @@
     </None>
     <None Include="packages.config" />
     <None Include="Resources\messages.json" />
+    <None Include="Resources\phrases.json" />
     <Resource Include="Resources\test.markdown" />
     <Resource Include="Resources\words.json" />
   </ItemGroup>

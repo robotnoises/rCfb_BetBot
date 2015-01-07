@@ -2,12 +2,22 @@
     "title": "phrases",
     "description": "A list of key phrases the bot can search for",
     "phrases": [
-        // Todo: summoners?
-        
-        "If ... wins, I will",
-        "If ... loses, I will",
-        "If ... wins, you must",
-        "If ... loses, you must",
+        // Summoners
+
+        "/u/cfb_betbot",
+        "cfb_betbot",
+        "aksdxxpLllsfo9 zidjl", // For testing
+
+        // Key/Target Phrases
+
+        "If ... win, I'll",
+        "If ... lose, I'll",
+        "If ... win, you must",
+        "If ... lose, you must",
+        "bet ... if ... wins",
+        "bet ... if ... lose",
+        "want to bet?",
+        "care to make it interesting?",
         "up for a bet?",
         "do a flair bet?",
         "do a signature bet",

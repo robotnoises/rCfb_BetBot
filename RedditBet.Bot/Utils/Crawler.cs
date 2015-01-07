@@ -44,16 +44,16 @@ namespace RedditBet.Bot.Utils
             {
                 var currentNode = nodes[i];
 
-                if (currentNode.XPath.Length > targetNodeXpath.Length)  // Todo: Need to do a deep comparison of Xpaths, not just a length check
-                {
-                    targetNodeXpath = currentNode.XPath;
-                    continue;
-                }
-                
-                var textToParse = currentNode.InnerText;
-                var hasMatch = phrazes.HasMatch(textToParse);
-                    
-                if (hasMatch)
+                //if (currentNode.XPath.Length > targetNodeXpath.Length)  // Todo: Need to do a deep comparison of Xpaths, not just a length check
+                //{
+                //    continue;
+                //}
+                //else
+                //{
+                //    targetNodeXpath = currentNode.XPath;
+                //}
+
+                if (phrazes.HasMatch(currentNode.InnerText))
                 {
                     matches.AddComment(Builder.Comment(currentNode));
                     targetNodeXpath = topNodeXpath;
@@ -62,61 +62,5 @@ namespace RedditBet.Bot.Utils
 
             return matches;
         }
-
-        ///// <summary>
-        ///// I'm really abusing the Dictionary class at this point...
-        ///// </summary>
-        ///// <param name="dict"></param>
-        ///// <param name="key"></param>
-        ///// <returns></returns>
-        //private bool ContainsKeyWithSpaces(Dictionary<string, double> dict, string key)
-        //{
-        //    var found = false;
-        //    var keyHashSet = new HashSet<string>(dict.Keys);
-
-        //    foreach (var k in dict.Keys)
-        //    {
-        //        if (key == k.ToLower())
-        //        {
-        //            found = true;
-        //            break;
-        //        }
-        //    }
-
-        //    return found;
-        //}
-
-        ///// <summary>
-        ///// Gruhhhhh
-        ///// </summary>
-        ///// <param name="dict"></param>
-        ///// <param name="key"></param>
-        ///// <returns></returns>
-        //private double GetValueForKeyWithSpaces(Dictionary<string, double> dict, string key)
-        //{
-        //    var value = 0.0;
-        //    var count = 0;
-        //    var values = dict.Values.ToArray();
-
-        //    if (key.Contains(' '))
-        //    {
-        //        foreach (var k in dict.Keys)
-        //        {
-        //            if (key == k.ToLower())
-        //            {
-        //                value = values[count];
-        //                break;
-        //            }
-
-        //            count++;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        value = dict[key];
-        //    }
-
-        //    return value;
-        //}
     }
 }

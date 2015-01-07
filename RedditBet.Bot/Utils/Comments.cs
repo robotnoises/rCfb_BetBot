@@ -138,6 +138,7 @@ namespace RedditBet.Bot.Utils
             }
             catch (Exception ex)
             {
+                // Todo: maybe not the best tactic...
                 return null;
             }
         }

@@ -136,8 +136,6 @@ namespace RedditBet.Bot.Tasks
             var comment = _redditContext.GetComment(Config.SubReddit, _name, _linkName);
 
             // comment.Reply(_message);
-
-            var foo = "bar";
         }
     }
 

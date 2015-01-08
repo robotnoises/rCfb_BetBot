@@ -43,6 +43,7 @@ namespace RedditBet.Bot.Utils
             for (var i = 1; i < nodes.Count; i++)
             {
                 var currentNode = nodes[i];
+                var text = currentNode.InnerText.Clean();
 
                 //if (currentNode.XPath.Length > targetNodeXpath.Length)  // Todo: Need to do a deep comparison of Xpaths, not just a length check
                 //{
@@ -53,7 +54,7 @@ namespace RedditBet.Bot.Utils
                 //    targetNodeXpath = currentNode.XPath;
                 //}
 
-                if (phrazes.HasMatch(currentNode.InnerText))
+                if (phrazes.HasMatch(text))
                 {
                     matches.AddComment(Builder.Comment(currentNode));
                     targetNodeXpath = topNodeXpath;

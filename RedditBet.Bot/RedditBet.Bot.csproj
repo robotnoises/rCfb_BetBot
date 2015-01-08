@@ -84,6 +84,7 @@
     <Compile Include="Utils\Crawler.cs" />
     <Compile Include="Utils\Comments.cs" />
     <Compile Include="Utils\Requester.cs" />
+    <Compile Include="Utils\Strings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

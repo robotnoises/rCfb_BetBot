@@ -10,4 +10,8 @@ obj/
 
 extras/
 
+# suo file
+
+*.suo
+
 

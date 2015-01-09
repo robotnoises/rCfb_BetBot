@@ -23,9 +23,9 @@ namespace RedditBet.Bot.Utils
             Console.WriteLine(msg);
         }
 
-        public static void Error(string message)
+        public static void Error(Exception ex)
         {
-            var msg = string.Format("[ERROR] {0}", message);
+            var msg = string.Format("[ERROR] {0}", ex.Message);
 
             Console.WriteLine(msg);
         }

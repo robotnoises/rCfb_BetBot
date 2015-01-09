@@ -4,6 +4,8 @@ using RedditBet.Bot.Utils;
 using RedditBet.Bot.DataResources;
 using RedditBet.Bot.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Diagnostics;
 using RedditSharp;
 
 namespace RedditBet.Bot.Tasks
@@ -14,32 +16,61 @@ namespace RedditBet.Bot.Tasks
     public interface IBotTask
     {
         void Execute();
+        string GetTaskName();
+        TimeSpan GetElapsedTime();
     }
 
     /// <summary>
-    /// Static RedditSharp context to be used for each Task instance
+    /// Todo
     /// </summary>
-    public class RedditBotTask
+    public class RedditTask
     {
         protected static RedditSharp.Reddit _redditContext;
+        private Stopwatch _timer;
 
-        static RedditBotTask()
+        // Static constructor
+        static RedditTask()
         {
             if (_redditContext == null)
             {
                 _redditContext = RedditApi.Init(Config.Reddit_Username, Config.Reddit_Password);
             }
         }
+
+        // Instance Constructor
+        public RedditTask()
+        {
+            if (_timer == null)
+            {
+                _timer = new Stopwatch();
+            }
+        }
+
+        public void StartTimer()
+        {
+            _timer.Start();
+        }
+
+        public void StopTimer()
+        {
+            _timer.Stop();
+        }
+
+        public TimeSpan GetElapsed()
+        {
+            return _timer.Elapsed;
+        }
     }
     
     /// <summary>
     /// Crawl is the main task, which every Bot instance will execute once
     /// </summary>
-    public class Crawl : IBotTask
+    public class Crawl : RedditTask, IBotTask
     {
         // Note: will make only 1 API call (allowed 30 per minute)
 
         private Comments _matchedComments;
+        private const string _taskName = "Crawl";
 
         public Crawl()
         {
@@ -48,34 +79,48 @@ namespace RedditBet.Bot.Tasks
 
         public void Execute()
         {
-            Log.Info("Fetching URLs.");
-
-            foreach (var url in Data.GetCrawlerUrls())
+            base.StartTimer();
+            var locker = new object();
+            
+            Parallel.ForEach(Data.GetCrawlerUrls(), url =>
             {
                 // var url = "http://www.reddit.com/r/CFB/comments/2mvv7y/week_13_user_friendly_bet_thread/";
                 var crawler = new Crawler(url);
 
-                var matches = crawler.GetMatchedComments("class", "entry", Data.GetPhrasesToMatch());    
-                
+                var matches = crawler.GetMatchedComments("class", "entry", Data.GetPhrasesToMatch());
+
                 // todo, probably shouldn't log this to the db
                 Log.Info(string.Format("Found {0} matches in {1}", matches.Count, url));
 
-                _matchedComments.AddRange(matches);
-            }
-
+                lock (locker) _matchedComments.AddRange(matches);
+            });
+            
             Data.SaveComment(_matchedComments);
+
+            base.StopTimer();
+        }
+
+        public string GetTaskName()
+        {
+            return _taskName;
+        }
+
+        public TimeSpan GetElapsedTime()
+        {
+            return base.GetElapsed();
         }
     }
 
     /// <summary>
     /// Replies to a comment
     /// </summary>
-    public class Reply : RedditBotTask, IBotTask
+    public class Reply : RedditTask, IBotTask
     {
         private string _permaLink;
         private string _message;
         private string _name;
         private string _linkName;
+        private const string _taskName = "Reply";
 
         public Reply(BotTask task)
         {
@@ -89,6 +134,8 @@ namespace RedditBet.Bot.Tasks
 
         public void Execute()
         {
+            base.StartTimer();
+
             var user = _redditContext.GetUser(Config.Reddit_Username);
             var comment = _redditContext.GetComment(Config.SubReddit, _name, _linkName);
 
@@ -102,24 +149,37 @@ namespace RedditBet.Bot.Tasks
                 var foo = ex.TimeToReset;
             }
             catch (Exception ex)
-            { 
-            
+            {
+                Log.Error(ex);
             }
             
             // Todo, mark task as complete
             // Data.
+
+            base.StopTimer();
+        }
+
+        public string GetTaskName()
+        {
+            return _taskName;
+        }
+
+        public TimeSpan GetElapsedTime()
+        {
+            return base.GetElapsed();
         }
     }
 
     /// <summary>
     /// Updates an existing reply
     /// </summary>
-    public class UpdateReply : RedditBotTask, IBotTask
+    public class UpdateReply : RedditTask, IBotTask
     {
         private string _targetUrl;
         private string _message;
         private string _name;
         private string _linkName;
+        private const string _taskName = "UpdateReply";
 
         public UpdateReply(BotTask task)
         {
@@ -133,19 +193,34 @@ namespace RedditBet.Bot.Tasks
 
         public void Execute()
         {
+            base.StartTimer();
+
             var comment = _redditContext.GetComment(Config.SubReddit, _name, _linkName);
 
             // comment.Reply(_message);
+
+            base.StopTimer();
+        }
+
+        public string GetTaskName()
+        {
+            return _taskName;
+        }
+
+        public TimeSpan GetElapsedTime()
+        {
+            return base.GetElapsed();
         }
     }
 
     /// <summary>
     /// Send a direct message to a reddit user
     /// </summary>
-    public class DirectMessage : IBotTask
+    public class DirectMessage : RedditTask, IBotTask
     {
         private string _targetUrl;
         private string _message;
+        private const string _taskName = "DirectMessage";
 
         public DirectMessage(BotTask task)
         {
@@ -155,7 +230,21 @@ namespace RedditBet.Bot.Tasks
 
         public void Execute()
         {
+            base.StartTimer();
+
             // todo
+
+            base.StopTimer();
+        }
+
+        public string GetTaskName()
+        {
+            return _taskName;
+        }
+
+        public TimeSpan GetElapsedTime()
+        {
+            return base.GetElapsed();
         }
     }
 

@@ -105,7 +105,7 @@ namespace RedditBet.Bot.Utils
                 }
                 catch (Exception ex)
                 {
-                    // Todo log exception
+                    Log.Error(ex);
                 }
             }
 
@@ -138,6 +138,8 @@ namespace RedditBet.Bot.Utils
             }
             catch (Exception ex)
             {
+                Log.Error(ex);
+
                 // Todo: maybe not the best tactic...
                 return null;
             }

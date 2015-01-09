@@ -30,8 +30,8 @@ namespace RedditBet.Bot.Utils
         {
             var matches = new Comments();
             var phrazes = new PhraseCollection(keyPhrases);
+            var blackList = new HashSet<int>();
             var nodes = _doc.DocumentNode.SelectNodes("//*[contains(concat(' ', normalize-space(@" + attribute + "), ' '), ' " + attributeValue + " ')]");
-            var blackList = new HtmlNodeCollection(nodes[0]);
 
             // If there aren't any comments beyond the OP, there is no need to continue
             if (nodes.Count <= 1) return matches;
@@ -44,17 +44,15 @@ namespace RedditBet.Bot.Utils
                 var locker = new object();
 
                 if (!phrazes.HasMatch(text)) continue;
-                if (blackList.Contains(currentNode)) continue;
+                if (blackList.Contains(currentNode.StreamPosition)) continue;
 
                 // Add the Comment to the match list
                 matches.AddComment(Builder.Comment(currentNode));
                     
                 // Add all child comments to the blacklist
-                blackList = new HtmlNodeCollection(nodes[0]);
-                
                 Parallel.ForEach(currentNode.ChildNodes, childNode =>
                 {
-                    lock (locker) blackList.Add(childNode);
+                    lock (locker) blackList.Add(childNode.StreamPosition);
                 });
             }
 

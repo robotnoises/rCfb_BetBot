@@ -39,11 +39,10 @@ namespace RedditBet.Bot
 
         public void PerformAssignedTasks()
         {
-            // todo make Parallel?
-            
             foreach (var task in _tasks)
             {
                 task.Execute();
+                Log.Info(string.Format("Task {0} took {1} to complete.", task.GetTaskName(), task.GetElapsedTime()));
             }
         }
     }

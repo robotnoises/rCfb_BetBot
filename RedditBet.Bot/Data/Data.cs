@@ -8,6 +8,7 @@ using RedditBet.Bot.Models;
 using RedditBet.Bot.Enums;
 using Local = RedditBet.Bot.Properties;
 using RedditSharp;
+using RedditBet.API.Models;
 
 
 namespace RedditBet.Bot.DataResources
@@ -31,8 +32,6 @@ namespace RedditBet.Bot.DataResources
             {
                 urls.Add(string.Format("{0}{1}", Config.BaseUrl, item.data.permalink));
             }
-
-            // urls.Add("http://rc.reddit.com/r/CFB/comments/1rkt6s/week_14_user_friendly_bet_thread/");
 
             return urls;
         }
@@ -99,6 +98,13 @@ namespace RedditBet.Bot.DataResources
                 var response = requester.GetResponse();
                 var statusCode = response.StatusCode;
             }
+        }
+
+        public static void AddLog(LogModel log)
+        { 
+            var requester = new Requester(string.Format("{0}{1}", Config.ApiUrl, Config.Api_Log), RequestMethod.POST, log);
+            var response = requester.GetResponse();
+            var statusCode = response.StatusCode;
         }
 
         #endregion

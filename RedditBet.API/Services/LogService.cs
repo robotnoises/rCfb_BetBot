@@ -30,7 +30,7 @@ namespace RedditBet.API.Services
 
         public void Create(Log t)
         {
-            t.TimeStamp = DateTime.UtcNow;
+            t.TimeStamp = (t.TimeStamp != null) ? t.TimeStamp : DateTime.UtcNow;
 
             _repository.Add(t);
         }

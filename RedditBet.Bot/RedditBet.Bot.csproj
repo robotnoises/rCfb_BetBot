@@ -78,8 +78,10 @@
   <ItemGroup>
     <Compile Include="Data\Data.cs" />
     <Compile Include="Bot.cs" />
+    <Compile Include="Enums\LogTypes.cs" />
     <Compile Include="Enums\RequestTypes.cs" />
     <Compile Include="Enums\TaskType.cs" />
+    <Compile Include="Models\Log.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Tasks\BotTasks.cs" />
     <Compile Include="Models\Reddit.cs" />
@@ -94,7 +96,7 @@
     <Compile Include="Tasks\TaskFactory.cs" />
     <Compile Include="Utils\Config.cs" />
     <Compile Include="Utils\Convert.cs" />
-    <Compile Include="Utils\Log.cs" />
+    <Compile Include="Utils\Logger.cs" />
     <Compile Include="Utils\Markdown.cs" />
     <Compile Include="Utils\Message.cs" />
     <Compile Include="Utils\Parse.cs" />

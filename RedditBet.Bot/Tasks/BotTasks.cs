@@ -82,9 +82,9 @@ namespace RedditBet.Bot.Tasks
             base.StartTimer();
             var locker = new object();
             
-            Parallel.ForEach(Data.GetCrawlerUrls(), url =>
-            {
-                // var url = "http://www.reddit.com/r/CFB/comments/2mvv7y/week_13_user_friendly_bet_thread/";
+            //Parallel.ForEach(Data.GetCrawlerUrls(), url =>
+            //{
+                var url = "http://www.reddit.com/r/CFB/comments/2mvv7y/week_13_user_friendly_bet_thread/";
                 var crawler = new Crawler(url);
 
                 var matches = crawler.GetMatchedComments("class", "entry", Data.GetPhrasesToMatch());
@@ -93,9 +93,9 @@ namespace RedditBet.Bot.Tasks
                 Log.Info(string.Format("Found {0} matches in {1}", matches.Count, url));
 
                 lock (locker) _matchedComments.AddRange(matches);
-            });
+            //});
             
-            Data.SaveComment(_matchedComments);
+            Data.SaveComments(_matchedComments);
 
             base.StopTimer();
         }

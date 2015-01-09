@@ -90,15 +90,14 @@ namespace RedditBet.Bot.DataResources
         /// Todo
         /// </summary>
         /// <param name="comments"></param>
-        public static void SaveComment(Comments comments)
+        public static void SaveComments(Comments comments)
         {
             foreach (var comment in comments)
             {
                 var task = comment.ToBotTask(TaskType.Reply);
                 var requester = new Requester(string.Format("{0}{1}", Config.ApiUrl, Config.Api_Tasks), RequestMethod.POST, task);
                 var response = requester.GetResponse();
-                
-                // if (response.StatusCode == OK)
+                var statusCode = response.StatusCode;
             }
         }
 

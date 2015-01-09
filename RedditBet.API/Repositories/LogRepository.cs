@@ -8,41 +8,41 @@ using System.Data.Entity;
 
 namespace RedditBet.API.Repositories
 {
-    public class TaskRepository : IRepository<BotTask>
+    public class LogRepository : IRepository<Log>
     {
         private readonly RedditBetDataContext _context;
 
-        public TaskRepository(RedditBetDataContext context)
+        public LogRepository(RedditBetDataContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<BotTask> GetAll()
+        public IEnumerable<Log> GetAll()
         {
-            return _context.Tasks.ToList();
+            return _context.Logs.ToList();
         }
 
-        public BotTask Get(int id)
+        public Log Get(int id)
         {
-            return _context.Tasks.Find(id);
+            return _context.Logs.Find(id);
         }
 
-        public void Add(BotTask entity)
+        public void Add(Log entity)
         {
-            _context.Tasks.Add(entity);
+            _context.Logs.Add(entity);
             _context.SaveChanges();
         }
 
-        public void Update(BotTask entity)
+        public void Update(Log entity)
         {
-            _context.Tasks.Attach(entity);
+            _context.Logs.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
             _context.SaveChanges();
         }
 
-        public void Remove(BotTask entity)
+        public void Remove(Log entity)
         {
-            _context.Tasks.Remove(entity);
+            _context.Logs.Remove(entity);
             _context.SaveChanges();
         }
 

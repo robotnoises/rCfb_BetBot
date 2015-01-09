@@ -52,7 +52,7 @@ namespace RedditBet.Bot.Tasks
 
             foreach (var url in Data.GetCrawlerUrls())
             {
-                //var url = "http://www.reddit.com/r/CFB/comments/2o9oen/week_15_user_friendly_bet_thread/";
+                // var url = "http://www.reddit.com/r/CFB/comments/2mvv7y/week_13_user_friendly_bet_thread/";
                 var crawler = new Crawler(url);
 
                 var matches = crawler.GetMatchedComments("class", "entry", Data.GetPhrasesToMatch());    

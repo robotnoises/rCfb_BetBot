@@ -120,17 +120,15 @@ namespace RedditBet.Bot.Utils
     {
         public static Comment Comment(HtmlNode node, double confidence = 1.0)
         {
-            var author = node.SelectSingleNode(".//a[contains(concat(' ', normalize-space(@class), ' '), ' author ')]");
-            var permaLink = node.SelectSingleNode(".//a[contains(concat(' ', normalize-space(@class), ' '), ' bylink ')]");
-            var upVotes = node.SelectSingleNode(".//span[contains(concat(' ', normalize-space(@class), ' '), ' score unvoted ')]");
+            var author = node.SelectSingleNode(BuildSelector("class", "author"));
+            var permaLink = node.SelectSingleNode(BuildSelector("class", "bylink"));
+            var upVotes = node.SelectSingleNode(BuildSelector("class", "score unvoted"));
 
             try
             {
                 // Originally captured as "### points", so chop-off the " points"
                 var uv = upVotes.InnerText.Split(' ')[0];
                 
-                // var ifAuthorDeleted = author.InnerText ?? "";
-
                 // ... and Convert to int
                 var uvInt = Convert.ToInt32(uv);
                 
@@ -140,9 +138,13 @@ namespace RedditBet.Bot.Utils
             {
                 Log.Error(ex);
 
-                // Todo: maybe not the best tactic...
                 return null;
             }
+        }
+
+        private static string BuildSelector(string attribute, string value)
+        {
+            return string.Format(".//a[contains(concat(' ', normalize-space(@{0}), ' '), ' {1} ')]", attribute, value);
         }
     }
 }

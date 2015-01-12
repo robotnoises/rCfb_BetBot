@@ -46,8 +46,7 @@ namespace RedditBet.Bot.Utils
             {
                 Type = type,
                 Message = message,
-                StackTrace = (ex != null) ? ex.StackTrace : string.Empty,
-                InnerException = (ex != null) ? ex.InnerException.ToString() : string.Empty,
+                StackTrace = (ex == null) ? string.Empty : ex.StackTrace,
                 Timestamp = DateTime.UtcNow
             };
 

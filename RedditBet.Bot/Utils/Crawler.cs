@@ -46,9 +46,11 @@ namespace RedditBet.Bot.Utils
                 if (!phrazes.HasMatch(text)) continue;
                 if (blackList.Contains(currentNode.StreamPosition)) continue;
 
+                var matchedPhrases = phrazes.GetMatches(text);
+
                 // Add the Comment to the match list
-                matches.AddComment(Builder.Comment(currentNode));
-                    
+                matches.AddComment(Builder.Comment(currentNode, );
+
                 // Add all child comments to the blacklist
                 Parallel.ForEach(currentNode.ChildNodes, childNode =>
                 {

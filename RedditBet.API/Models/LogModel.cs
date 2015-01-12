@@ -13,10 +13,9 @@ namespace RedditBet.API.Models
         public string Origin { get; set; }
         [Required]
         public string Message { get; set; }
-        public DateTime TimeStamp { get; set; }
+        public DateTime? TimeStamp { get; set; }
         
         // For Exceptions, only
         public string StackTrace { get; set; }
-        public string InnerException { get; set; }
     }
 }

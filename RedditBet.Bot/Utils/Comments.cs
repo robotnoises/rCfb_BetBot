@@ -27,14 +27,16 @@ namespace RedditBet.Bot.Utils
         private string _hashId;
         private int _upVotes;
         private double _confidence;
-        
-        public Comment(string author, string permaLink, int upVotes, double confidence)
+        private ICollection<string> _matchedPhrases;
+
+        public Comment(string author, string permaLink, int upVotes, double confidence, ICollection<string> matchedPhrases)
         {
             _author = author;
             _permaLink = permaLink;
             _hashId = CreateHashId(permaLink);
             _upVotes = upVotes;
             _confidence = confidence;
+            _matchedPhrases = matchedPhrases;
         }
 
         public string GetHashId()
@@ -118,11 +120,11 @@ namespace RedditBet.Bot.Utils
     /// </summary>
     public static class Builder
     {
-        public static Comment Comment(HtmlNode node, double confidence = 1.0)
+        public static Comment Comment(HtmlNode node, ICollection<string> matchedPhrases, double confidence = 1.0)
         {
-            var author = node.SelectSingleNode(BuildSelector("class", "author"));
-            var permaLink = node.SelectSingleNode(BuildSelector("class", "bylink"));
-            var upVotes = node.SelectSingleNode(BuildSelector("class", "score unvoted"));
+            var author = node.SelectSingleNode(BuildSelector("a", "class", "author"));
+            var permaLink = node.SelectSingleNode(BuildSelector("a", "class", "bylink"));
+            var upVotes = node.SelectSingleNode(BuildSelector("span", "class", "score unvoted"));
 
             try
             {
@@ -132,7 +134,7 @@ namespace RedditBet.Bot.Utils
                 // ... and Convert to int
                 var uvInt = Convert.ToInt32(uv);
                 
-                return new Comment(author.InnerText, permaLink.Attributes["href"].Value, uvInt, confidence);
+                return new Comment(author.InnerText, permaLink.Attributes["href"].Value, uvInt, confidence, matchedPhrases);
             }
             catch (Exception ex)
             {
@@ -142,9 +144,9 @@ namespace RedditBet.Bot.Utils
             }
         }
 
-        private static string BuildSelector(string attribute, string value)
+        private static string BuildSelector(string element, string attribute, string value)
         {
-            return string.Format(".//a[contains(concat(' ', normalize-space(@{0}), ' '), ' {1} ')]", attribute, value);
+            return string.Format(".//{0}[contains(concat(' ', normalize-space(@{1}), ' '), ' {2} ')]", element, attribute, value);
         }
     }
 }

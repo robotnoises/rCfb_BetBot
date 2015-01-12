@@ -89,9 +89,6 @@ namespace RedditBet.Bot.Tasks
 
                 var matches = crawler.GetMatchedComments("class", "entry", Data.GetPhrasesToMatch());
 
-                // todo, probably shouldn't log this to the db
-                Log.Info(string.Format("Found {0} matches in {1}", matches.Count, url));
-
                 lock (locker) _matchedComments.AddRange(matches);
             });
             

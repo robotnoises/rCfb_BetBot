@@ -12,6 +12,5 @@ namespace RedditBet.API.Models
 
         // For Exceptions, only
         public string StackTrace { get; set; }
-        public string InnerException { get; set; }
     }
 }

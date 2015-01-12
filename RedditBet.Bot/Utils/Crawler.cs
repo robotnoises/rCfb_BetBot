@@ -46,7 +46,7 @@ namespace RedditBet.Bot.Utils
                 if (!phrazes.HasMatch(text)) continue;
                 if (blackList.Contains(currentNode.StreamPosition)) continue;
 
-                var matchedPhrases = phrazes.GetMatches(text);
+                var matchedPhrases = phrazes.GetMatches(text).Select(x => x.)
 
                 // Add the Comment to the match list
                 matches.AddComment(Builder.Comment(currentNode, );

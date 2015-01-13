@@ -87,9 +87,9 @@ namespace RedditBet.Bot.Tasks
                 // var url = "http://www.reddit.com/r/CFB/comments/2mvv7y/week_13_user_friendly_bet_thread/";
                 var crawler = new Crawler(url);
 
-                var matches = crawler.GetMatchedComments("class", "entry", Data.GetPhrasesToMatch());
+                var marchedComments = crawler.GetMatchedComments("class", "entry", Data.GetPhrasesToMatch());
 
-                lock (locker) _matchedComments.AddRange(matches);
+                lock (locker) _matchedComments.AddRange(marchedComments);
             });
             
             Data.SaveComments(_matchedComments);

@@ -29,7 +29,7 @@ namespace RedditBet.Bot
         {
             _timer.Stop();
 
-            Log.Info(string.Format("Bot finished {0} tasks in {0}.", _tasks.Count, _timer.Elapsed));
+            Log.Info(string.Format("Bot finished {0} tasks in {1}.", _tasks.Count, _timer.Elapsed));
         }
 
         public void AssignTasks(BotTasks tasks)

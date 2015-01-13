@@ -27,16 +27,14 @@ namespace RedditBet.Bot.Utils
         private string _hashId;
         private int _upVotes;
         private double _confidence;
-        private ICollection<string> _matchedPhrases;
-
-        public Comment(string author, string permaLink, int upVotes, double confidence, ICollection<string> matchedPhrases)
+        
+        public Comment(string author, string permaLink, int upVotes, double confidence)
         {
             _author = author;
             _permaLink = permaLink;
             _hashId = CreateHashId(permaLink);
             _upVotes = upVotes;
             _confidence = confidence;
-            _matchedPhrases = matchedPhrases;
         }
 
         public string GetHashId()
@@ -120,7 +118,7 @@ namespace RedditBet.Bot.Utils
     /// </summary>
     public static class Builder
     {
-        public static Comment Comment(HtmlNode node, ICollection<string> matchedPhrases, double confidence = 1.0)
+        public static Comment Comment(HtmlNode node, double confidence = 1.0)
         {
             var author = node.SelectSingleNode(BuildSelector("a", "class", "author"));
             var permaLink = node.SelectSingleNode(BuildSelector("a", "class", "bylink"));
@@ -134,7 +132,7 @@ namespace RedditBet.Bot.Utils
                 // ... and Convert to int
                 var uvInt = Convert.ToInt32(uv);
                 
-                return new Comment(author.InnerText, permaLink.Attributes["href"].Value, uvInt, confidence, matchedPhrases);
+                return new Comment(author.InnerText, permaLink.Attributes["href"].Value, uvInt, confidence);
             }
             catch (Exception ex)
             {

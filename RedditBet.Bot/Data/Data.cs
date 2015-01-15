@@ -35,18 +35,7 @@ namespace RedditBet.Bot.DataResources
 
             return urls;
         }
-
-        /// <summary>
-        /// Gets a Dictionary of key words, to be matched within blocks of text. Each has an associated value.
-        /// </summary>
-        /// <returns>A Dictionary of key words and their values</returns>
-        public static Dictionary<string, double> GetWordsToMatch()
-        {
-            var json = JsonConvert.DeserializeObject<Words>(RedditBet.Bot.Properties.Resources.words);
-            
-            return json.words;
-        }
-
+                
         /// <summary>
         /// Gets a Dictionary of key words, to be matched within blocks of text. Each has an associated value.
         /// </summary>

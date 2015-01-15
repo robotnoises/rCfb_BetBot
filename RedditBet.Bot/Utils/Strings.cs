@@ -14,7 +14,7 @@ namespace RedditBet.Bot.Utils
             i = i.Substring(pattern.Match(i).Groups[1].Index);
             i = Regex.Replace(i, @"\n", " ");
             i = Regex.Replace(i, @"</form>permalink", "");
-            
+            i = i.TrimEnd(' ');
             return i;
         }
     }

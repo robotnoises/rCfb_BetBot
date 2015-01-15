@@ -113,12 +113,12 @@
     <None Include="Resources\messages.json" />
     <None Include="Resources\phrases.json" />
     <Resource Include="Resources\test.markdown" />
-    <Resource Include="Resources\words.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

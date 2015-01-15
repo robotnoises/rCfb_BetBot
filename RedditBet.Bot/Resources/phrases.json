@@ -12,8 +12,8 @@
 
         "If ... win, I'll",
         "If ... lose, I'll",
-        "If ... win, you must",
-        "If ... lose, you must",
+        // "If ... win, you must",
+        // "If ... lose, you must",
         "Anybody wanna bet",
         "be willing to bet",
         "bet ... if ... wins",

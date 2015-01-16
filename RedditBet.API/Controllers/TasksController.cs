@@ -27,7 +27,7 @@ namespace RedditBet.API.Controllers
             return _service.GetAll();
         }
 
-        [Route("Incomplete")]
+        [Route("incomplete")]
         public IEnumerable<BotTask> GetTasksIncomplete()
         {
             return _service.GetIncomplete();
@@ -74,6 +74,18 @@ namespace RedditBet.API.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = task.TaskId }, task);
         }
+
+        // POST: api/tasks/markcomplete
+        [Route("markcomplete/{id}")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult MarkTaskComplete(int id)
+        {
+            _service.MarkComplete(id);
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+
 
         //// DELETE: api/Tasks/5
         //[ResponseType(typeof(BotTask))]

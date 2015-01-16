@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using HtmlAgilityPack;
 using RedditBet.Bot.Models;
+using RedditBet.Bot.DataResources;
 
 namespace RedditBet.Bot.Utils
 {
@@ -25,14 +26,16 @@ namespace RedditBet.Bot.Utils
         private string _author;
         private string _permaLink;
         private string _hashId;
+        private string _message;
         private int _upVotes;
         private double _confidence;
         
-        public Comment(string author, string permaLink, int upVotes, double confidence)
+        public Comment(string author, string permaLink, string message, int upVotes, double confidence)
         {
             _author = author;
             _permaLink = permaLink;
             _hashId = CreateHashId(permaLink);
+            _message = message;
             _upVotes = upVotes;
             _confidence = confidence;
         }
@@ -62,14 +65,22 @@ namespace RedditBet.Bot.Utils
             return _upVotes;
         }
 
+        public string GetMessage()
+        {
+            return _message;
+        }
+
         public BotTask ToBotTask(Enums.TaskType taskType = Enums.TaskType.Reply)
         {
             var bt = new BotTask();
+            var data = new TaskData();
+
+            data.Add(new TaskDataItem(Config.PermaLink_Key, _permaLink));
 
             bt.TaskType = taskType;
-            bt.TargetUrl = _permaLink;
             bt.HashId = _hashId;
-            bt.Message = ""; // Todo, create msg based on TaskType and confidence
+            bt.Message = _message;
+            bt.Data = data;
 
             return bt;
         }
@@ -131,8 +142,11 @@ namespace RedditBet.Bot.Utils
                 
                 // ... and Convert to int
                 var uvInt = Convert.ToInt32(uv);
+
+                // Todo: this is a temporary message
+                var message = Data.MarkDown_Test;
                 
-                return new Comment(author.InnerText, permaLink.Attributes["href"].Value, uvInt, confidence);
+                return new Comment(author.InnerText, permaLink.Attributes["href"].Value, message, uvInt, confidence);
             }
             catch (Exception ex)
             {

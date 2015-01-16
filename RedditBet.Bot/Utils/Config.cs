@@ -22,13 +22,16 @@ namespace RedditBet.Bot.Utils
         // Tasks
         public static string Api_Tasks { get { return ConfigurationManager.AppSettings["api_Tasks"]; } }
         public static string Api_Tasks_GetIncomplete { get { return ConfigurationManager.AppSettings["api_Tasks_Incomplete"]; } }
+        public static string Api_Tasks_MarkTaskComplete { get { return ConfigurationManager.AppSettings["api_Tasks_MarkComplete"]; } }
         public static string Api_Tasks_Update { get { return ConfigurationManager.AppSettings["api_Tasks_Incomplete"]; } }
 
+        // Task Data Dictionary Keys
+        public static string PermaLink_Key { get { return ConfigurationManager.AppSettings["permaLink"]; } }
+
         // Log
-                
         public static string Api_Log { get { return ConfigurationManager.AppSettings["api_Log"]; } }
         
-
+        // User agent 
         public const string Bot_UserAgent = "cfb_betbot 0.1 @robotnoises";
     }
 }

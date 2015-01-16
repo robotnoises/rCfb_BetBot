@@ -47,7 +47,7 @@ namespace RedditBet.Bot.DataResources
             return json.phrases;
         }
 
-        // Begin Markdown files
+        // Markdown files
 
         public static string MarkDown_Test = Local.Resources.test;
                 
@@ -78,7 +78,7 @@ namespace RedditBet.Bot.DataResources
         /// Todo
         /// </summary>
         /// <param name="comments"></param>
-        public static void SaveComments(Comments comments)
+        public static void SaveMatchedComments(Comments comments)
         {
             foreach (var comment in comments)
             {
@@ -87,6 +87,13 @@ namespace RedditBet.Bot.DataResources
                 var response = requester.GetResponse();
                 var statusCode = response.StatusCode;
             }
+        }
+
+        public static void MarkCommentComplete(int id)
+        {
+            var requester = new Requester(string.Format("{0}{1}/{2}", Config.ApiUrl, Config.Api_Tasks_MarkTaskComplete, id), RequestMethod.POST);
+            var response = requester.GetResponse();
+            var statusCode = response.StatusCode;
         }
 
         public static void AddLog(LogModel log)

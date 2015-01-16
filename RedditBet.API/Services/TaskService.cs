@@ -23,7 +23,8 @@ namespace RedditBet.API.Services
 
         public IEnumerable<BotTask> GetIncomplete()
         {
-            return _repository.GetAll().Where(x => !x.Completed);
+            var foo = _repository.GetAll().Where(x => !x.Completed);
+            return foo;
         }
 
         public BotTask Get(int id)
@@ -33,6 +34,8 @@ namespace RedditBet.API.Services
 
         public void Create(BotTask t)
         {
+            if (TaskAlreadyExists(t)) return;
+            
             t.TimeAssigned = DateTime.UtcNow;
             t.TimeCompleted = null;
             t.Completed = false;
@@ -45,6 +48,18 @@ namespace RedditBet.API.Services
             _repository.Update(t);
         }
 
+        public void MarkComplete(int id)
+        {
+            var t = _repository.Get(id);
+
+            if (t == null) return;
+
+            t.Completed = true;
+            t.TimeCompleted = DateTime.UtcNow;
+
+            _repository.Update(t);
+        }
+
         public void Remove(int id)
         {
             var t = _repository.Get(id);
@@ -52,6 +67,25 @@ namespace RedditBet.API.Services
             if (t != null)
             {
                 _repository.Remove(t);
+            }
+        }
+
+        private bool TaskAlreadyExists(BotTask t)
+        {
+            var task = _repository.Get(t.HashId).OrderByDescending(x => x.TimeAssigned).FirstOrDefault();
+            
+            // If nothing is found return false
+            if (task == null) return false;
+                        
+            if (task.TaskType == (int)TaskType.Reply)
+            {
+                // If the TaskType is "Reply", return true, as there is only allowed to be one "Reply" per comment
+                return true;
+            }
+            else
+            {
+                // Else, the task is either a direct message or update, so just make sure the task is now complete
+                return !t.Completed;
             }
         }
     }

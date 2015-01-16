@@ -92,7 +92,7 @@ namespace RedditBet.Bot.Tasks
                 lock (locker) _matchedComments.AddRange(matchedComments);
             });
             
-            Data.SaveComments(_matchedComments);
+            Data.SaveMatchedComments(_matchedComments);
 
             base.StopTimer();
         }
@@ -113,6 +113,7 @@ namespace RedditBet.Bot.Tasks
     /// </summary>
     public class Reply : RedditTask, IBotTask
     {
+        private int _taskId;
         private string _permaLink;
         private string _message;
         private string _name;
@@ -121,9 +122,11 @@ namespace RedditBet.Bot.Tasks
 
         public Reply(BotTask task)
         {
-            var parser = new PermaLinkParser(task.TargetUrl);
+            var permaLink = task.Data.GetValue(Config.PermaLink_Key);
+            var parser = new PermaLinkParser(permaLink);
             
-            _permaLink = task.TargetUrl;
+            _taskId = task.TaskId;
+            _permaLink = permaLink;
             _message = task.Message;
             _name = parser.GetNameId();
             _linkName = parser.GetLinkId();
@@ -134,11 +137,17 @@ namespace RedditBet.Bot.Tasks
             base.StartTimer();
 
             var user = _redditContext.GetUser(Config.Reddit_Username);
-            var comment = _redditContext.GetComment(Config.SubReddit, _name, _linkName);
+            var parentComment = _redditContext.GetComment(Config.SubReddit, _name, _linkName);
 
             try
             {
-                var botComment = comment.Reply(Message.Test());
+                var botComment = parentComment.Reply(Message.Test());
+
+                // Mark Task as Complete
+                Data.MarkCommentComplete(_taskId);
+
+                // Todo: Log all this
+
             }
             catch (RateLimitException ex)
             {
@@ -148,9 +157,6 @@ namespace RedditBet.Bot.Tasks
             {
                 Log.Error(ex);
             }
-            
-            // Todo, mark task as complete
-            // Data.
 
             base.StopTimer();
         }
@@ -179,9 +185,10 @@ namespace RedditBet.Bot.Tasks
 
         public UpdateReply(BotTask task)
         {
-            var parser = new PermaLinkParser(task.TargetUrl);
+            var permaLink = task.Data.GetValue(Config.PermaLink_Key);
+            var parser = new PermaLinkParser(permaLink);
 
-            _targetUrl = task.TargetUrl;
+            _targetUrl = permaLink;
             _message = task.Message;
             _name = parser.GetNameId();
             _linkName = parser.GetLinkId();
@@ -220,7 +227,7 @@ namespace RedditBet.Bot.Tasks
 
         public DirectMessage(BotTask task)
         {
-            _targetUrl = task.TargetUrl;
+            _targetUrl = task.Data.GetValue(Config.PermaLink_Key);
             _message = task.Message;
         }
 
@@ -260,7 +267,7 @@ namespace RedditBet.Bot.Tasks
         /// </summary>
         public void Load()
         {
-            // this.AddRange(Data.GetIncompleteTasks());
+            this.AddRange(Data.GetIncompleteTasks());
         }
     }
 }

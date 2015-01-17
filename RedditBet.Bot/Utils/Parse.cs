@@ -99,11 +99,14 @@ namespace RedditBet.Bot.Utils
         
         public PermaLinkParser(string permalink)
         {
+            // Todo, if there is no permaLink, throw Exception here
             _permaLink = permalink;
         }
         
         public string GetNameId()
         {
+            if (string.IsNullOrEmpty(_permaLink)) return string.Empty; // Todo throw exception
+
             var parts = _permaLink.Split('/');
             var lastPart = parts.Length - 1;
 
@@ -112,6 +115,8 @@ namespace RedditBet.Bot.Utils
 
         public string GetLinkId()
         {
+            if (string.IsNullOrEmpty(_permaLink)) return string.Empty; // Todo throw exception
+
             var parts = _permaLink.Split('/');
             var index = Array.IndexOf(parts, "comments") + 1;
 

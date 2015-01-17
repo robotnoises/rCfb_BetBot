@@ -9,4 +9,13 @@ namespace RedditBet.API
         Warning,
         Error
     }
+
+    [Flags]
+    public enum TaskType
+    {
+        Crawl,
+        Reply,
+        Update,
+        DirectMessage
+    }
 }

@@ -27,6 +27,11 @@ namespace RedditBet.API.Repositories
             return _context.Tasks.Find(id);
         }
 
+        public IEnumerable<BotTask> Get(string hashId)
+        {
+            return _context.Tasks.Where(x => x.HashId == hashId);
+        }
+
         public void Add(BotTask entity)
         {
             _context.Tasks.Add(entity);

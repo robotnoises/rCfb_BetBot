@@ -14,8 +14,6 @@ using RedditBet.API.Services;
 
 namespace RedditBet.API.Controllers
 {
-    // Todo make async
-
     [RoutePrefix("api/Tasks")]
     public class TasksController : ApiController
     {

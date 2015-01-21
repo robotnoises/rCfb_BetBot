@@ -12,14 +12,14 @@ namespace RedditBet.API.Repositories
     using RedditBet.API.Data;
 
     /// <summary>
-    /// Concrete UOW class
+    /// UOW class, basically being used as a generic repository wrapper
     /// </summary>
     /// <typeparam name="T">An EntityObject Type</typeparam>
     public class UnitOfWork<T> : IUnitOfWork<T> where T : class
     {
         private DbContext _context;
 
-        public UnitOfWork(RedditBetDataContext context)
+        public UnitOfWork(DbContext context)
         {
             _context = context;
         }

@@ -1,25 +1,10 @@
 ﻿using System;
 using System.Text;
+using System.Collections.Generic;
 
-namespace RedditBet.Bot.Utils
+namespace RedditBet.API.Utils
 {
     using System.Security.Cryptography;
-    using System.Text.RegularExpressions;
-
-    public static class RedditComment
-    {
-        public static string Clean(this string input)
-        {
-            var i = input;
-            var pattern = new Regex(@"\(\d\Wchild[ren]{0,3}\)(.)");
-
-            i = i.Substring(pattern.Match(i).Groups[1].Index);
-            i = Regex.Replace(i, @"\n", " ");
-            i = Regex.Replace(i, @"</form>permalink", "");
-            i = i.TrimEnd(' ');
-            return i;
-        }
-    }
 
     public static class StringExtensions
     {
@@ -44,7 +29,7 @@ namespace RedditBet.Bot.Utils
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex);
+                    // Todo rethrow StringExtenstionException
                 }
             }
 

@@ -29,6 +29,10 @@ namespace RedditBet.API.Services
 
         public void Create(Bet b)
         {
+            b.TempPages.Add(GenerateTempPage(b.Solicitor));
+
+            // if (!string.IsNullOrEmpty(b.Challenger))
+
             _uow.Add(b);
         }
 
@@ -40,6 +44,16 @@ namespace RedditBet.API.Services
         public void Remove(Bet b)
         {
             _uow.Remove(b);
+        }
+
+        private TempPage GenerateTempPage(string userName)
+        {
+            var tempPage = new TempPage();
+
+            tempPage.CreateToken();
+            tempPage.UserName = userName;
+
+            return tempPage;
         }
     }
 }

@@ -18,4 +18,12 @@ namespace RedditBet.API
         Update,
         DirectMessage
     }
+
+    [Flags]
+    public enum TempPageStatus
+    { 
+        OK,
+        INVALID_TOKEN,
+        STALE
+    }
 }

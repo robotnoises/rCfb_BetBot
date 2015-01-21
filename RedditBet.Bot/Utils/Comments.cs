@@ -97,30 +97,7 @@ namespace RedditBet.Bot.Utils
              * temporary nature of these records it should be safe to be used as a key for quick lookups or potentially part of a temp url.
             */
 
-            var id = "";
-            var bytes = Encoding.UTF8.GetBytes(permaLink);
-
-            using (var hasher = new SHA1Managed())
-            {
-                try
-                {
-                    var hash = hasher.ComputeHash(bytes);
-                    var sb = new StringBuilder(hash.Length * 2);
-
-                    foreach (var b in hash)
-                    {
-                        sb.Append(b.ToString("X2"));
-                    }
-
-                    id = sb.ToString();
-                }
-                catch (Exception ex)
-                {
-                    Log.Error(ex);
-                }
-            }
-
-            return id;
+            return permaLink.ToHashString();
         }
     }
 

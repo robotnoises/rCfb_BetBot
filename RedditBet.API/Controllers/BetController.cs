@@ -36,30 +36,30 @@ namespace RedditBet.API.Controllers
 
         // PUT: api/Bet/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutBet(Bet entry)
+        public IHttpActionResult PutBet(Bet bet)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _service.Update(entry);
+            _service.Update(bet);
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Bet
         [ResponseType(typeof(Bet))]
-        public IHttpActionResult PostBet(Bet entry)
+        public IHttpActionResult PostBet(Bet bet)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _service.Create(entry);
+            _service.Create(bet);
 
-            return CreatedAtRoute("DefaultApi", new { id = entry.BetId }, entry);
+            return CreatedAtRoute("DefaultApi", new { id = bet.BetId }, bet);
         }
     }
 }

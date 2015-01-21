@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 namespace RedditBet.API.Repositories
 {
+    using RedditBet.API.Data;
     using System.Data.Entity;
     using System.Data.Entity.Core.Objects;
     using System.Data.Entity.Core.Objects.DataClasses;
     using System.Data.Entity.Core.Metadata.Edm;
-    using RedditBet.API.Data;
-
+    
     /// <summary>
     /// UOW class, basically being used as a generic repository wrapper
     /// </summary>
@@ -38,7 +38,7 @@ namespace RedditBet.API.Repositories
         {
             return _context.Set<T>().Where(predicate);
         }
-        
+
         public void Add(T entity)
         {
             _context.Set<T>().Add(entity);

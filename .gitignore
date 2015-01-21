@@ -18,3 +18,8 @@ extras/
 
 $tf/
 BuildProcessTemplates
+
+# Databases
+
+*.mdf
+*.ldf

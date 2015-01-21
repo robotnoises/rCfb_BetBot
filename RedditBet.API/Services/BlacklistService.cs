@@ -16,14 +16,14 @@ namespace RedditBet.API.Services
             _uow = new UnitOfWork<BlacklistEntry>(DatabaseContext.Create());
         }
 
-        public IEnumerable<BlacklistEntry> GetAll()
-        {
-            return _uow.GetAll();
-        }
-
         public BlacklistEntry Get(int id)
         {
             return _uow.Get(id);
+        }
+
+        public IEnumerable<BlacklistEntry> GetAll()
+        {
+            return _uow.GetAll();
         }
 
         public void Create(BlacklistEntry entity)

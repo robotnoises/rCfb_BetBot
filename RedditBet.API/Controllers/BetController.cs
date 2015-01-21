@@ -9,20 +9,20 @@ namespace RedditBet.API.Controllers
     using RedditBet.API.Models;
     using RedditBet.API.Services;
 
-    [RoutePrefix("api/blacklist")]
-    public class BlacklistController : ApiController
+    [RoutePrefix("api/Bet")]
+    public class BetController : ApiController
     {
-        private BlacklistService _service = new BlacklistService();
+        private BetService _service = new BetService();
 
-        // GET: api/blacklist
-        public IEnumerable<BlacklistEntry> GetBlacklist()
+        // GET: api/Bet
+        public IEnumerable<Bet> GetBet()
         {
             return _service.GetAll();
         }
 
-        // GET: api/blacklist/5
-        [ResponseType(typeof(BlacklistEntry))]
-        public IHttpActionResult GetBlacklist(int id)
+        // GET: api/Bet/5
+        [ResponseType(typeof(Bet))]
+        public IHttpActionResult GetBet(int id)
         {
             var task = _service.Get(id);
 
@@ -34,9 +34,9 @@ namespace RedditBet.API.Controllers
             return Ok(task);
         }
 
-        // PUT: api/blacklist/5
+        // PUT: api/Bet/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutBlacklist(BlacklistEntry entry)
+        public IHttpActionResult PutBet(Bet entry)
         {
             if (!ModelState.IsValid)
             {
@@ -48,9 +48,9 @@ namespace RedditBet.API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/blacklist
-        [ResponseType(typeof(BlacklistEntry))]
-        public IHttpActionResult PostBlacklist(BlacklistEntry entry)
+        // POST: api/Bet
+        [ResponseType(typeof(Bet))]
+        public IHttpActionResult PostBet(Bet entry)
         {
             if (!ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace RedditBet.API.Controllers
 
             _service.Create(entry);
 
-            return CreatedAtRoute("DefaultApi", new { id = entry.BlacklistEntryId }, entry);
+            return CreatedAtRoute("DefaultApi", new { id = entry.BetId }, entry);
         }
     }
 }

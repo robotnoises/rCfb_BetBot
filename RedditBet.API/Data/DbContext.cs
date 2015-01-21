@@ -14,6 +14,7 @@ namespace RedditBet.API.Data
 
         // Entities
         public DbSet<BotTask> Tasks { get; set; }
+        public DbSet<Bet> Bets { get; set; }
         public DbSet<Log> Logs { get; set; }
         public DbSet<BlacklistEntry> Blacklist { get; set; }
     }

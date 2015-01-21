@@ -215,12 +215,8 @@
     <Compile Include="Models\TaskModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
-    <Compile Include="Repositories\BlacklistRepository.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="Repositories\UnitOfWork.cs" />
-    <Compile Include="Repositories\LogRepository.cs" />
-    <Compile Include="Repositories\Repository.cs" />
-    <Compile Include="Repositories\TaskRepository.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\UnitOfWork.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Services\BlacklistService.cs" />
     <Compile Include="Services\LogService.cs" />

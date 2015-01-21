@@ -22,6 +22,7 @@ namespace RedditBet.API.Data
         public DbSet<BlacklistEntry> Blacklist { get; set; }
 
     }
+
     public static class DatabaseContext
     {
         public static RedditBetDataContext Create()

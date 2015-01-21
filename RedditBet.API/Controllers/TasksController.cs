@@ -82,25 +82,5 @@ namespace RedditBet.API.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
-
-
-        //// DELETE: api/Tasks/5
-        //[ResponseType(typeof(BotTask))]
-        //public IHttpActionResult DeleteTask(int id)
-        //{
-        //    _service.Remove(id);
-
-        //    return Ok();
-        //}
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
     }
 }

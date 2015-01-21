@@ -9,40 +9,40 @@ namespace RedditBet.API.Services
 
     public class BlacklistService
     {
-        private Repository<BlacklistEntry> _repository;
+        private IUnitOfWork<BlacklistEntry> _uow;
 
         public BlacklistService()
         {
-            _repository = new Repository<BlacklistEntry>(new UnitOfWork(DatabaseContext.Create()));
+            _uow = new UnitOfWork<BlacklistEntry>(DatabaseContext.Create());
         }
 
         public IEnumerable<BlacklistEntry> GetAll()
         {
-            return _repository.GetAll();
+            return _uow.GetAll();
         }
 
         public BlacklistEntry Get(int id)
         {
-            return _repository.Get(id);
+            return _uow.Get(id);
         }
 
         public void Create(BlacklistEntry entity)
         {
-            _repository.Add(entity);
+            _uow.Add(entity);
         }
 
         public void Update(BlacklistEntry entity)
         {
-            _repository.Update(entity);
+            _uow.Update(entity);
         }
 
         public void Remove(int id)
         {
-            var item = _repository.Get(id);
+            var item = _uow.Get(id);
 
             if (item != null)
             {
-                _repository.Remove(item);
+                _uow.Remove(item);
             }
         }
     }

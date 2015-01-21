@@ -11,42 +11,42 @@ namespace RedditBet.API.Services
 {
     public class LogService
     {
-        private LogRepository _repository;
+        private IUnitOfWork<Log> _uow;
 
         public LogService()
         {
-            _repository = new LogRepository(DatabaseContext.Create());
+            _uow = new UnitOfWork<Log>(DatabaseContext.Create());
         }
 
         public IEnumerable<Log> GetAll()
         {
-            return _repository.GetAll();
+            return _uow.GetAll();
         }
 
         public Log Get(int id)
         {
-            return _repository.Get(id);
+            return _uow.Get(id);
         }
 
         public void Create(Log t)
         {
             t.TimeStamp = (t.TimeStamp != null) ? t.TimeStamp : DateTime.UtcNow;
 
-            _repository.Add(t);
+            _uow.Add(t);
         }
 
         public void Update(Log t)
         {
-            _repository.Update(t);
+            _uow.Update(t);
         }
 
         public void Remove(int id)
         {
-            var t = _repository.Get(id);
+            var t = _uow.Get(id);
 
             if (t != null)
             {
-                _repository.Remove(t);
+                _uow.Remove(t);
             }
         }
     }

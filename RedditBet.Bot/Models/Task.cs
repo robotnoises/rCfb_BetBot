@@ -26,7 +26,18 @@ namespace RedditBet.Bot.Models
 
         public string GetValue(string key)
         {
-            return this.Where(x => x.Key == key).Select(x => x.Value).FirstOrDefault();
+            var value = "";
+
+            try
+            {
+                value = this.Where(x => x.Key == key).Select(x => x.Value).FirstOrDefault();
+            }
+            catch (Exception ex)
+            { 
+                // Todo: rethrow as new exception?
+            }
+
+            return value;
         }
 
         public void Add(string key, string value)

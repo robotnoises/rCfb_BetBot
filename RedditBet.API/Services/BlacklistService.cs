@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 
 namespace RedditBet.API.Services
@@ -13,6 +14,11 @@ namespace RedditBet.API.Services
         public BlacklistService()
         {
             _uow = new UnitOfWork<BlacklistEntry>(DatabaseContext.Create());
+        }
+
+        public BlacklistService(DbContext context)
+        {
+            _uow = new UnitOfWork<BlacklistEntry>(context);
         }
 
         public BlacklistEntry Get(int id)

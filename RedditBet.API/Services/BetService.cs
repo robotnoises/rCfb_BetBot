@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 
 namespace RedditBet.API.Services
@@ -13,6 +14,11 @@ namespace RedditBet.API.Services
         public BetService()
         {
             _uow = new UnitOfWork<Bet>(DatabaseContext.Create());
+        }
+
+        public BetService(DbContext context)
+        {
+            _uow = new UnitOfWork<Bet>(context);
         }
 
         public Bet Get(int id)
@@ -50,9 +56,9 @@ namespace RedditBet.API.Services
             _uow.Remove(b);
         }
 
-        private TempPage GenerateTempPage(string userName)
+        private TempPageData GenerateTempPage(string userName)
         {
-            var tempPage = new TempPage();
+            var tempPage = new TempPageData();
                         
             tempPage.UserName = userName;
 

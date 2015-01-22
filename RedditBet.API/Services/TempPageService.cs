@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Linq;
+using System.Data.Entity;
 using System.Collections.Generic;
 
 namespace RedditBet.API.Services
@@ -8,13 +9,19 @@ namespace RedditBet.API.Services
     using RedditBet.API.Models;
     using RedditBet.API.Repositories;
     
+    
     internal class TempPageService
     {
-        private IUnitOfWork<TempPage> _uow;
+        private IUnitOfWork<TempPageData> _uow;
 
         public TempPageService()
         {
-            _uow = new UnitOfWork<TempPage>(DatabaseContext.Create());
+            _uow = new UnitOfWork<TempPageData>(DatabaseContext.Create());
+        }
+
+        public TempPageService(DbContext context)
+        {
+            _uow = new UnitOfWork<TempPageData>(context);
         }
 
         public TempPageTokenStatus ValidateToken(string token)

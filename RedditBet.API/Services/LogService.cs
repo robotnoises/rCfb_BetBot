@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Data.Entity;
 using System.Collections.Generic;
 
 namespace RedditBet.API.Services
@@ -14,6 +15,11 @@ namespace RedditBet.API.Services
         public LogService()
         {
             _uow = new UnitOfWork<Log>(DatabaseContext.Create());
+        }
+
+        public LogService(DbContext context)
+        {
+            _uow = new UnitOfWork<Log>(context);
         }
 
         public IEnumerable<Log> GetAll()

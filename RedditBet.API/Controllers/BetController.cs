@@ -9,7 +9,7 @@ namespace RedditBet.API.Controllers
     using RedditBet.API.Models;
     using RedditBet.API.Services;
 
-    [RoutePrefix("api/Bet")]
+    [RoutePrefix("api/bet")]
     public class BetController : ApiController
     {
         private BetService _service = new BetService();
@@ -24,42 +24,44 @@ namespace RedditBet.API.Controllers
         [ResponseType(typeof(Bet))]
         public IHttpActionResult GetBet(int id)
         {
-            var task = _service.Get(id);
+            var bet = _service.Get(id);
 
-            if (task == null)
+            if (bet == null)
             {
                 return NotFound();
             }
 
-            return Ok(task);
+            return Ok(bet);
         }
 
         // PUT: api/Bet/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutBet(Bet bet)
+        public IHttpActionResult PutBet(BetViewModel bet)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _service.Update(bet);
+            _service.Update(bet.ToDomainModel());
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Bet
         [ResponseType(typeof(Bet))]
-        public IHttpActionResult PostBet(Bet bet)
+        public IHttpActionResult PostBet(BetViewModel bet)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _service.Create(bet);
+            var model = bet.ToDomainModel();
 
-            return CreatedAtRoute("DefaultApi", new { id = bet.BetId }, bet);
+            _service.Create(model);
+
+            return CreatedAtRoute("DefaultApi", new { id = model.BetId }, bet);
         }
     }
 }

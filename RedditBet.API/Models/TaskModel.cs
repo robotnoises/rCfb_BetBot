@@ -16,8 +16,8 @@ namespace RedditBet.API.Models
         public DateTime TimeAssigned { get; set; }
         public DateTime? TimeCompleted { get; set; }
         public bool Completed { get; set; }
-        public virtual TaskData Data { get; set; }
         public string Message { get; set; }
+        public virtual TaskData Data { get; set; }
     }
 
     public class TaskData : List<TaskDataItem>

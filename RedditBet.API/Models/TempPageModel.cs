@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RedditBet.API.Models
 {
-    public class TempPage
+    public class TempPageData
     {
         [Key]
         public int TempPageId { get; set; }
@@ -19,7 +19,7 @@ namespace RedditBet.API.Models
         private const int days_until_stale = 5;
         private const int numCharsForToken = 30;
 
-        public TempPage()
+        public TempPageData()
         {
             CreatedAt = DateTime.UtcNow;
         }

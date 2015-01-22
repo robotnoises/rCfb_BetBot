@@ -74,12 +74,4 @@ namespace RedditBet.API.Repositories
             GC.SuppressFinalize(this);
         }
     }
-
-    public static class DatabaseContext
-    {
-        public static RedditBetDataContext Create()
-        {
-            return new RedditBetDataContext();
-        }
-    }
 }

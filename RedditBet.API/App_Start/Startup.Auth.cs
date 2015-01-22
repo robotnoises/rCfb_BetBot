@@ -7,7 +7,7 @@ using Microsoft.AspNet.Identity;
 
 namespace RedditBet.API
 {
-    using RedditBet.API.Repositories;
+    using RedditBet.API.Services;
 
     public partial class Startup
     {

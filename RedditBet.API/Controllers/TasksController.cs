@@ -10,7 +10,7 @@ namespace RedditBet.API.Controllers
     using RedditBet.API.Models;
     using RedditBet.API.Services;
 
-    [RoutePrefix("api/Tasks")]
+    [RoutePrefix("api/tasks")]
     public class TasksController : ApiController
     {
         private TaskService _service = new TaskService();

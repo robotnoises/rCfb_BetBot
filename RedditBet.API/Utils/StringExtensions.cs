@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace RedditBet.API.Utils
+namespace RedditBet.API
 {
     using System.Security.Cryptography;
 

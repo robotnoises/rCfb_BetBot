@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Linq;
-using System.Web;
+using System.Data.Entity;
 using System.Collections.Generic;
 
 namespace RedditBet.API.Repositories
 {
     using RedditBet.API.Data;
-    using System.Data.Entity;
-    using System.Data.Entity.Core.Objects;
-    using System.Data.Entity.Core.Objects.DataClasses;
-    using System.Data.Entity.Core.Metadata.Edm;
     
     /// <summary>
     /// UOW class, basically being used as a generic repository wrapper
@@ -76,6 +72,14 @@ namespace RedditBet.API.Repositories
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+    }
+
+    public static class DatabaseContext
+    {
+        public static RedditBetDataContext Create()
+        {
+            return new RedditBetDataContext();
         }
     }
 }

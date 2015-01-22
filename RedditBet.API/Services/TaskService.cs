@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using RedditBet.API.Repositories;
-using RedditBet.API.Data;
-using RedditBet.API.Models;
+using System.Collections.Generic;
 
 namespace RedditBet.API.Services
 {
+    using RedditBet.API.Models;
+    using RedditBet.API.Repositories;
+
     public class TaskService
     {
         private IUnitOfWork<BotTask> _uow;

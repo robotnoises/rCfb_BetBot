@@ -5,8 +5,7 @@ namespace RedditBet.API.Services
 {
     using RedditBet.API.Models;
     using RedditBet.API.Repositories;
-    using RedditBet.API.Data;
-
+    
     public class BlacklistService
     {
         private IUnitOfWork<BlacklistEntry> _uow;

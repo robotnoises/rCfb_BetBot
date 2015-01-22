@@ -9,7 +9,7 @@ namespace RedditBet.API.Data
     [DbConfigurationType("RedditBet.API.App_Start.DbConfig, RedditBet.API")]
     public class RedditBetDataContext : DbContext
     {
-        // Construct Context using "RedditBet" as the conn string name
+        // Context
         public RedditBetDataContext() : base("RedditBet") { }
 
         // Entities
@@ -18,13 +18,5 @@ namespace RedditBet.API.Data
         public DbSet<Log> Logs { get; set; }
         public DbSet<TempPage> TempPages { get; set; }
         public DbSet<BlacklistEntry> Blacklist { get; set; }
-    }
-
-    public static class DatabaseContext
-    {
-        public static RedditBetDataContext Create()
-        {
-            return new RedditBetDataContext();
-        }
     }
 }

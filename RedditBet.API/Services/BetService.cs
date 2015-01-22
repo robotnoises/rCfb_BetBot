@@ -29,9 +29,15 @@ namespace RedditBet.API.Services
 
         public void Create(Bet b)
         {
-            b.TempPages.Add(GenerateTempPage(b.Solicitor));
+            var tp = GenerateTempPage(b.Solicitor);
+            
+            if (!tp.HasToken())
+            {
+                var tpService = new TempPageService();
+                tp.Token = tpService.GenerateToken();
+            }
 
-            // if (!string.IsNullOrEmpty(b.Challenger))
+            b.TempPages.Add(tp);
 
             _uow.Add(b);
         }
@@ -49,8 +55,7 @@ namespace RedditBet.API.Services
         private TempPage GenerateTempPage(string userName)
         {
             var tempPage = new TempPage();
-
-            tempPage.CreateToken();
+                        
             tempPage.UserName = userName;
 
             return tempPage;

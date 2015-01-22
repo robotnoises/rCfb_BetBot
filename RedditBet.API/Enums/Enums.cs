@@ -20,10 +20,11 @@ namespace RedditBet.API
     }
 
     [Flags]
-    public enum TempPageStatus
+    public enum TempPageTokenStatus
     { 
         OK,
-        INVALID_TOKEN,
+        INVALID,
+        USED,
         STALE
     }
 }

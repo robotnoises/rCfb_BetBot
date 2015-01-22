@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using RedditBet.API.Repositories;
-using RedditBet.API.Data;
-using RedditBet.API.Models;
-using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace RedditBet.API.Services
 {
+    using RedditBet.API.Repositories;
+    using RedditBet.API.Data;
+    using RedditBet.API.Models;
+
     public class LogService
     {
         private IUnitOfWork<Log> _uow;

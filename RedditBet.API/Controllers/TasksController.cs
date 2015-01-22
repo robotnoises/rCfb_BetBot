@@ -8,12 +8,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using RedditBet.API.Data;
-using RedditBet.API.Models;
-using RedditBet.API.Services;
 
 namespace RedditBet.API.Controllers
 {
+    using RedditBet.API.Data;
+    using RedditBet.API.Models;
+    using RedditBet.API.Services;
+
     [RoutePrefix("api/Tasks")]
     public class TasksController : ApiController
     {

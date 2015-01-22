@@ -24,9 +24,16 @@ namespace RedditBet.API.Models
             CreatedAt = DateTime.UtcNow;
         }
 
+        /// <summary>
+        /// "Fresh" tokens have not yet been used and wwere created within the last x-days
+        /// </summary>
+        /// <returns>bool</returns>
         public bool IsFresh()
         {
-            return (!Visited && CreatedAt.AddDays(days_until_stale) <= DateTime.UtcNow);
+            var timeSpan = DateTime.UtcNow - CreatedAt;
+            var daysOld = (int)Math.Ceiling(timeSpan.TotalDays);
+
+            return (!Visited && daysOld <= days_until_stale);
         }
         
         public void CreateToken()
@@ -78,6 +85,40 @@ namespace RedditBet.API.Models
                     }
                 }
                 return result.ToString();
+            }
+        }
+    }
+
+    public class TokenValidationResponse
+    {
+        public bool IsValid { get; set; }
+        public string Message { get; set; }
+
+        private const string _validMsg = "This token is valid.";
+        private const string _invalidMsg = "This token is invalid.";
+        private const string _usedMsg = "This token has already been used.";
+        private const string _staleMsg = "This token is too old to be valid.";
+
+        public TokenValidationResponse(TempPageTokenStatus status)
+        {
+            IsValid = (status == TempPageTokenStatus.OK);
+            Message = GetMessage(status);
+        }
+
+        private string GetMessage(TempPageTokenStatus status)
+        {
+            switch (status)
+            { 
+                case TempPageTokenStatus.OK:
+                    return _validMsg;
+                case TempPageTokenStatus.INVALID:
+                    return _invalidMsg;
+                case TempPageTokenStatus.USED:
+                    return _usedMsg;
+                case TempPageTokenStatus.STALE:
+                    return _staleMsg;
+                default:
+                    return _invalidMsg;
             }
         }
     }

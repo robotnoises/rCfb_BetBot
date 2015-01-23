@@ -21,9 +21,8 @@ namespace RedditBet.API.Models
     public class BotTaskViewModel : Mappable<BotTaskViewModel, BotTask>
     {
         [Required]
-        public string HashId { get; set; }
-        [Required]
         public int TaskType { get; set; }
+        public string HashId { get; set; }
         public DateTime TimeAssigned { get; set; }
         public DateTime? TimeCompleted { get; set; }
         public bool Completed { get; set; }

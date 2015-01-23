@@ -76,7 +76,7 @@ namespace RedditBet.Bot.Utils
             var bt = new BotTask();
             var data = new TaskData();
 
-            data.Add(new TaskDataItem(Config.PermaLink_Key, _permaLink));
+            data.Add(new TaskDataItem(Config.TargetUrl_Key, _permaLink));
 
             bt.TaskType = taskType;
             bt.HashId = _hashId;
@@ -122,7 +122,7 @@ namespace RedditBet.Bot.Utils
                 var uvInt = Convert.ToInt32(uv);
 
                 // Todo: this is a temporary message
-                var message = Data.MarkDown_Test;
+                var message = Config.MarkDown_Test;
                 
                 return new Comment(author.InnerText, permaLink.Attributes["href"].Value, message, uvInt, confidence);
             }

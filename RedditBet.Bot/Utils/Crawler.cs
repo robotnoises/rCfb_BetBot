@@ -21,6 +21,8 @@ namespace RedditBet.Bot.Utils
             _doc = new HtmlDocument();
 
             var client = new WebClient();
+
+            // try catch here for 404?
             var page = WebUtility.HtmlDecode(client.DownloadString(url));
 
             _doc.LoadHtml(page);

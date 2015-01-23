@@ -4,34 +4,101 @@ using System.Configuration;
 
 namespace RedditBet.Bot.Utils
 {
-    public static class Config
-    {
-        public static string BaseUrl { get { return ConfigurationManager.AppSettings["baseUrl"]; } }
-        public static string SubReddit { get { return ConfigurationManager.AppSettings["subReddit"]; } }
-        public static int UrlLimit { get { return Convert.ToInt32(ConfigurationManager.AppSettings["urlLimit"]); } }
-        
-        public static string Reddit_Username { get { return ConfigurationManager.AppSettings["redditUsername"]; } }
-        public static string Reddit_Password { get { return ConfigurationManager.AppSettings["redditPassword"]; } }
+    using Newtonsoft.Json;
+    using RedditBet.Bot.Models;
+    using Local = RedditBet.Bot.Properties;
 
-        public static string RedditApi_GetUser { get { return BaseUrl + ConfigurationManager.AppSettings["redditApi_getUser"]; } }
-        public static string RedditApi_Login { get { return BaseUrl + ConfigurationManager.AppSettings["redditApi_login"]; } }
+    internal static class Config
+    {
+        #region Urls
+
+        internal static string RedditBaseUrl { get { return ConfigurationManager.AppSettings["baseUrl"]; } }
+        internal static string SubReddit { get { return ConfigurationManager.AppSettings["subReddit"]; } }
+        internal static int UrlLimit { get { return Convert.ToInt32(ConfigurationManager.AppSettings["urlLimit"]); } }
+        
+        internal static string Reddit_Username { get { return ConfigurationManager.AppSettings["redditUsername"]; } }
+        internal static string Reddit_Password { get { return ConfigurationManager.AppSettings["redditPassword"]; } }
+
+        internal static string RedditApi_GetUser { get { return RedditBaseUrl + ConfigurationManager.AppSettings["redditApi_getUser"]; } }
+        internal static string RedditApi_Login { get { return RedditBaseUrl + ConfigurationManager.AppSettings["redditApi_login"]; } }
 
         // RedditBet.API
-        public static string ApiUrl { get { return ConfigurationManager.AppSettings["apiBaseUrl"]; } }
+        internal static string ApiUrl { get { return ConfigurationManager.AppSettings["apiBaseUrl"]; } }
         
         // Tasks
-        public static string Api_Tasks { get { return ConfigurationManager.AppSettings["api_Tasks"]; } }
-        public static string Api_Tasks_GetIncomplete { get { return ConfigurationManager.AppSettings["api_Tasks_Incomplete"]; } }
-        public static string Api_Tasks_MarkTaskComplete { get { return ConfigurationManager.AppSettings["api_Tasks_MarkComplete"]; } }
-        public static string Api_Tasks_Update { get { return ConfigurationManager.AppSettings["api_Tasks_Incomplete"]; } }
-
-        // Task Data Dictionary Keys
-        public static string PermaLink_Key { get { return ConfigurationManager.AppSettings["permaLink"]; } }
-
-        // Log
-        public static string Api_Log { get { return ConfigurationManager.AppSettings["api_Log"]; } }
+        internal static string Api_Tasks { get { return ConfigurationManager.AppSettings["api_Tasks"]; } }
+        internal static string Api_Tasks_GetIncomplete { get { return ConfigurationManager.AppSettings["api_Tasks_Incomplete"]; } }
+        internal static string Api_Tasks_MarkTaskComplete { get { return ConfigurationManager.AppSettings["api_Tasks_MarkComplete"]; } }
         
+        // Log
+        internal static string Api_Log { get { return ConfigurationManager.AppSettings["api_Log"]; } }
+
+        #endregion
+               
+        #region Local Resources
+
+        /// <summary>
+        /// Gets a Collection of key phrases to be used in matching reddit comments
+        /// </summary>
+        /// <returns>A Dictionary of key words and their values</returns>
+        internal static ICollection<string> GetPhrasesToMatch()
+        {
+            var json = JsonConvert.DeserializeObject<Phrases>(RedditBet.Bot.Properties.Resources.phrases);
+
+            return json.phrases;
+        }
+
+        /// <summary>
+        /// Gets a collection of key phrases to be used in matching Reddit Users replies to a Bot comment
+        /// </summary>
+        /// <returns>A collection of </returns>
+        internal static ICollection<string> GetConfirmationPhrases()
+        {
+            var json = JsonConvert.DeserializeObject<Phrases>(RedditBet.Bot.Properties.Resources.confirm);
+
+            return json.phrases;
+        }
+
+        /// <summary>
+        /// Gets a collection of key phrases to be used in matching Reddit Users replies to a Bot comment
+        /// </summary>
+        /// <returns>A collection of </returns>
+        internal static ICollection<string> GetDeclinePhrases()
+        {
+            var json = JsonConvert.DeserializeObject<Phrases>(RedditBet.Bot.Properties.Resources.decline);
+
+            return json.phrases;
+        }
+
+        /// <summary>
+        /// Gets a collection of key phrases to be used in matching Reddit Users replies to a Bot comment
+        /// </summary>
+        /// <returns>A collection of </returns>
+        internal static ICollection<string> GetUnsubscribePhrases()
+        {
+            var json = JsonConvert.DeserializeObject<Phrases>(RedditBet.Bot.Properties.Resources.unsubscribe);
+
+            return json.phrases;
+        }
+
+        // Markdown files
+
+        internal static string MarkDown_Test = Local.Resources.test;
+
+        #endregion
+
+        #region Special Keys
+
+        internal static string TargetUrl_Key { get { return ConfigurationManager.AppSettings["targetUrl"]; } }
+        internal static string Username_Key { get { return ConfigurationManager.AppSettings["userName"]; } }
+        
+        #endregion
+
+        #region Misc
+
         // User agent 
-        public const string Bot_UserAgent = "cfb_betbot 0.1 @robotnoises";
+        internal const string Bot_UserAgent = "cfb_betbot 0.1 @robotnoises";
+
+        #endregion
     }
 }

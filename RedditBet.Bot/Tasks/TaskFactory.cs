@@ -15,8 +15,10 @@ namespace RedditBet.Bot.Tasks
                     return new Reply(task);
                 case TaskType.Update:
                     return new UpdateReply(task);
+                case TaskType.Monitor:
+                    return new Monitor(task);
                 default:
-                    return new Crawl();
+                    return new Crawl(); // Not sure if this should be the default...
             }
         }
     }

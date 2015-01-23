@@ -105,7 +105,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Tasks\Crawl.cs" />
+    <Compile Include="Tasks\DirectMessage.cs" />
+    <Compile Include="Tasks\Monitor.cs" />
+    <Compile Include="Tasks\Reply.cs" />
     <Compile Include="Tasks\TaskFactory.cs" />
+    <Compile Include="Tasks\Update.cs" />
     <Compile Include="Utils\Config.cs" />
     <Compile Include="Utils\Convert.cs" />
     <Compile Include="Utils\Logger.cs" />
@@ -123,8 +128,11 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="Resources\confirm.json" />
+    <None Include="Resources\decline.json" />
     <None Include="Resources\messages.json" />
     <None Include="Resources\phrases.json" />
+    <None Include="Resources\unsubscribe.json" />
     <Resource Include="Resources\test.markdown" />
   </ItemGroup>
   <ItemGroup>

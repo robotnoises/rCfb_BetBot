@@ -23,7 +23,9 @@ namespace RedditBet.API.Services
 
         public Bet Get(int id)
         {
-            return _uow.Get(id);
+            var bet = _uow.Get(id);
+
+            return bet;
         }
 
         public IEnumerable<Bet> GetAll()

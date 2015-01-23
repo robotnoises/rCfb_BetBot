@@ -21,8 +21,17 @@ namespace RedditBet.API.Services
             _uow = new UnitOfWork<Fulfillment>(context);
         }
 
-        // Todo: need to look into this more. This is a stopgap for prevent orphaned recs when the parent Bet object is updated
-        public void RemoveOldFulfillmentRecord(Fulfillment f)
+        public void Add(Fulfillment f)
+        {
+            _uow.Add(f);
+        }
+
+        public void Update(Fulfillment f)
+        {
+            _uow.Update(f);
+        }
+
+        public void Remove(Fulfillment f)
         {
             _uow.Remove(f);
         }

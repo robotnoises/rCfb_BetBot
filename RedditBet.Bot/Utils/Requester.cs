@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using RestSharp;
 using RedditBet.Bot.Utils;
-using RedditBet.Bot.Enums;
 
 namespace RedditBet.Bot.Utils
 {

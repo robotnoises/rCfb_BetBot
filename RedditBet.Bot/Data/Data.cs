@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using Newtonsoft;
 using Newtonsoft.Json;
-using RedditBet.Bot.Tasks;
-using RedditBet.Bot.Utils;
-using RedditBet.Bot.Models;
-using RedditBet.Bot.Enums;
-using Local = RedditBet.Bot.Properties;
-using RedditSharp;
-using RedditBet.API.Models;
-
 
 namespace RedditBet.Bot.DataResources
 {
+    using RedditSharp;
+    using RedditBet.Bot.Tasks;
+    using RedditBet.Bot.Utils;
+    using RedditBet.Bot.Models;
+    using Local = RedditBet.Bot.Properties;
+
     public static class Data
     {
         #region Local Resources 

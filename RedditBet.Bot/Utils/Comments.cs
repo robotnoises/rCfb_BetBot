@@ -1,15 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Security.Cryptography;
-using HtmlAgilityPack;
-using RedditBet.Bot.Models;
-using RedditBet.Bot.DataResources;
 
 namespace RedditBet.Bot.Utils
 {
+    using HtmlAgilityPack;
+    using RedditBet.Bot.Models;
+    using RedditBet.Bot.DataResources;
+
     public class Comments : List<Comment>
     {
         public void AddComment(Comment c)
@@ -70,7 +71,7 @@ namespace RedditBet.Bot.Utils
             return _message;
         }
 
-        public BotTask ToBotTask(Enums.TaskType taskType = Enums.TaskType.Reply)
+        public BotTask ToBotTask(TaskType taskType = TaskType.Reply)
         {
             var bt = new BotTask();
             var data = new TaskData();

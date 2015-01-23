@@ -1,5 +1,4 @@
 ﻿using System;
-using RedditBet.Bot.Enums;
 using RedditBet.Bot.Utils;
 using RedditBet.Bot.DataResources;
 using RedditBet.Bot.Models;

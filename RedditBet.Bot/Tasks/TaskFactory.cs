@@ -1,5 +1,4 @@
 ﻿using System;
-using RedditBet.Bot.Enums;
 using RedditBet.Bot.Models;
 
 namespace RedditBet.Bot.Tasks

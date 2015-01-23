@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
 
+// Todo: not sure if this is necessary
+
 namespace RedditBet.API
 {
     using System.Security.Cryptography;

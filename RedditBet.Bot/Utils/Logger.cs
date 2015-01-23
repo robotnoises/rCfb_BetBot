@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RedditBet.Bot.Enums;
 using RedditBet.Bot.Models;
-using RedditBet.API.Models;
 using RedditBet.Bot.DataResources;
 
 namespace RedditBet.Bot.Utils

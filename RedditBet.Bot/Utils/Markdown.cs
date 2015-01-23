@@ -63,13 +63,6 @@ namespace RedditBet.Bot.Utils
             _markdown = markdown;
             _variables = new List<string>();
             _variables.AddRange(GetVariables());
-
-            //var variables = GetVariables();
-
-            //if (variables.Count() > 0)
-            //{
-            //    _variables.AddRange(variables);
-            //}
         }
 
         public void ReplaceVariable(string variableName, string replacement)
@@ -82,7 +75,7 @@ namespace RedditBet.Bot.Utils
             }
             else
             { 
-                // TODO: Throw 'varible not found' Exception
+                // TODO: Throw 'variable not found' Exception
             }
         }
 

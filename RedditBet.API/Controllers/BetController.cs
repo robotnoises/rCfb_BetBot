@@ -38,12 +38,14 @@ namespace RedditBet.API.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutBet(BetViewModel bet)
         {
+            if (bet.BetId == 0) return BadRequest("A BetId cannot be 0 for PUT requests.");
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _service.Update(bet.ToDomainModel());
+            _service.Update(bet.ToMappedType());
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -52,12 +54,14 @@ namespace RedditBet.API.Controllers
         [ResponseType(typeof(Bet))]
         public IHttpActionResult PostBet(BetViewModel bet)
         {
+            if (bet.BetId != 0) return BadRequest("A BetId must be 0 for POST requests.");
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var model = bet.ToDomainModel();
+            var model = bet.ToMappedType();
 
             _service.Create(model);
 

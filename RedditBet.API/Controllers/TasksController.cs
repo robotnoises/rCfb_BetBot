@@ -43,30 +43,32 @@ namespace RedditBet.API.Controllers
 
         // PUT: api/Tasks/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutTask(BotTask task)
+        public IHttpActionResult PutTask(BotTaskViewModel task)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _service.Update(task);
+            _service.Update(task.ToMappedType());
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Tasks
         [ResponseType(typeof(BotTask))]
-        public IHttpActionResult PostTask(BotTask task)
+        public IHttpActionResult PostTask(BotTaskViewModel task)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _service.Create(task);
+            var model = task.ToMappedType();
 
-            return CreatedAtRoute("DefaultApi", new { id = task.TaskId }, task);
+            _service.Create(model);
+
+            return CreatedAtRoute("DefaultApi", new { id = model.TaskId }, task);
         }
 
         // POST: api/tasks/markcomplete

@@ -33,16 +33,18 @@ namespace RedditBet.API.Controllers
 
         // POST: api/Log
         [ResponseType(typeof(Log))]
-        public IHttpActionResult PostLog(Log log)
+        public IHttpActionResult PostLog(LogViewModel log)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _service.Create(log);
+            var model = log.ToMappedType();
 
-            return CreatedAtRoute("DefaultApi", new { id = log.LogId }, log);
+            _service.Create(model);
+
+            return CreatedAtRoute("DefaultApi", new { id = model.LogId }, log);
         }
 
         // DELETE: api/Log/5

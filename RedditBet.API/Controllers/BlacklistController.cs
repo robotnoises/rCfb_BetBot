@@ -36,30 +36,32 @@ namespace RedditBet.API.Controllers
 
         // PUT: api/blacklist/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutBlacklist(BlacklistEntry entry)
+        public IHttpActionResult PutBlacklist(BlacklistViewModel entry)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _service.Update(entry);
+            _service.Update(entry.ToMappedType());
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/blacklist
         [ResponseType(typeof(BlacklistEntry))]
-        public IHttpActionResult PostBlacklist(BlacklistEntry entry)
+        public IHttpActionResult PostBlacklist(BlacklistViewModel entry)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _service.Create(entry);
+            var model = entry.ToMappedType();
 
-            return CreatedAtRoute("DefaultApi", new { id = entry.BlacklistEntryId }, entry);
+            _service.Create(model);
+
+            return CreatedAtRoute("DefaultApi", new { id = model.BlacklistEntryId }, entry);
         }
     }
 }

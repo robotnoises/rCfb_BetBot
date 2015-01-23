@@ -10,25 +10,44 @@ namespace RedditBet.API.Controllers
     {
         FulfillmentService _service = new FulfillmentService();
 
+        // Todo
+
+        private const string _betNotFoundMsg = "";
+        private const string _betAlreadyFulfilledMsg = "";
+        private const string _betHasExistingFulfillmentMsg = "";
+
         // This is for adding a brand new fulfillment record to a bet
         public IHttpActionResult PostFulfillment(FulfillmentViewModel data)
-        {   
-            var betService = new BetService();
-            var bet = betService.Get(data.BetId);
+        {
+            var bet = GetBet(data);
             
             if (bet == null) return BadRequest(string.Format("Bet (betId: {0}) was not found.", data.BetId));
             if (bet.IsFullfilled()) return BadRequest("This Bet already been fulfilled");
+            if (bet.Fulfillment != null) return BadRequest("This Bet already has a fulfillment record. Use PUT if you wish to update.");
+            
+            _service.Add(data.ToMappedType());
+                        
+            return Ok(data);
+        }
 
-            var oldF = bet.FulfillmentData;
-            var newF = data.ToDomainModel();
+        public IHttpActionResult PutFulfillment(FulfillmentViewModel data)
+        {
+            var bet = GetBet(data);
 
-            bet.FulfillmentData = newF;
+            if (bet == null) return BadRequest(string.Format("Bet (betId: {0}) was not found.", data.BetId));
+            if (bet.IsFullfilled()) return BadRequest("This Bet already been fulfilled");
+            
+            _service.Update(data.ToMappedType());
 
-            betService.Update(bet);
+            return Ok(data);
+        }
 
-            _service.RemoveOldFulfillmentRecord(oldF);
-                
-            return Ok(newF);
+        private Bet GetBet(FulfillmentViewModel data)
+        {
+            var betService = new BetService();
+            var bet = betService.Get(data.BetId);
+
+            return bet;
         }
     }
 }

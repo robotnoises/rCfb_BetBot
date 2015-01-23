@@ -12,24 +12,25 @@ namespace RedditBet.API.Models
         public string Solicitor { get; set; }
         public string Challenger { get; set; }
         public string Terms { get; set; }
-        public bool IsConfirmed { get; set; }
-        public int Score { get; set; }
         public DateTime EventDate { get; set; }
         public DateTime? CutoffDate { get; set; }
-                
+        public bool IsConfirmed { get; set; }
+        public int Score { get; set; }
+        
         public virtual List<TempPageData> TempPages { get; set; }
-        public Fulfillment FulfillmentData { get; set; }
+        public virtual Fulfillment Fulfillment { get; set; }
 
         public bool IsFullfilled()
         {
-            if (FulfillmentData == null) return false;
+            if (Fulfillment == null) return false;
 
-            return FulfillmentData.IsFulfilled;
+            return Fulfillment.IsFulfilled;
         }
     }
 
     public class BetViewModel : Mappable<BetViewModel, Bet>
     {
+        public int BetId { get; set; }
         [Required]
         public string Solicitor { get; set; }
         public string Challenger { get; set; }
@@ -41,4 +42,6 @@ namespace RedditBet.API.Models
         public DateTime? CutoffDate { get; set; }
         public List<TempPageData> TempPages { get; set; }
     }
+
+
 }

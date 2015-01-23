@@ -7,18 +7,22 @@ namespace RedditBet.API.Models
 {
     public class Fulfillment
     {
-        [Key]
-        public int FulfillmentId { get; set; }
-        //[ForeignKey("Bet")]
-        //public int BetId { get; set; }
+        [Key, ForeignKey("Bet")]
+        public int BetId { get; set; }
         public bool IsFulfilled { get; set; }
         public string LoserStatement { get; set; }
+
         public virtual List<RelevantLink> RelevantLinks { get; set; }
+        public virtual Bet Bet { get; set; }
+
+        public bool IdValidFulfillment()
+        { 
+            return (IsFulfilled && (!string.IsNullOrEmpty(LoserStatement) || RelevantLinks.Count > 0));
+        }
     }
 
     public class FulfillmentViewModel : Mappable<FulfillmentViewModel, Fulfillment>
     {
-        public int FulfillmentId { get; set; }
         public int BetId { get; set; }
         public bool IsFulfilled { get; set; }
         public string LoserStatement { get; set; }

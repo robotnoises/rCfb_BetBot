@@ -9,6 +9,17 @@ namespace RedditBet.API.Models
     {
         [Key]
         public int TaskId { get; set; }
+        public string HashId { get; set; }
+        public int TaskType { get; set; }
+        public DateTime TimeAssigned { get; set; }
+        public DateTime? TimeCompleted { get; set; }
+        public bool Completed { get; set; }
+        public string Message { get; set; }
+        public virtual TaskData Data { get; set; }
+    }
+
+    public class BotTaskViewModel : Mappable<BotTaskViewModel, BotTask>
+    {
         [Required]
         public string HashId { get; set; }
         [Required]

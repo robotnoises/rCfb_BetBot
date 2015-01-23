@@ -6,11 +6,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RedditBet.API.Models
 {
+    [Table("TempPages")]
     public class TempPageData
     {
         [Key]
         public int TempPageId { get; set; }
-        [Required]
         public string UserName { get; set; }
         public DateTime CreatedAt { get; set; }
         public bool Visited { get; set; }
@@ -40,6 +40,14 @@ namespace RedditBet.API.Models
         {
             return !string.IsNullOrEmpty(Token);
         }
+    }
+
+    public class TempPageDataViewModel : Mappable<TempPageDataViewModel, TempPageData>
+    {
+        [Required]
+        public string UserName { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public bool Visited { get; set; }
     }
 
     public class TokenValidationResponse

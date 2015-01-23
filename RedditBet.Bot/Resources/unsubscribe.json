@@ -1,0 +1,7 @@
+﻿{
+    "title": "unsubscribe",
+    "description": "A list of key phrases the bot can use to determine if a user needs to be added to the Blacklist",
+    "phrases": [
+        "unsubscribe"
+    ]
+}

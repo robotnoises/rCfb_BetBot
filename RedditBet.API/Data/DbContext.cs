@@ -17,7 +17,7 @@ namespace RedditBet.API.Data
         public DbSet<Bet> Bets { get; set; }
         public DbSet<Log> Logs { get; set; }
         public DbSet<TempPageData> TempPages { get; set; }
-        public DbSet<Fulfillment> FulfillmentData { get; set; }
+        public DbSet<Fulfillment> Fulfillments { get; set; }
         public DbSet<BlacklistEntry> Blacklist { get; set; }
     }
 }

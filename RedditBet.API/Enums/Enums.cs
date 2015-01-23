@@ -16,7 +16,8 @@ namespace RedditBet.API
         Crawl,
         Reply,
         Update,
-        DirectMessage
+        DirectMessage,
+        Monitor
     }
 
     [Flags]

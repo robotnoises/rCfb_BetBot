@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using RedditBet.API.Data;
-using RedditBet.API.Models;
-using RedditBet.API.Services;
+using System.Collections.Generic;
 
 namespace RedditBet.API.Controllers
 {
-    [RoutePrefix("api/Tasks")]
+    using RedditBet.API.Models;
+    using RedditBet.API.Services;
+
+    [RoutePrefix("api/tasks")]
     public class TasksController : ApiController
     {
         private TaskService _service = new TaskService();
@@ -47,30 +43,32 @@ namespace RedditBet.API.Controllers
 
         // PUT: api/Tasks/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutTask(BotTask task)
+        public IHttpActionResult PutTask(BotTaskViewModel task)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _service.Update(task);
+            _service.Update(task.ToMappedType());
 
             return StatusCode(HttpStatusCode.NoContent);
         }
 
         // POST: api/Tasks
         [ResponseType(typeof(BotTask))]
-        public IHttpActionResult PostTask(BotTask task)
+        public IHttpActionResult PostTask(BotTaskViewModel task)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _service.Create(task);
+            var model = task.ToMappedType();
 
-            return CreatedAtRoute("DefaultApi", new { id = task.TaskId }, task);
+            _service.Create(model);
+
+            return CreatedAtRoute("DefaultApi", new { id = model.TaskId }, task);
         }
 
         // POST: api/tasks/markcomplete
@@ -82,25 +80,5 @@ namespace RedditBet.API.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
-
-
-        //// DELETE: api/Tasks/5
-        //[ResponseType(typeof(BotTask))]
-        //public IHttpActionResult DeleteTask(int id)
-        //{
-        //    _service.Remove(id);
-
-        //    return Ok();
-        //}
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
     }
 }

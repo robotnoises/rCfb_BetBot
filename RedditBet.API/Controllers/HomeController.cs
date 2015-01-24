@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace RedditBet.API.Controllers
@@ -10,7 +7,7 @@ namespace RedditBet.API.Controllers
     {
         public ActionResult Index()
         {
-            // ViewBag.Title = "Home Page";
+            // Todo: need to restrict this View 
 
             return View();
         }

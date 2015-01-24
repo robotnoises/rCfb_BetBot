@@ -16,6 +16,16 @@ namespace RedditBet.API
         Crawl,
         Reply,
         Update,
-        DirectMessage
+        DirectMessage,
+        Monitor
+    }
+
+    [Flags]
+    public enum TempPageTokenStatus
+    { 
+        OK,
+        INVALID,
+        USED,
+        STALE
     }
 }

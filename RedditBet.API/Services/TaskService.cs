@@ -1,35 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using RedditBet.API.Repositories;
-using RedditBet.API.Data;
-using RedditBet.API.Models;
+using System.Data.Entity;
+using System.Collections.Generic;
 
 namespace RedditBet.API.Services
 {
+    using RedditBet.API.Models;
+    using RedditBet.API.Repositories;
+
     public class TaskService
     {
-        private TaskRepository _repository;
+        private IUnitOfWork<BotTask> _uow;
 
         public TaskService()
         {
-            _repository = new TaskRepository(DatabaseContext.Create());
+            _uow = new UnitOfWork<BotTask>(DatabaseContext.Create());
+        }
+
+        public TaskService(DbContext context)
+        {
+            _uow = new UnitOfWork<BotTask>(context);
         }
 
         public IEnumerable<BotTask> GetAll() {
-            return _repository.GetAll();
+            return _uow.GetAll();
         }
 
         public IEnumerable<BotTask> GetIncomplete()
         {
-            var foo = _repository.GetAll().Where(x => !x.Completed);
+            var foo = _uow.GetAll().Where(x => !x.Completed);
             return foo;
         }
 
         public BotTask Get(int id)
         {
-            return _repository.Get(id);
+            return _uow.Get(id);
         }
 
         public void Create(BotTask t)
@@ -40,40 +45,40 @@ namespace RedditBet.API.Services
             t.TimeCompleted = null;
             t.Completed = false;
 
-            _repository.Add(t);
+            _uow.Add(t);
         }
 
         public void Update(BotTask t)
         {
-            _repository.Update(t);
+            _uow.Update(t);
         }
 
         public void MarkComplete(int id)
         {
-            var t = _repository.Get(id);
+            var t = _uow.Get(id);
 
             if (t == null) return;
 
             t.Completed = true;
             t.TimeCompleted = DateTime.UtcNow;
 
-            _repository.Update(t);
+            _uow.Update(t);
         }
 
         public void Remove(int id)
         {
-            var t = _repository.Get(id);
+            var t = _uow.Get(id);
             
             if (t != null)
             {
-                _repository.Remove(t);
+                _uow.Remove(t);
             }
         }
 
         private bool TaskAlreadyExists(BotTask t)
         {
-            var task = _repository.Get(t.HashId).OrderByDescending(x => x.TimeAssigned).FirstOrDefault();
-            
+            var task = _uow.GetWhere(x => x.HashId == t.HashId).OrderByDescending(x => x.TimeAssigned).FirstOrDefault();
+                        
             // If nothing is found return false
             if (task == null) return false;
                         

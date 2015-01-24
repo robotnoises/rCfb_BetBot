@@ -1,0 +1,21 @@
+﻿{
+    "title": "confirm",
+    "description": "A list of key phrases the bot can use to determine if a user wants to participate",
+    "phrases": [
+        "yes",
+        "sure",
+        "I guess so",
+        "let's do it",
+        "hell yeah",
+        "affirmative",
+        "fine",
+        "ok",
+        "yeah",
+        "alright",
+        "aye",
+        "definitely",
+        "by all means",
+        "yep",
+        "of course"
+    ]
+}

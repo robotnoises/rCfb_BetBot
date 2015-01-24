@@ -1,0 +1,16 @@
+﻿{
+    "title": "decline",
+    "description": "A list of key phrases the bot can use to determine if a user does not want to participate",
+    "phrases": [
+        "no",
+        "nope",
+        "hell no",
+        "not this time",
+        "no thank you",
+        "no thanks",
+        "absolutely not",
+        "no way",
+        "not at all",
+        "not in the least"
+    ]
+}

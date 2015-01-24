@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RedditBet.Bot.Enums
+namespace RedditBet.Bot
 {
     [Flags]
     public enum TaskType
@@ -12,6 +12,7 @@ namespace RedditBet.Bot.Enums
         Crawl,
         Reply,
         Update,
-        DirectMessage
+        DirectMessage,
+        Monitor
     }
 }

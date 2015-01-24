@@ -1,7 +1,6 @@
 ﻿using System;
-using RedditBet.Bot.Enums;
 
-namespace RedditBet.API.Models
+namespace RedditBet.Bot.Models
 {
     public class LogModel
     {

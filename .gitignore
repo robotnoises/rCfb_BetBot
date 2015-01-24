@@ -14,4 +14,12 @@ extras/
 
 *.suo
 
+# team foundation sever
 
+$tf/
+BuildProcessTemplates
+
+# Databases
+
+*.mdf
+*.ldf

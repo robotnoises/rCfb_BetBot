@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RedditBet.Bot.Enums;
-using RedditBet.Bot.Models;
-using RedditBet.API.Models;
-using RedditBet.Bot.DataResources;
+using System.Collections.Generic;
 
 namespace RedditBet.Bot.Utils
 {
-    // Todo: need to add real logging
+    using RedditBet.Bot.Models;
+    using RedditBet.Bot.DataResources;
+
     public static class Log
     {
         public static void Info(string message)
@@ -50,7 +48,7 @@ namespace RedditBet.Bot.Utils
                 Timestamp = DateTime.UtcNow
             };
 
-            Data.AddLog(log);
+            Api.AddLog(log);
         }
     }
 }

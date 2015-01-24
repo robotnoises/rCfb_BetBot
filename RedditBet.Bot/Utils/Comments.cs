@@ -1,15 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Security.Cryptography;
-using HtmlAgilityPack;
-using RedditBet.Bot.Models;
-using RedditBet.Bot.DataResources;
 
 namespace RedditBet.Bot.Utils
 {
+    using HtmlAgilityPack;
+    using RedditBet.Bot.Models;
+    using RedditBet.Bot.DataResources;
+
     public class Comments : List<Comment>
     {
         public void AddComment(Comment c)
@@ -70,12 +71,12 @@ namespace RedditBet.Bot.Utils
             return _message;
         }
 
-        public BotTask ToBotTask(Enums.TaskType taskType = Enums.TaskType.Reply)
+        public BotTask ToBotTask(TaskType taskType = TaskType.Reply)
         {
             var bt = new BotTask();
             var data = new TaskData();
 
-            data.Add(new TaskDataItem(Config.PermaLink_Key, _permaLink));
+            data.Add(new TaskDataItem(Config.TargetUrl_Key, _permaLink));
 
             bt.TaskType = taskType;
             bt.HashId = _hashId;
@@ -97,30 +98,7 @@ namespace RedditBet.Bot.Utils
              * temporary nature of these records it should be safe to be used as a key for quick lookups or potentially part of a temp url.
             */
 
-            var id = "";
-            var bytes = Encoding.UTF8.GetBytes(permaLink);
-
-            using (var hasher = new SHA1Managed())
-            {
-                try
-                {
-                    var hash = hasher.ComputeHash(bytes);
-                    var sb = new StringBuilder(hash.Length * 2);
-
-                    foreach (var b in hash)
-                    {
-                        sb.Append(b.ToString("X2"));
-                    }
-
-                    id = sb.ToString();
-                }
-                catch (Exception ex)
-                {
-                    Log.Error(ex);
-                }
-            }
-
-            return id;
+            return permaLink.ToHashString();
         }
     }
 
@@ -144,7 +122,7 @@ namespace RedditBet.Bot.Utils
                 var uvInt = Convert.ToInt32(uv);
 
                 // Todo: this is a temporary message
-                var message = Data.MarkDown_Test;
+                var message = Config.MarkDown_Test;
                 
                 return new Comment(author.InnerText, permaLink.Attributes["href"].Value, message, uvInt, confidence);
             }

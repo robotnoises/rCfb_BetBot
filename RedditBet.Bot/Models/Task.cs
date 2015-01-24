@@ -22,6 +22,11 @@ namespace RedditBet.Bot.Models
             _keys = new HashSet<string>();
         }
 
+        public TaskDataItem Get(string key)
+        {
+            return this.Where(x => x.Key == key).FirstOrDefault();
+        }
+        
         public string GetValue(string key)
         {
             var value = "";
@@ -68,5 +73,11 @@ namespace RedditBet.Bot.Models
             Key = key;
             Value = value;
         }
+    }
+
+    // Todo: expand on this
+    public class UniqueTaskResponse
+    {
+        public bool IsUnique { get; set; }
     }
 }

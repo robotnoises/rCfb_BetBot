@@ -81,8 +81,8 @@ namespace RedditBet.API.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/tasks/unique
-        [Route("unique")]
+        // POST: api/tasks/isunique
+        [Route("isunique")]
         public UniqueTaskResponse MarkTaskComplete(TaskDataItem dataItem)
         {
             var taskDataService = new TaskDataService();

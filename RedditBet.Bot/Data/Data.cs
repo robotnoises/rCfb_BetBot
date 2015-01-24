@@ -44,10 +44,11 @@ namespace RedditBet.Bot.DataResources
 
             foreach (var comment in comments)
             {
-                if (!TaskUnique(comment)) continue;
-
                 var task = comment.ToBotTask();
-
+                var taskDataItem = task.TaskData.Get(Config.HashId_Key);
+                
+                if (!TaskIsUnique(taskDataItem)) continue;
+                
                 AddTask(task);
             }
         }
@@ -60,7 +61,7 @@ namespace RedditBet.Bot.DataResources
 
             data.Add(new TaskDataItem(Config.Username_Key, userName));
             data.Add(new TaskDataItem(Config.TargetUrl_Key, linkToMonitor));
-            
+
             task.TaskType = TaskType.Monitor;
             task.TaskData = data;
             task.Completed = false;
@@ -108,10 +109,17 @@ namespace RedditBet.Bot.DataResources
         /// <summary>
         /// Todo
         /// </summary>
-        /// <param name="comment"></param>
-        private static bool TaskUnique(Comment comment)
+        /// <param name="item"></param>
+        private static bool TaskIsUnique(TaskDataItem item)
         {
-            throw new NotImplementedException();
+            var requester = new Requester(string.Format("{0}{1}", Config.ApiUrl, Config.Api_Tasks_Unique), RequestMethod.POST, item);
+            var response = requester.GetResponse();
+                        
+            ProcessResponse(response);
+
+            var json = JsonConvert.DeserializeObject<UniqueTaskResponse>(response.Content);
+
+            return json.IsUnique;
         }
         
         #endregion

@@ -66,7 +66,7 @@ namespace RedditBet.API.Controllers
 
             var model = task.ToMappedType();
 
-            _service.Create(model);
+            _service.Add(model);
 
             return CreatedAtRoute("DefaultApi", new { id = model.TaskId }, task);
         }
@@ -79,6 +79,17 @@ namespace RedditBet.API.Controllers
             _service.MarkComplete(id);
 
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // POST: api/tasks/unique
+        [Route("unique")]
+        public UniqueTaskResponse MarkTaskComplete(TaskDataItem dataItem)
+        {
+            var taskDataService = new TaskDataService();
+            var resp = new UniqueTaskResponse();
+            resp.IsUnique = taskDataService.TaskIsUnique(dataItem);
+
+            return resp;
         }
     }
 }

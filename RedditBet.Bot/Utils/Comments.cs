@@ -71,17 +71,17 @@ namespace RedditBet.Bot.Utils
             return _message;
         }
 
-        public BotTask ToBotTask(TaskType taskType = TaskType.Reply)
+        public BotTask ToBotTask()
         {
             var bt = new BotTask();
             var data = new TaskData();
 
             data.Add(new TaskDataItem(Config.TargetUrl_Key, _permaLink));
+            data.Add(new TaskDataItem(Config.HashId_Key, _hashId));
+            data.Add(new TaskDataItem(Config.Message_Key, _message));
 
-            bt.TaskType = taskType;
-            bt.HashId = _hashId;
-            bt.Message = _message;
-            bt.Data = data;
+            bt.TaskType = TaskType.Reply;
+            bt.TaskData = data;
 
             return bt;
         }

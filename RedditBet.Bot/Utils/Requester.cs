@@ -13,8 +13,8 @@ namespace RedditBet.Bot.Utils
         // Private fields
         
         private RestClient _client;
-        private Method _requestMethod;
         private Uri _url;
+        private Method _requestMethod;
         private string _cookieValue;
         private object _data;
         private readonly string _userAgent = Config.Bot_UserAgent;

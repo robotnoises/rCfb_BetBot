@@ -18,11 +18,11 @@ namespace RedditBet.Bot.Tasks
 
         public UpdateReply(BotTask task)
         {
-            var permaLink = task.Data.GetValue(Config.TargetUrl_Key);
+            var permaLink = task.TaskData.GetValue(Config.TargetUrl_Key);
             var parser = new PermaLinkParser(permaLink);
 
             _targetUrl = permaLink;
-            _message = task.Message;
+            _message = task.TaskData.GetValue(Config.Message_Key);
             _name = parser.GetNameId();
             _linkName = parser.GetLinkId();
         }

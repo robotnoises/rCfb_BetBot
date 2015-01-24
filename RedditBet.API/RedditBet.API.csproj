@@ -207,6 +207,7 @@
     <Compile Include="Controllers\FulfillmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogController.cs" />
+    <Compile Include="Services\TaskDataService.cs" />
     <Compile Include="Controllers\TasksController.cs" />
     <Compile Include="Controllers\TempPageController.cs" />
     <Compile Include="Data\DbContext.cs" />

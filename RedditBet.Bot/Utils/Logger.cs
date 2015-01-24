@@ -38,6 +38,15 @@ namespace RedditBet.Bot.Utils
             DoLog(msg, LogType.Error, ex);
         }
 
+        public static void Error(string message)
+        {
+            var msg = string.Format("[ERROR] {0}", message);
+
+            Console.WriteLine(msg);
+
+            DoLog(msg, LogType.Error);
+        }
+
         private static void DoLog(string message, LogType type, Exception ex = null)
         {
             var log = new LogModel

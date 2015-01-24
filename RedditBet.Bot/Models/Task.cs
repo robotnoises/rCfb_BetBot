@@ -8,10 +8,9 @@ namespace RedditBet.Bot.Models
     {
         public int TaskId { get; set; }
         public TaskType TaskType { get; set; }
-        public string HashId { get; set; }
-        public TaskData Data { get; set; }
-        public string Message { get; set; }
+        public DateTime? TimeLastRun { get; set; }
         public bool Completed { get; set; }
+        public TaskData TaskData { get; set; }
     }
 
     public class TaskData : List<TaskDataItem>

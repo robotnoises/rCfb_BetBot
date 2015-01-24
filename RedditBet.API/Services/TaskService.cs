@@ -37,10 +37,8 @@ namespace RedditBet.API.Services
             return _uow.Get(id);
         }
 
-        public void Create(BotTask t)
+        public void Add(BotTask t)
         {
-            if (TaskAlreadyExists(t)) return;
-            
             t.TimeAssigned = DateTime.UtcNow;
             t.TimeCompleted = null;
             t.Completed = false;
@@ -50,6 +48,13 @@ namespace RedditBet.API.Services
 
         public void Update(BotTask t)
         {
+            t.TimeLastRun = DateTime.UtcNow;
+
+            if (t.Completed && t.TimeCompleted == null) 
+            {
+                // Todo: throw Exception explaining they used the wrong method to mark this Task complete
+            }
+
             _uow.Update(t);
         }
 
@@ -61,6 +66,7 @@ namespace RedditBet.API.Services
 
             t.Completed = true;
             t.TimeCompleted = DateTime.UtcNow;
+            t.TimeLastRun = t.TimeCompleted;
 
             _uow.Update(t);
         }
@@ -72,25 +78,6 @@ namespace RedditBet.API.Services
             if (t != null)
             {
                 _uow.Remove(t);
-            }
-        }
-
-        private bool TaskAlreadyExists(BotTask t)
-        {
-            var task = _uow.GetWhere(x => x.HashId == t.HashId).OrderByDescending(x => x.TimeAssigned).FirstOrDefault();
-                        
-            // If nothing is found return false
-            if (task == null) return false;
-                        
-            if (task.TaskType == (int)TaskType.Reply)
-            {
-                // If the TaskType is "Reply", return true, as there is only allowed to be one "Reply" per comment
-                return true;
-            }
-            else
-            {
-                // Else, the task is either a direct message or update, so just make sure the task is now complete
-                return !t.Completed;
             }
         }
     }

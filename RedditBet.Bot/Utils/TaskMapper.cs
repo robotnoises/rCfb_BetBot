@@ -21,7 +21,7 @@ namespace RedditBet.Bot.Utils
             Mapper.CreateMap<T, BotTask>();
             
             var mapped = Mapper.Map<BotTask>(_derived);
-            mapped.Data.AddRange(data);
+            mapped.TaskData.AddRange(data);
 
             return mapped;
         }

@@ -55,7 +55,7 @@ namespace RedditBet.Bot.Utils
 
                 var matchedPhrases = String.Join(" | ", phrazes.Matches(text));
 
-                Log.Info(string.Format("Comment ({0}) matched phrase(s): {1}", comment.GetHashId(), matchedPhrases));
+                Log.Info(string.Format("Matched Comment ({0}) (matched phrase(s): {1})", comment.GetHashId(), matchedPhrases));
 
                 // Add all child comments to the blacklist
                 Parallel.ForEach(currentNode.ChildNodes, childNode =>

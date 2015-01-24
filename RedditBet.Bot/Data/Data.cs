@@ -40,9 +40,13 @@ namespace RedditBet.Bot.DataResources
         /// <param name="comments"></param>
         internal static void AddReplyTasks(Comments comments)
         {
+            // Todo: check for unique here
+
             foreach (var comment in comments)
             {
-                var task = comment.ToBotTask(TaskType.Reply);
+                if (!TaskUnique(comment)) continue;
+
+                var task = comment.ToBotTask();
 
                 AddTask(task);
             }
@@ -58,33 +62,58 @@ namespace RedditBet.Bot.DataResources
             data.Add(new TaskDataItem(Config.TargetUrl_Key, linkToMonitor));
             
             task.TaskType = TaskType.Monitor;
-            task.Data = data;
+            task.TaskData = data;
             task.Completed = false;
             
             AddTask(task);
         }
 
-        private static void AddTask(BotTask task)
-        {
-            var requester = new Requester(string.Format("{0}{1}", Config.ApiUrl, Config.Api_Tasks), RequestMethod.POST, task);
-            var response = requester.GetResponse();
-            var statusCode = response.StatusCode;
-        }
-
         internal static void MarkTaskComplete(int id)
         {
             var requester = new Requester(string.Format("{0}{1}/{2}", Config.ApiUrl, Config.Api_Tasks_MarkTaskComplete, id), RequestMethod.POST);
-            var response = requester.GetResponse();
-            var statusCode = response.StatusCode;
+            
+            ProcessResponse(requester.GetResponse());
         }
 
         internal static void AddLog(LogModel log)
         { 
             var requester = new Requester(string.Format("{0}{1}", Config.ApiUrl, Config.Api_Log), RequestMethod.POST, log);
-            var response = requester.GetResponse();
-            var statusCode = response.StatusCode;
+            
+            ProcessResponse(requester.GetResponse());
         }
 
+        private static void AddTask(BotTask task)
+        {
+            var requester = new Requester(string.Format("{0}{1}", Config.ApiUrl, Config.Api_Tasks), RequestMethod.POST, task);
+
+            ProcessResponse(requester.GetResponse());
+        }
+
+        private static void ProcessResponse(RestSharp.IRestResponse response)
+        {
+            switch (response.StatusCode)
+            { 
+                case System.Net.HttpStatusCode.BadRequest:
+                    Log.Error(string.Format("The Server responded with status code {0}: {1}", response.StatusCode, response.StatusDescription));
+                    break;
+                case System.Net.HttpStatusCode.InternalServerError:
+                    Log.Error(string.Format("The Server responded with status code {0}: {1}", response.StatusCode, response.StatusDescription));
+                    break;
+                //default:
+                //    Log.Info(string.Format("The Server responded with status code {0}: {1}", response.StatusCode, response.StatusDescription));
+                //    break;
+            }
+        }
+
+        /// <summary>
+        /// Todo
+        /// </summary>
+        /// <param name="comment"></param>
+        private static bool TaskUnique(Comment comment)
+        {
+            throw new NotImplementedException();
+        }
+        
         #endregion
     }
 

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RedditBet.API.Models
 {
@@ -9,25 +10,25 @@ namespace RedditBet.API.Models
     {
         [Key]
         public int TaskId { get; set; }
-        public string HashId { get; set; }
         public int TaskType { get; set; }
+        public bool Completed { get; set; }
+        public DateTime? TimeLastRun { get; set; }
         public DateTime TimeAssigned { get; set; }
         public DateTime? TimeCompleted { get; set; }
-        public bool Completed { get; set; }
-        public string Message { get; set; }
-        public virtual TaskData Data { get; set; }
+        
+        public virtual TaskData TaskData { get; set; }
     }
 
     public class BotTaskViewModel : Mappable<BotTaskViewModel, BotTask>
     {
         [Required]
         public int TaskType { get; set; }
-        public string HashId { get; set; }
+        public bool Completed { get; set; }
+        public DateTime? TimeLastRun { get; set; }
         public DateTime TimeAssigned { get; set; }
         public DateTime? TimeCompleted { get; set; }
-        public bool Completed { get; set; }
-        public string Message { get; set; }
-        public virtual TaskData Data { get; set; }
+        
+        public TaskData TaskData { get; set; }
     }
 
     public class TaskData : List<TaskDataItem>
@@ -64,6 +65,7 @@ namespace RedditBet.API.Models
         }
     }
 
+    [Table("TaskData")]
     public class TaskDataItem
     {
         [Key]
@@ -78,5 +80,11 @@ namespace RedditBet.API.Models
             Key = key;
             Value = value;
         }
+    }
+
+    // Todo: expand on this
+    public class UniqueTaskResponse
+    { 
+        public bool IsUnique { get; set; }
     }
 }

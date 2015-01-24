@@ -91,13 +91,15 @@ namespace RedditBet.Bot.Utils
 
         internal static string TargetUrl_Key { get { return ConfigurationManager.AppSettings["targetUrl"]; } }
         internal static string Username_Key { get { return ConfigurationManager.AppSettings["userName"]; } }
+        internal static string Message_Key { get { return ConfigurationManager.AppSettings["message"]; } }
+        internal static string HashId_Key { get { return ConfigurationManager.AppSettings["hashId"]; } }
         
         #endregion
 
         #region Misc
 
         // User agent 
-        internal const string Bot_UserAgent = "cfb_betbot 0.1 @robotnoises";
+        internal const string Bot_UserAgent = "cfb_betbot (still testing) 0.1 @robotnoises";
 
         #endregion
     }

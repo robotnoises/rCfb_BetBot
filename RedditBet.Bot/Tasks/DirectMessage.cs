@@ -16,8 +16,8 @@ namespace RedditBet.Bot.Tasks
 
         public DirectMessage(BotTask task)
         {
-            _targetUrl = task.Data.GetValue(Config.TargetUrl_Key);
-            _message = task.Message;
+            _targetUrl = task.TaskData.GetValue(Config.TargetUrl_Key);
+            _message = task.TaskData.GetValue(Config.Message_Key);
         }
 
         public void Execute()

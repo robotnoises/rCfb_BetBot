@@ -53,19 +53,8 @@ namespace RedditBet.Bot.DataResources
             }
         }
 
-        // Todo: This needs a lot of TLC...
-        internal static void AddMonitorTask(string userName, string linkToMonitor)
+        internal static void AddMonitorTask(BotTask task)
         {
-            var task = new BotTask();
-            var data = new TaskData();
-
-            data.Add(new TaskDataItem(Config.Username_Key, userName));
-            data.Add(new TaskDataItem(Config.TargetUrl_Key, linkToMonitor));
-
-            task.TaskType = TaskType.Monitor;
-            task.TaskData = data;
-            task.Completed = false;
-            
             AddTask(task);
         }
 

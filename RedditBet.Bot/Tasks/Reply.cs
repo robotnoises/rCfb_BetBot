@@ -35,18 +35,22 @@ namespace RedditBet.Bot.Tasks
         {
             base.StartTimer();
 
-            var user = _redditContext.GetUser(Config.Reddit_Username);
+            // var user = _redditContext.GetUser(Config.Reddit_Username);
             var parentComment = _redditContext.GetComment(Config.SubReddit, _name, _linkName);
 
             try
             {
-                var botComment = parentComment.Reply(Message.Test());
+                var botComment = new ApiComment(parentComment.Reply(Message.Test()));
 
                 // Mark Task as Complete
                 Api.MarkTaskComplete(_taskId);
+
+                var monitorTask = botComment.ToBotTask(TaskType.Monitor);
+                
+                monitorTask.TaskData.Add(new TaskDataItem(Config.TargetUrl_Key, _permaLink));
                 
                 // Start monitoring this reply
-                Api.AddMonitorTask(_name, _permaLink);
+                Api.AddMonitorTask(monitorTask);
 
                 // Todo: Log all this
 

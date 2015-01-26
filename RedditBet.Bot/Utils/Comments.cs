@@ -41,6 +41,14 @@ namespace RedditBet.Bot.Utils
             _confidence = confidence;
         }
 
+        public Comment(string author, string permaLink, int upVotes)
+        {
+            _author = author;
+            _permaLink = permaLink;
+            _hashId = CreateHashId(permaLink);
+            _upVotes = upVotes;
+        }
+
         public string GetHashId()
         {
             return _hashId;
@@ -103,7 +111,7 @@ namespace RedditBet.Bot.Utils
     }
 
     /// <summary>
-    /// Todo
+    /// Builder for comments scraped from Reddit (non-api)
     /// </summary>
     public static class Builder
     {
@@ -137,6 +145,51 @@ namespace RedditBet.Bot.Utils
         private static string BuildSelector(string element, string attribute, string value)
         {
             return string.Format(".//{0}[contains(concat(' ', normalize-space(@{1}), ' '), ' {2} ')]", element, attribute, value);
+        }
+    }
+
+
+    /// <summary>
+    /// Wrapper for RedditSharp comments (using reddit api)
+    /// </summary>
+    internal class ApiComment : RedditSharp.Things.Comment
+    {
+        private RedditSharp.Things.Comment _comment;
+
+        public ApiComment(RedditSharp.Things.Comment comment)
+        {
+            _comment = (RedditSharp.Things.Comment)comment.Parent;
+        }
+
+        public BotTask ToBotTask(TaskType type)
+        {
+            var bt = new BotTask();
+            var data = new TaskData();
+
+            var author = _comment.Author ?? "";
+            var upVotes = _comment.Upvotes.ToString() ?? "";
+
+            bt.TaskType = type;
+            bt.Completed = false;
+            
+            data.Add(new TaskDataItem(Config.Username_Key, author));
+            data.Add(new TaskDataItem(Config.Upvotes_Key, upVotes));
+
+            bt.TaskData = data;
+
+            return bt;
+        }
+
+        private string ShortlinkToPermaLink()
+        {
+            // http://www.reddit.com/r/sandboxtest/comments/t3_2tmcdr/_/co0acqg
+
+            var shortLink = _comment.Shortlink.Split('/');
+            var index = Array.IndexOf(shortLink, "comments") + 2;
+
+            shortLink[index] = _comment.LinkTitle;
+
+            return String.Join("/", shortLink);
         }
     }
 }

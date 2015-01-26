@@ -94,6 +94,7 @@ namespace RedditBet.Bot.Utils
         internal static string Username_Key { get { return ConfigurationManager.AppSettings["userName"]; } }
         internal static string Message_Key { get { return ConfigurationManager.AppSettings["message"]; } }
         internal static string HashId_Key { get { return ConfigurationManager.AppSettings["hashId"]; } }
+        internal static string Upvotes_Key { get { return ConfigurationManager.AppSettings["upvotes"]; } }
         
         #endregion
 

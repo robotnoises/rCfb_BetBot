@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace RedditBet.Bot.Tasks
 {
@@ -19,6 +20,7 @@ namespace RedditBet.Bot.Tasks
         private string _message;
         private string _name;
         private const string _taskName = "Reply";
+        private BotTask _task;
 
         public Monitor(BotTask task)
         {
@@ -29,6 +31,7 @@ namespace RedditBet.Bot.Tasks
             _permaLink = permaLink;
             _message = task.TaskData.GetValue(Config.Message_Key);
             _name = parser.GetNameId();
+            _task = task;
         }
         public void Execute()
         {
@@ -60,12 +63,15 @@ namespace RedditBet.Bot.Tasks
                 // make a call to API to add a new bet record
                 // Add a new Task to send a DM to the OP
                 // Add a new Task to Update the Original Bot reply
-                foundMatch = true;
+                if (confirmComments.Any(x => x.GetAuthor() == _task.TaskData.GetValue(Config.Username_Key)))
+                {
+                    foundMatch = true;
+                }
             }
 
             if (foundMatch)
             {
-                Api.MarkTaskComplete(_taskId);
+                // Api.MarkTaskComplete(_taskId);
             }
 
             base.StopTimer();

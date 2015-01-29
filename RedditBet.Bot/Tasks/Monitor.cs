@@ -15,22 +15,14 @@ namespace RedditBet.Bot.Tasks
 
     class Monitor : RedditTask, IBotTask
     {
-        private int _taskId;
-        private string _permaLink;
-        private string _message;
-        private string _name;
-        private const string _taskName = "Reply";
         private BotTask _task;
+        private string _permaLink;
+        private const string _taskName = "Reply";
 
         public Monitor(BotTask task)
         {
-            var permaLink = task.TaskData.GetValue(Config.TargetUrl_Key);
-            var parser = new PermaLinkParser(permaLink);
-
-            _taskId = task.TaskId;
-            _permaLink = permaLink;
-            _message = task.TaskData.GetValue(Config.Message_Key);
-            _name = parser.GetNameId();
+            _permaLink = task.TaskData.GetValue(Config.TargetUrl_Key);
+            
             _task = task;
         }
         public void Execute()
@@ -41,37 +33,32 @@ namespace RedditBet.Bot.Tasks
             var foundMatch = false;
 
             // Check to see if user declines
-            var declineComments = crawler.GetMatchedComments("class", "entry", Config.GetDeclinePhrases());
-            if (declineComments.Count > 0 && FoundMatchForUser(declineComments))
+            if (FoundMatchForOP(crawler.GetMatchedComments("class", "entry", Config.GetDeclinePhrases())))
             { 
-                // Add a new Task to Update the Original Bot reply (apoligize, etc etc)
+                // Add a new Task to Update the Original Bot reply (apoligize, etc)
                 foundMatch = true;
             }
 
             // Check to see if user unsubscribes
-            var unsubscribeComments = crawler.GetMatchedComments("class", "entry", Config.GetUnsubscribePhrases());
-            if (!foundMatch && unsubscribeComments.Count > 0 && FoundMatchForUser(unsubscribeComments))
+            if (!foundMatch && FoundMatchForOP(crawler.GetMatchedComments("class", "entry", Config.GetUnsubscribePhrases())))
             {
                 // make a call to API to add user to the blacklist
                 foundMatch = true;
             }
 
             // Check to see if user confirms
-            var confirmComments = crawler.GetMatchedComments("class", "entry", Config.GetConfirmationPhrases());
-            if (!foundMatch && confirmComments.Count > 0 && FoundMatchForUser(confirmComments))
+            if (!foundMatch && FoundMatchForOP(crawler.GetMatchedComments("class", "entry", Config.GetConfirmationPhrases())))
             {
                 // make a call to API to add a new bet record
                 // Add a new Task to send a DM to the OP
                 // Add a new Task to Update the Original Bot reply
-                if (confirmComments.Any(x => x.GetAuthor() == _task.TaskData.GetValue(Config.Username_Key)))
-                {
-                    foundMatch = true;
-                }
+                
+                foundMatch = true;
             }
 
             if (foundMatch)
             {
-                // Api.MarkTaskComplete(_taskId);
+                Api.MarkTaskComplete(_task.TaskId);
             }
 
             base.StopTimer();
@@ -87,12 +74,16 @@ namespace RedditBet.Bot.Tasks
             return base.GetElapsed();
         }
 
-        private bool FoundMatchForUser(Comments matchedComments)
+        private bool FoundMatchForOP(Comments matchedComments)
         { 
-            // Iterate through matched comments and confirm the username matches the OP
-
-            // temp
-            return matchedComments.Count > 0;
+            // Iterate through matched comments and confirm the username of the top matched comment matches the OPs username
+            var topMatch = matchedComments
+                .Where(x => x.GetAuthor() == _task.TaskData.GetValue(Config.Username_Key))
+                .OrderByDescending(x => x.GetUpVotes())
+                .FirstOrDefault();
+            
+            // Did we get a top match?
+            return topMatch != null;
         }
     }
 }

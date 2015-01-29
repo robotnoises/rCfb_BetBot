@@ -22,7 +22,10 @@ namespace RedditBet.Bot.Utils
 
             var client = new WebClient();
 
-            // try catch here for 404?
+            // Todo: some logic to kill the cache
+            // var foo = url.AppendRandomQueryString();
+
+            // Todo: try catch here for 404?
             var page = WebUtility.HtmlDecode(client.DownloadString(url));
 
             _doc.LoadHtml(page);

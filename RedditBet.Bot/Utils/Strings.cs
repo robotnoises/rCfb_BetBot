@@ -50,5 +50,24 @@ namespace RedditBet.Bot.Utils
 
             return hash;
         }
+
+        public static string AppendRandomQueryString(this string input)
+        {
+            var random = new Random().Next(1, 9999);
+            var url = input.Split(new char[] { '&', '?' });
+
+            // Todo, confirm is URL
+
+            // No existing query string
+            if (url.Length == 1)
+            {
+                return input.TrimEnd(new char[] { '/' }) + string.Format("?={0}", random);
+            }
+            // has querystring(s)
+            else
+            {
+                return input.TrimEnd(new char[] { '/' }) + string.Format("&={0}", random);
+            }
+        }
     }
 }

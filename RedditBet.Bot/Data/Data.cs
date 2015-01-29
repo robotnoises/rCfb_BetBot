@@ -67,9 +67,10 @@ namespace RedditBet.Bot.DataResources
         /// Todo
         /// </summary>
         /// <param name="comments"></param>
-        internal static void AddBet()
+        internal static string AddBet()
         {
-            throw new NotImplementedException();
+            // Todo, needs to return the TempPage Token
+            return "";
         }
 
         internal static void AddLog(LogModel log)

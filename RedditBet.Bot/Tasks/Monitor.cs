@@ -51,12 +51,12 @@ namespace RedditBet.Bot.Tasks
             {
                 // Make a call to API to add a new bet record
 
-                Api.AddBet();
+                var token = Api.AddBet();
 
                 // Add a new Task to send a DM to the OP
                 
                 var userName = _task.TaskData.GetValue(Config.Username_Key);
-                var message = ""; // Todo: build a Direct message 
+                var message = Message.PrivateMsgGreet(token);
                 var targetUrl = _task.TaskData.GetValue(Config.TargetUrl_Key);
 
                 Api.AddBotTask(Builder.DirectMessageTask(userName, message, targetUrl));

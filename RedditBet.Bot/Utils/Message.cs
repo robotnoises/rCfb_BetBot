@@ -13,5 +13,16 @@ namespace RedditBet.Bot.Utils
 
             return msg.GetText();
         }
+
+        public static string PrivateMsgGreet(string tempPageToken)
+        {
+            var msg = new Markdown(Config.MarkDown_Greetings);
+            // todo, build link from token
+            var link = "" + tempPageToken;
+
+            msg.ReplaceVariable("link01", MarkdownFormat.LINK("This is a link", link));
+
+            return msg.GetText();
+        }
     }
 }

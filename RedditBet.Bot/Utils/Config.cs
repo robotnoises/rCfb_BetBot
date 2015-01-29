@@ -85,6 +85,7 @@ namespace RedditBet.Bot.Utils
         // Markdown files
 
         internal static string MarkDown_Test = Local.Resources.test;
+        internal static string MarkDown_Greetings = Local.Resources.greetings;
 
         #endregion
 
@@ -95,7 +96,7 @@ namespace RedditBet.Bot.Utils
         internal static string Message_Key { get { return ConfigurationManager.AppSettings["message"]; } }
         internal static string HashId_Key { get { return ConfigurationManager.AppSettings["hashId"]; } }
         internal static string Upvotes_Key { get { return ConfigurationManager.AppSettings["upvotes"]; } }
-        
+                
         #endregion
 
         #region Misc

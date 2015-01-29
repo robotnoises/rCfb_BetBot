@@ -124,6 +124,9 @@
   <data name="decline" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\decline.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="greetings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\greetings.markdown;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="phrases" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\phrases.json;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>

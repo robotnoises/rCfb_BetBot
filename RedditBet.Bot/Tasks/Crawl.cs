@@ -28,7 +28,7 @@ namespace RedditBet.Bot.Tasks
             
             Parallel.ForEach(RedditApi.GetCrawlerUrls(), url =>
             {
-                var crawler = new Crawler(url);
+                var crawler = new Scraper(url);
 
                 var matchedComments = crawler.GetMatchedComments("class", "entry", Config.GetPhrasesToMatch());
 

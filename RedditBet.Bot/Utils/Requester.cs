@@ -15,33 +15,15 @@ namespace RedditBet.Bot.Utils
         private RestClient _client;
         private Uri _url;
         private Method _requestMethod;
-        private string _cookieValue;
         private object _data;
         private readonly string _userAgent = Config.Bot_UserAgent;
 
-        public Requester(string url, object data = null)
-        {
-            _client = new RestClient();
-            _requestMethod = Method.GET;
-            _url = Converter.ToUri(url);
-            _data = data;
-        }
-
-        public Requester(string url, RequestMethod method, object data = null)
+        public Requester(string url, RequestMethod method = RequestMethod.GET, object data = null)
         {
             _client = new RestClient();
             _requestMethod = GetRequestMethod(method);
-            _url = Converter.ToUri(url);
+            _url = url.ToUri();
             _data = data;
-        }
-
-        public Requester(string url, string cookie, RequestMethod method, object data = null)
-        {
-            _client = new RestClient();
-            _requestMethod = GetRequestMethod(method);
-            _url = Converter.ToUri(url);
-            _data = data;
-            _cookieValue = cookie;
         }
 
         public IRestResponse GetResponse()

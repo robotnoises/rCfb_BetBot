@@ -111,17 +111,15 @@
     <Compile Include="Tasks\Reply.cs" />
     <Compile Include="Tasks\TaskFactory.cs" />
     <Compile Include="Tasks\Update.cs" />
+    <Compile Include="Utils\Builder.cs" />
     <Compile Include="Utils\Config.cs" />
-    <Compile Include="Utils\Convert.cs" />
     <Compile Include="Utils\Logger.cs" />
     <Compile Include="Utils\Markdown.cs" />
     <Compile Include="Utils\Message.cs" />
-    <Compile Include="Utils\Parse.cs" />
-    <Compile Include="Utils\Crawler.cs" />
+    <Compile Include="Utils\Scraper.cs" />
     <Compile Include="Utils\Comments.cs" />
     <Compile Include="Utils\Requester.cs" />
-    <Compile Include="Utils\Strings.cs" />
-    <Compile Include="Utils\TaskMapper.cs" />
+    <Compile Include="Utils\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -130,6 +128,7 @@
     <None Include="packages.config" />
     <None Include="Resources\confirm.json" />
     <None Include="Resources\decline.json" />
+    <None Include="Resources\greetings.markdown" />
     <None Include="Resources\messages.json" />
     <None Include="Resources\phrases.json" />
     <None Include="Resources\unsubscribe.json" />

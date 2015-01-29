@@ -109,46 +109,7 @@ namespace RedditBet.Bot.Utils
             return permaLink.ToHashString();
         }
     }
-
-    /// <summary>
-    /// Builder for comments scraped from Reddit (non-api)
-    /// </summary>
-    public static class Builder
-    {
-        public static Comment Comment(HtmlNode node, double confidence = 1.0)
-        {
-            var author = node.SelectSingleNode(BuildSelector("a", "class", "author"));
-            var permaLink = node.SelectSingleNode(BuildSelector("a", "class", "bylink"));
-            var upVotes = node.SelectSingleNode(BuildSelector("span", "class", "score unvoted"));
-
-            try
-            {
-                // Originally captured as "### points", so chop-off the " points"
-                var uv = upVotes.InnerText.Split(' ')[0];
-                
-                // ... and Convert to int
-                var uvInt = Convert.ToInt32(uv);
-
-                // Todo: this is a temporary message
-                var message = Config.MarkDown_Test;
-                
-                return new Comment(author.InnerText, permaLink.Attributes["href"].Value, message, uvInt, confidence);
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex);
-
-                return null;
-            }
-        }
-
-        private static string BuildSelector(string element, string attribute, string value)
-        {
-            return string.Format(".//{0}[contains(concat(' ', normalize-space(@{1}), ' '), ' {2} ')]", element, attribute, value);
-        }
-    }
-
-
+    
     /// <summary>
     /// Wrapper for RedditSharp comments (using reddit api)
     /// </summary>
@@ -178,18 +139,6 @@ namespace RedditBet.Bot.Utils
             bt.TaskData = data;
 
             return bt;
-        }
-
-        private string ShortlinkToPermaLink()
-        {
-            // http://www.reddit.com/r/sandboxtest/comments/t3_2tmcdr/_/co0acqg
-
-            var shortLink = _comment.Shortlink.Split('/');
-            var index = Array.IndexOf(shortLink, "comments") + 2;
-
-            shortLink[index] = _comment.LinkTitle;
-
-            return String.Join("/", shortLink);
         }
     }
 }

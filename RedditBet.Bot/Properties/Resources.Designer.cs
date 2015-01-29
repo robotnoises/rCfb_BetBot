@@ -116,6 +116,21 @@ namespace RedditBet.Bot.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to # Test Direct message: greetings
+        ///
+        ///This message is to confirm that you have agreed to participate in a bet. 
+        ///
+        ///[Click here to confirm the bet terms and your opponent](http://foo.bar)
+        ///[Click here to decline the bet](http://foo.bar)
+        ///[Click here to unsubscribe (forever)](http://foo.bar).
+        /// </summary>
+        internal static string greetings {
+            get {
+                return ResourceManager.GetString("greetings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {
         ///    &quot;title&quot;: &quot;phrases&quot;,
         ///    &quot;description&quot;: &quot;A list of key phrases the bot can search for&quot;,
@@ -124,18 +139,18 @@ namespace RedditBet.Bot.Properties {
         ///
         ///        &quot;/u/cfb_betbot&quot;,
         ///        &quot;cfb_betbot&quot;,
-        ///        &quot;aksdxxpLllsfo9 zidjl&quot;, // For testing
+        ///        &quot;fdssf jjyjt jjjjj&quot;, // For testing
         ///
         ///        // Key/Target Phrases
         ///
         ///        &quot;If ... win, I&apos;ll&quot;,
         ///        &quot;If ... lose, I&apos;ll&quot;,
-        ///        // &quot;If ... win, you must&quot;,
-        ///        // &quot;If ... lose, you must&quot;,
         ///        &quot;Anybody wanna bet&quot;,
         ///        &quot;be willing to bet&quot;,
         ///        &quot;bet ... if ... wins&quot;,
-        ///        &quot;bet ... i [rest of string was truncated]&quot;;.
+        ///        &quot;bet ... if ... lose&quot;,
+        ///        &quot;does ... wanna bet?&quot;,
+        ///        &quot;care to make ... inte [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string phrases {
             get {

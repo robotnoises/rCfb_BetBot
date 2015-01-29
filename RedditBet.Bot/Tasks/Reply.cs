@@ -22,20 +22,18 @@ namespace RedditBet.Bot.Tasks
         public Reply(BotTask task)
         {
             var permaLink = task.TaskData.GetValue(Config.TargetUrl_Key);
-            var parser = new PermaLinkParser(permaLink);
-
+            
             _taskId = task.TaskId;
             _permaLink = permaLink;
             _message = task.TaskData.GetValue(Config.Message_Key);
-            _name = parser.GetNameId();
-            _linkName = parser.GetLinkId();
+            _name = permaLink.GetNameId();
+            _linkName = permaLink.GetLinkId();
         }
 
         public void Execute()
         {
             base.StartTimer();
 
-            // var user = _redditContext.GetUser(Config.Reddit_Username);
             var parentComment = _redditContext.GetComment(Config.SubReddit, _name, _linkName);
 
             try
@@ -50,7 +48,7 @@ namespace RedditBet.Bot.Tasks
                 monitorTask.TaskData.Add(new TaskDataItem(Config.TargetUrl_Key, _permaLink));
                 
                 // Start monitoring this reply
-                Api.AddMonitorTask(monitorTask);
+                Api.AddBotTask(monitorTask);
 
                 // Todo: Log all this
 

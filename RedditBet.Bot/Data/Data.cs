@@ -40,8 +40,6 @@ namespace RedditBet.Bot.DataResources
         /// <param name="comments"></param>
         internal static void AddReplyTasks(Comments comments)
         {
-            // Todo: check for unique here
-
             foreach (var comment in comments)
             {
                 var task = comment.ToBotTask();
@@ -53,7 +51,7 @@ namespace RedditBet.Bot.DataResources
             }
         }
 
-        internal static void AddMonitorTask(BotTask task)
+        internal static void AddBotTask(BotTask task)
         {
             AddTask(task);
         }

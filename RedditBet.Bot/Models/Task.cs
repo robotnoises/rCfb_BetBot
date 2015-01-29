@@ -11,6 +11,11 @@ namespace RedditBet.Bot.Models
         public DateTime? TimeLastRun { get; set; }
         public bool Completed { get; set; }
         public TaskData TaskData { get; set; }
+
+        public BotTask(TaskType type = TaskType.Reply)
+        {
+            TaskType = type;
+        }
     }
 
     public class TaskData : List<TaskDataItem>
@@ -37,7 +42,7 @@ namespace RedditBet.Bot.Models
             }
             catch (Exception ex)
             { 
-                // Todo: rethrow as new exception?
+                // Todo: throw new TaskDataKeyNotFound()
             }
 
             return value;

@@ -65,7 +65,7 @@ namespace RedditBet.API.Controllers
 
             _service.Create(model);
 
-            return CreatedAtRoute("DefaultApi", new { id = model.BetId }, bet);
+            return CreatedAtRoute("DefaultApi", new { id = model.BetId }, model);
         }
     }
 }

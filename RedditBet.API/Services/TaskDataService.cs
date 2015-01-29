@@ -10,16 +10,16 @@ namespace RedditBet.API.Controllers
 
     internal class TaskDataService
     {
-        private IUnitOfWork<TaskDataItem> _uow;
+        private IRepository<TaskDataItem> _repo;
 
         public TaskDataService()
         {
-            _uow = new UnitOfWork<TaskDataItem>(DatabaseContext.Create());
+            _repo = new Repository<TaskDataItem>(DatabaseContext.Create());
         }
 
         public TaskDataService(DbContext context)
         {
-            _uow = new UnitOfWork<TaskDataItem>(context);
+            _repo = new Repository<TaskDataItem>(context);
         }
 
         // This method is stupid.
@@ -33,7 +33,7 @@ namespace RedditBet.API.Controllers
 
             try
             {
-                var dataItem = _uow.GetWhere(x => x.Key == item.Key && x.Value == item.Value);
+                var dataItem = _repo.GetWhere(x => x.Key == item.Key && x.Value == item.Value);
 
                 foreach (var d in dataItem)
                 {
@@ -46,26 +46,6 @@ namespace RedditBet.API.Controllers
             {
                 return true;
             }
-                        
-            //var task = _uow
-            //    .GetWhere(x => x.TaskData.GetValue(hashIdKey) == hashId)
-            //    .ToList()
-            //    .OrderByDescending(x => x.TimeAssigned)
-            //    .FirstOrDefault();
-
-            // If nothing is found return false
-            //if (task == null) return false;
-
-            //if (task.TaskType == (int)TaskType.Reply)
-            //{
-            //    // If the TaskType is "Reply", return true, as there is only allowed to be one "Reply" per comment
-            //    return true;
-            //}
-            //else
-            //{
-            //    // Else, the task is either a direct message or update, so just make sure the task is now complete
-            //    return !data.Completed;
-            //}
         }
     }
 }

@@ -10,31 +10,31 @@ namespace RedditBet.API.Services
 
     public class TaskService
     {
-        private IUnitOfWork<BotTask> _uow;
+        private IRepository<BotTask> _repo;
 
         public TaskService()
         {
-            _uow = new UnitOfWork<BotTask>(DatabaseContext.Create());
+            _repo = new Repository<BotTask>(DatabaseContext.Create());
         }
 
         public TaskService(DbContext context)
         {
-            _uow = new UnitOfWork<BotTask>(context);
+            _repo = new Repository<BotTask>(context);
         }
 
         public IEnumerable<BotTask> GetAll() {
-            return _uow.GetAll();
+            return _repo.GetAll();
         }
 
         public IEnumerable<BotTask> GetIncomplete()
         {
-            var foo = _uow.GetAll().Where(x => !x.Completed);
+            var foo = _repo.GetAll().Where(x => !x.Completed);
             return foo;
         }
 
         public BotTask Get(int id)
         {
-            return _uow.Get(id);
+            return _repo.Get(id);
         }
 
         public void Add(BotTask t)
@@ -43,7 +43,7 @@ namespace RedditBet.API.Services
             t.TimeCompleted = null;
             t.Completed = false;
 
-            _uow.Add(t);
+            _repo.Add(t);
         }
 
         public void Update(BotTask t)
@@ -55,12 +55,12 @@ namespace RedditBet.API.Services
                 // Todo: throw Exception explaining they used the wrong method to mark this Task complete
             }
 
-            _uow.Update(t);
+            _repo.Update(t);
         }
 
         public void MarkComplete(int id)
         {
-            var t = _uow.Get(id);
+            var t = _repo.Get(id);
 
             if (t == null) return;
 
@@ -68,16 +68,16 @@ namespace RedditBet.API.Services
             t.TimeCompleted = DateTime.UtcNow;
             t.TimeLastRun = t.TimeCompleted;
 
-            _uow.Update(t);
+            _repo.Update(t);
         }
 
         public void Remove(int id)
         {
-            var t = _uow.Get(id);
+            var t = _repo.Get(id);
             
             if (t != null)
             {
-                _uow.Remove(t);
+                _repo.Remove(t);
             }
         }
     }

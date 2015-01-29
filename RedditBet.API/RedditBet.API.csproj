@@ -226,8 +226,8 @@
     <Compile Include="Services\DataService.cs" />
     <Compile Include="Services\FulfillmentService.cs" />
     <Compile Include="Services\TempPageService.cs" />
-    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\UnitOfWork.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\Repository.cs" />
     <Compile Include="Services\BlacklistService.cs" />
     <Compile Include="Services\LogService.cs" />
     <Compile Include="Services\TaskService.cs" />

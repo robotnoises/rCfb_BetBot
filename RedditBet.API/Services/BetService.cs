@@ -9,28 +9,28 @@ namespace RedditBet.API.Services
     
     public class BetService
     {
-        private readonly IUnitOfWork<Bet> _uow;
+        private readonly IRepository<Bet> _repo;
 
         public BetService()
         {
-            _uow = new UnitOfWork<Bet>(DatabaseContext.Create());
+            _repo = new Repository<Bet>(DatabaseContext.Create());
         }
 
         public BetService(DbContext context)
         {
-            _uow = new UnitOfWork<Bet>(context);
+            _repo = new Repository<Bet>(context);
         }
 
         public Bet Get(int id)
         {
-            var bet = _uow.Get(id);
+            var bet = _repo.Get(id);
 
             return bet;
         }
 
         public IEnumerable<Bet> GetAll()
         {
-            return _uow.GetAll();
+            return _repo.GetAll();
         }
 
         public void Create(Bet b)
@@ -45,17 +45,17 @@ namespace RedditBet.API.Services
 
             b.TempPages.Add(tp);
 
-            _uow.Add(b);
+            _repo.Add(b);
         }
 
         public void Update(Bet b)
         {
-            _uow.Update(b);
+            _repo.Update(b);
         }
 
         public void Remove(Bet b)
         {
-            _uow.Remove(b);
+            _repo.Remove(b);
         }
 
         private TempPageData GenerateTempPage(string userName)

@@ -12,16 +12,16 @@ namespace RedditBet.API.Services
     
     internal class TempPageService
     {
-        private IUnitOfWork<TempPageData> _uow;
+        private IRepository<TempPageData> _repo;
 
         public TempPageService()
         {
-            _uow = new UnitOfWork<TempPageData>(DatabaseContext.Create());
+            _repo = new Repository<TempPageData>(DatabaseContext.Create());
         }
 
         public TempPageService(DbContext context)
         {
-            _uow = new UnitOfWork<TempPageData>(context);
+            _repo = new Repository<TempPageData>(context);
         }
 
         public TempPageTokenStatus ValidateToken(string token)
@@ -30,7 +30,7 @@ namespace RedditBet.API.Services
 
             if (string.IsNullOrEmpty(token)) return TempPageTokenStatus.INVALID;
 
-            var result = _uow.GetWhere(x => x.Token == token);
+            var result = _repo.GetWhere(x => x.Token == token);
             
             if (result.Count() > 1) return TempPageTokenStatus.INVALID;
             

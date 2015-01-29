@@ -15,26 +15,24 @@ namespace RedditBet.Bot.Tasks
         private int _taskId;
         private string _permaLink;
         private string _message;
-        private string _name;
-        private string _linkName;
+        private string _nameId;
+        private string _linkId;
         private const string _taskName = "Reply";
 
         public Reply(BotTask task)
         {
-            var permaLink = task.TaskData.GetValue(Config.TargetUrl_Key);
-            
-            _taskId = task.TaskId;
-            _permaLink = permaLink;
+            _permaLink = task.TaskData.GetValue(Config.TargetUrl_Key);
             _message = task.TaskData.GetValue(Config.Message_Key);
-            _name = permaLink.GetNameId();
-            _linkName = permaLink.GetLinkId();
+            _taskId = task.TaskId;
+            _nameId = _permaLink.GetNameId();
+            _linkId = _permaLink.GetLinkId();
         }
 
         public void Execute()
         {
             base.StartTimer();
 
-            var parentComment = _redditContext.GetComment(Config.SubReddit, _name, _linkName);
+            var parentComment = _redditContext.GetComment(Config.SubReddit, _nameId, _linkId);
 
             try
             {
@@ -50,7 +48,7 @@ namespace RedditBet.Bot.Tasks
                 // Start monitoring this reply
                 Api.AddBotTask(monitorTask);
 
-                // Todo: Log all this
+                // Todo: Log all of this
 
             }
             catch (RateLimitException ex)

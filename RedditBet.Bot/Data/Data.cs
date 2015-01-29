@@ -63,6 +63,15 @@ namespace RedditBet.Bot.DataResources
             ProcessResponse(requester.GetResponse());
         }
 
+        /// <summary>
+        /// Todo
+        /// </summary>
+        /// <param name="comments"></param>
+        internal static void AddBet()
+        {
+            throw new NotImplementedException();
+        }
+
         internal static void AddLog(LogModel log)
         { 
             var requester = new Requester(string.Format("{0}{1}", Config.ApiUrl, Config.Api_Log), RequestMethod.POST, log);

@@ -8,7 +8,7 @@ namespace RedditBet.Bot.Utils
 
     public static class RedditComment
     {
-        public static string Clean(this string input)
+        public static string ScrubRedditComment(this string input)
         {
             var i = input;
             var pattern = new Regex(@"\(\d\Wchild[ren]{0,3}\)(.)");
@@ -56,7 +56,7 @@ namespace RedditBet.Bot.Utils
             var random = new Random().Next(1, 9999);
             var url = input.Split(new char[] { '&', '?' });
 
-            // Todo, confirm is URL
+            // Todo, confirm is URL, throw Exception if not
 
             // No existing query string
             if (url.Length == 1)
@@ -72,11 +72,14 @@ namespace RedditBet.Bot.Utils
 
         public static Uri ToUri(this string url)
         {
+            // Todo, confirm is URL, throw Exception if not
             return new Uri(url);
         }
 
         public static string GetNameId(this string permaLink)
         {
+            // Todo, confirm is reddit permalink-style url
+
             if (string.IsNullOrEmpty(permaLink)) return string.Empty; // Todo throw exception
 
             var parts = permaLink.Split('/');
@@ -87,6 +90,8 @@ namespace RedditBet.Bot.Utils
 
         public static string GetLinkId(this string permaLink)
         {
+            // Todo, confirm is reddit permalink-style url
+
             if (string.IsNullOrEmpty(permaLink)) return string.Empty; // Todo throw exception
 
             var parts = permaLink.Split('/');

@@ -47,7 +47,7 @@ namespace RedditBet.Bot.Utils
             for (var i = 1; i < nodes.Count; i++)
             {
                 var currentNode = nodes[i];
-                var text = currentNode.InnerText.Clean();
+                var text = currentNode.InnerText.ScrubRedditComment();
                 var locker = new object();
 
                 if (!phrazes.HasMatch(text)) continue;

@@ -65,7 +65,8 @@
       <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Phraze">
       <HintPath>..\packages\Phraze\Phraze.dll</HintPath>
@@ -80,6 +81,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -128,11 +130,11 @@
     <None Include="packages.config" />
     <None Include="Resources\confirm.json" />
     <None Include="Resources\decline.json" />
-    <None Include="Resources\greetings.markdown" />
+    <None Include="Resources\greetings.md" />
     <None Include="Resources\messages.json" />
     <None Include="Resources\phrases.json" />
     <None Include="Resources\unsubscribe.json" />
-    <Resource Include="Resources\test.markdown" />
+    <None Include="Resources\test.md" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -8,16 +8,17 @@ namespace RedditBet.API.Controllers
 {
     using RedditBet.API.Models;
     using RedditBet.API.Services;
+    using System.Web.Http.Cors;
 
-    [RoutePrefix("api/bet")]
+    [RoutePrefix("api/bet"), EnableCors(origins: "*", headers: "*", methods: "*")]
     public class BetController : ApiController
     {
         private BetService _service = new BetService();
 
         // GET: api/Bet
-        public IEnumerable<Bet> GetBet()
+        public BetCollection GetBet()
         {
-            return _service.GetAll();
+            return new BetCollection(_service.GetAll());
         }
 
         // GET: api/Bet/5

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -41,6 +42,17 @@ namespace RedditBet.API.Models
         public DateTime EventDate { get; set; }
         public DateTime? CutoffDate { get; set; }
         public List<TempPageData> TempPages { get; set; }
+    }
+
+    public class BetCollection
+    {
+        [JsonProperty("bets")]
+        public IEnumerable<Bet> Bets { get; set; }
+
+        public BetCollection(IEnumerable<Bet> bets)
+        {
+            this.Bets = bets;
+        }
     }
 
 

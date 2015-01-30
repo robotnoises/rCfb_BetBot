@@ -79,7 +79,8 @@ namespace RedditBet.Bot.Properties {
         ///        &quot;definitely&quot;,
         ///        &quot;by all means&quot;,
         ///        &quot;yep&quot;,
-        ///        &quot;of course&quot;
+        ///        &quot;of course&quot;,
+        ///        &quot;sounds good&quot;
         ///    ]
         ///}
         ///.
@@ -120,9 +121,9 @@ namespace RedditBet.Bot.Properties {
         ///
         ///This message is to confirm that you have agreed to participate in a bet. 
         ///
-        ///[Click here to confirm the bet terms and your opponent](http://foo.bar)
-        ///[Click here to decline the bet](http://foo.bar)
-        ///[Click here to unsubscribe (forever)](http://foo.bar).
+        ///[Click here to confirm the bet terms and your opponent](%link%)
+        ///
+        ///.
         /// </summary>
         internal static string greetings {
             get {

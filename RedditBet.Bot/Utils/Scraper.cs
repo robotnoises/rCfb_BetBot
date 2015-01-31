@@ -15,7 +15,7 @@ namespace RedditBet.Bot.Utils
         private HtmlDocument _doc;
         private Comments _comments;
 
-        public Scraper(string url, bool clearCache = false)
+        public Scraper(string url, bool clearCache = true)
         {
             var client = new WebClient();
 
@@ -70,6 +70,20 @@ namespace RedditBet.Bot.Utils
             }
 
             return matches;
+        }
+
+        public ICollection<string> GetAll(string attribute, string attributeValue)
+        {
+            var items = new HashSet<string>();
+            var locker = new object();
+
+            var nodes = _doc.DocumentNode.SelectNodes("//*[contains(concat(' ', normalize-space(@" + attribute + "), ' '), ' " + attributeValue + " ')]");
+
+            Parallel.ForEach(nodes, node => {
+                lock (locker) items.Add(node.InnerText.ScrubRedditComment());
+            });
+
+            return items;
         }
     }
 }

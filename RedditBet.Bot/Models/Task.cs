@@ -72,7 +72,7 @@ namespace RedditBet.Bot.Models
     {
         public string Key { get; set; }
         public string Value { get; set; }
-
+        
         public TaskDataItem(string key, string value)
         {
             Key = key;

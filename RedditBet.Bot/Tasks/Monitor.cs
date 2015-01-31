@@ -58,8 +58,8 @@ namespace RedditBet.Bot.Tasks
                 var userName = _task.TaskData.GetValue(Config.Username_Key);
                 var message = Message.PrivateMsgGreet(token);
                 var targetUrl = _task.TaskData.GetValue(Config.TargetUrl_Key);
-
-                Api.AddBotTask(Builder.DirectMessageTask(userName, message, targetUrl));
+                var threadUserNames = GetThreadUserNames(targetUrl);
+                Api.AddBotTask(Builder.DirectMessageTask(userName, message, targetUrl, threadUserNames));
                 
                 // Add a new Task to Update the Original Bot reply
                 
@@ -94,6 +94,15 @@ namespace RedditBet.Bot.Tasks
             
             // Did we get a top match?
             return topMatch != null;
+        }
+
+        private string GetThreadUserNames(string permaLink)
+        {
+            var crawler = new Scraper(permaLink, true);
+
+            var userNames = crawler.GetAll("class", "author");
+
+            return String.Join(",", userNames);
         }
     }
 }

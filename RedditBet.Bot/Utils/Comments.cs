@@ -113,11 +113,11 @@ namespace RedditBet.Bot.Utils
     /// <summary>
     /// Wrapper for RedditSharp comments (using reddit api)
     /// </summary>
-    internal class ApiComment : RedditSharp.Things.Comment
+    internal class BetBotComment : RedditSharp.Things.Comment
     {
         private RedditSharp.Things.Comment _comment;
 
-        public ApiComment(RedditSharp.Things.Comment comment)
+        public BetBotComment(RedditSharp.Things.Comment comment)
         {
             _comment = (RedditSharp.Things.Comment)comment.Parent;
         }

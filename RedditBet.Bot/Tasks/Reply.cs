@@ -36,7 +36,7 @@ namespace RedditBet.Bot.Tasks
 
             try
             {
-                var botComment = new ApiComment(parentComment.Reply(Message.Test()));
+                var botComment = new BetBotComment(parentComment.Reply(Message.Test()));
 
                 // Mark Task as Complete
                 Api.MarkTaskComplete(_taskId);

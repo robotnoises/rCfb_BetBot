@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RedditBet.API.Services
 {
@@ -42,7 +43,7 @@ namespace RedditBet.API.Services
                 var tpService = new TempPageService();
                 tp.Token = tpService.GenerateToken();
             }
-
+            
             b.TempPages.Add(tp);
 
             _repo.Add(b);
@@ -58,11 +59,11 @@ namespace RedditBet.API.Services
             _repo.Remove(b);
         }
 
-        private TempPageData GenerateTempPage(string userName)
+        private TempPageData GenerateTempPage(string betSolicitor)
         {
             var tempPage = new TempPageData();
                         
-            tempPage.UserName = userName;
+            tempPage.UserName = betSolicitor;
 
             return tempPage;
         }

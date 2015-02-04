@@ -34,7 +34,7 @@ namespace RedditBet.API.Controllers
 
             return Ok(bet);
         }
-
+        
         // PUT: api/Bet/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutBet(BetViewModel bet)

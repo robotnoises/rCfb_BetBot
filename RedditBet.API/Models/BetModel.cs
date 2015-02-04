@@ -6,14 +6,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RedditBet.API.Models
 {
-    public class Bet
+    public class Bet : Mappable<Bet, BetViewModel>
     {
         [Key]
         public int BetId { get; set; }
         public string Solicitor { get; set; }
         public string Challenger { get; set; }
         public string Terms { get; set; }
-        public DateTime EventDate { get; set; }
+        public string PotentialChallengers { get; set; }
+        public DateTime? EventDate { get; set; }
         public DateTime? CutoffDate { get; set; }
         public bool IsConfirmed { get; set; }
         public int Score { get; set; }
@@ -31,17 +32,28 @@ namespace RedditBet.API.Models
 
     public class BetViewModel : Mappable<BetViewModel, Bet>
     {
+        [JsonProperty("bet_id")]
         public int BetId { get; set; }
-        [Required]
+        [Required, JsonProperty("solicitor")]
         public string Solicitor { get; set; }
+        [JsonProperty("challenger")]
         public string Challenger { get; set; }
-        [Required]
+        /// <summary>
+        /// A comma-delimeted list of other usernames involved in the thread
+        /// </summary>
+        [JsonProperty("potential_challengers")]
+        public string PotentialChallengers { get; set; }
+        [JsonProperty("terms")]
         public string Terms { get; set; }
+        [JsonProperty("score")]
         public int Score { get; set; }
-        [Required]
-        public DateTime EventDate { get; set; }
+        [JsonProperty("event_date")]
+        public DateTime? EventDate { get; set; }
+        [JsonProperty("cutoff_data")]
         public DateTime? CutoffDate { get; set; }
-        public List<TempPageData> TempPages { get; set; }
+        
+        // [JsonProperty("temp_pages")]
+        // public List<TempPageData> TempPages { get; set; }
     }
 
     public class BetCollection

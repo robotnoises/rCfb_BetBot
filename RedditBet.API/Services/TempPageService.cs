@@ -84,5 +84,10 @@ namespace RedditBet.API.Services
                 return result.ToString();
             }
         }
+
+        public TempPageData GetForToken(string token)
+        {
+            return _repo.GetWhere(x => x.Token == token).FirstOrDefault();
+        }
     }
 }

@@ -23,3 +23,7 @@ BuildProcessTemplates
 
 *.mdf
 *.ldf
+
+# Web (This is currently tracked in another repo)
+
+RedditBet.Web/

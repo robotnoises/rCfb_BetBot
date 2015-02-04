@@ -16,6 +16,8 @@ namespace RedditBet.API.Models
         public bool Visited { get; set; }
         public string Token { get; set; }
 
+        public virtual Bet Bet { get; set; }
+
         private const int days_until_stale = 5;
         private const int numCharsForToken = 30;
 
@@ -58,9 +60,9 @@ namespace RedditBet.API.Models
         private const string _validMsg = "This token is valid.";
         private const string _invalidMsg = "This token is invalid.";
         private const string _usedMsg = "This token has already been used.";
-        private const string _staleMsg = "This token is too old to be valid.";
+        private const string _staleMsg = "This token is too old.";
 
-        public TokenValidationResponse(TempPageTokenStatus status)
+        public TokenValidationResponse(TempPageTokenStatus status, int betId = 0)
         {
             IsValid = (status == TempPageTokenStatus.OK);
             Message = GetMessage(status);

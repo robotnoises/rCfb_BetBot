@@ -95,6 +95,7 @@
     <Compile Include="Enums\LogTypes.cs" />
     <Compile Include="Enums\RequestTypes.cs" />
     <Compile Include="Enums\TaskType.cs" />
+    <Compile Include="Models\Bet.cs" />
     <Compile Include="Models\Log.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Tasks\BotTasks.cs" />

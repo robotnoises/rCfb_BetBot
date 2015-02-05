@@ -9,7 +9,7 @@ namespace RedditBet.Bot.Utils
     {
         #region Bot Tasks
 
-        public static BotTask DirectMessageTask(string userName, string message, string targetUrl, string threadUserNames)
+        public static BotTask DirectMessageTask(string userName, string message, string targetUrl)
         {
             var bt = new BotTask(TaskType.DirectMessage);
             var taskData = new TaskData();
@@ -17,7 +17,7 @@ namespace RedditBet.Bot.Utils
             taskData.Add(new TaskDataItem(Config.Username_Key, userName));
             taskData.Add(new TaskDataItem(Config.Message_Key, message));
             taskData.Add(new TaskDataItem(Config.TargetUrl_Key, targetUrl));
-            taskData.Add(new TaskDataItem(Config.ThreadUsernames_Key, threadUserNames));
+            
             bt.TaskData = taskData;
 
             return bt;

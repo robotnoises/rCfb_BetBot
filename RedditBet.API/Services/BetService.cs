@@ -43,8 +43,18 @@ namespace RedditBet.API.Services
                 var tpService = new TempPageService();
                 tp.Token = tpService.GenerateToken();
             }
-            
-            b.TempPages.Add(tp);
+
+            if (b.TempPages == null)
+            {
+                var tpd = new List<TempPageData>();
+                tpd.Add(tp);
+
+                b.TempPages = tpd;
+            }
+            else 
+            {
+                b.TempPages.Add(tp);
+            }
 
             _repo.Add(b);
         }

@@ -67,10 +67,26 @@ namespace RedditBet.Bot.DataResources
         /// Todo
         /// </summary>
         /// <param name="comments"></param>
-        internal static string AddBet()
+        internal static string AddBet(string solicitor, string threadUsernames)
         {
-            // Todo, needs to return the TempPage Token
-            return "";
+            var bet = new Bet(solicitor, threadUsernames);
+            var requester = new Requester(string.Format("{0}{1}", Config.ApiUrl, Config.Api_Bet), RequestMethod.POST, bet);
+            var response = requester.GetResponse();
+            var token = "";
+
+            ProcessResponse(response);
+
+            try
+            {
+                dynamic json =  JsonConvert.DeserializeObject(response.Content);
+                token = json.token;
+            }
+            catch (Exception ex)
+            {
+                // Todo log?
+            }
+
+            return token;
         }
 
         internal static void AddLog(LogModel log)

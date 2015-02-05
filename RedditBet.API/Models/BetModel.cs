@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace RedditBet.API.Models
 {
@@ -38,9 +39,6 @@ namespace RedditBet.API.Models
         public string Solicitor { get; set; }
         [JsonProperty("challenger")]
         public string Challenger { get; set; }
-        /// <summary>
-        /// A comma-delimeted list of other usernames involved in the thread
-        /// </summary>
         [JsonProperty("potential_challengers")]
         public string PotentialChallengers { get; set; }
         [JsonProperty("terms")]
@@ -51,9 +49,6 @@ namespace RedditBet.API.Models
         public DateTime? EventDate { get; set; }
         [JsonProperty("cutoff_data")]
         public DateTime? CutoffDate { get; set; }
-        
-        // [JsonProperty("temp_pages")]
-        // public List<TempPageData> TempPages { get; set; }
     }
 
     public class BetCollection
@@ -67,5 +62,17 @@ namespace RedditBet.API.Models
         }
     }
 
+    public class BetCreationResponse
+    {
+        [JsonProperty("bet_id")]
+        public int BetId { get; set; }
+        [JsonProperty("token")]
+        public string Token { get; set; }
 
+        public BetCreationResponse(Bet b)
+        {
+            BetId = b.BetId;
+            Token = b.TempPages.Where(x => x.IsFresh()).Select(x => x.Token).FirstOrDefault();
+        }
+    }
 }

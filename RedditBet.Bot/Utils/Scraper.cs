@@ -41,7 +41,7 @@ namespace RedditBet.Bot.Utils
             var nodes = _doc.DocumentNode.SelectNodes("//*[contains(concat(' ', normalize-space(@" + attribute + "), ' '), ' " + attributeValue + " ')]");
 
             // If there aren't any comments beyond the OP, there is no need to continue
-            if (nodes.Count <= 1) return matches;
+            if (nodes == null || nodes.Count <= 1) return matches;
 
             // Exclude the top node, as this is the parent comment for the entire thread
             for (var i = 1; i < nodes.Count; i++)

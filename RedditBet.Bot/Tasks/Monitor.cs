@@ -49,17 +49,16 @@ namespace RedditBet.Bot.Tasks
             // Check to see if user confirms
             if (!foundMatch && FoundMatchForOP(crawler.GetMatchedComments("class", "entry", Config.GetConfirmationPhrases())))
             {
-                // Make a call to API to add a new bet record
+                var userName = _task.TaskData.GetValue(Config.Username_Key);
+                var targetUrl = _task.TaskData.GetValue(Config.TargetUrl_Key);
 
-                var token = Api.AddBet();
+                // Make a call to API to add a new bet record
+                var token = Api.AddBet(userName, GetThreadUserNames(targetUrl));
+
+                var message = Message.PrivateMsgGreet(token);
 
                 // Add a new Task to send a DM to the OP
-                
-                var userName = _task.TaskData.GetValue(Config.Username_Key);
-                var message = Message.PrivateMsgGreet(token);
-                var targetUrl = _task.TaskData.GetValue(Config.TargetUrl_Key);
-                var threadUserNames = GetThreadUserNames(targetUrl);
-                Api.AddBotTask(Builder.DirectMessageTask(userName, message, targetUrl, threadUserNames));
+                Api.AddBotTask(Builder.DirectMessageTask(userName, message, targetUrl));
                 
                 // Add a new Task to Update the Original Bot reply
                 

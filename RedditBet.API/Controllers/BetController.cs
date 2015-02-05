@@ -52,7 +52,7 @@ namespace RedditBet.API.Controllers
         }
 
         // POST: api/Bet
-        [ResponseType(typeof(Bet))]
+        [ResponseType(typeof(BetCreationResponse))]
         public IHttpActionResult PostBet(BetViewModel bet)
         {
             if (bet.BetId != 0) return BadRequest("A BetId must be 0 for POST requests.");
@@ -66,7 +66,9 @@ namespace RedditBet.API.Controllers
 
             _service.Create(model);
 
-            return CreatedAtRoute("DefaultApi", new { id = model.BetId }, model);
+            var response = new BetCreationResponse(model);
+
+            return CreatedAtRoute("DefaultApi", new { id = response.BetId }, response);
         }
     }
 }

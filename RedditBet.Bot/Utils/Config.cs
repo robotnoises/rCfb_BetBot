@@ -31,8 +31,14 @@ namespace RedditBet.Bot.Utils
         internal static string Api_Tasks_MarkTaskComplete { get { return ConfigurationManager.AppSettings["api_Tasks_MarkComplete"]; } }
         internal static string Api_Tasks_Unique { get { return ConfigurationManager.AppSettings["api_Tasks_Unique"]; } }
         
+        // Bets
+        internal static string Api_Bet { get { return ConfigurationManager.AppSettings["api_Bet"]; } }
+
         // Log
         internal static string Api_Log { get { return ConfigurationManager.AppSettings["api_Log"]; } }
+
+        // Web
+        internal static string Web_ConfirmBet { get { return ConfigurationManager.AppSettings["web_confirm"]; } }
 
         #endregion
                

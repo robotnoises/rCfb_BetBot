@@ -8,12 +8,12 @@ namespace RedditBet.Bot.Models
     {
         public int bet_Id { get; set; }
         public string solicitor { get; set; }
-        public string challenger { get; set; }
         public string potential_challengers { get; set; }
-        public string terms { get; set; }
-        public int score { get; set; }
-        public DateTime? event_date { get; set; }
-        public DateTime? cutoff_date { get; set; }
+        //public string challenger { get; set; }
+        //public string terms { get; set; }
+        //public int score { get; set; }
+        //public DateTime? event_date { get; set; }
+        //public DateTime? cutoff_date { get; set; }
 
         public Bet(string solicitor, string threadUserNames)
         {

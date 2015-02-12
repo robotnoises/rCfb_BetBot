@@ -241,6 +241,7 @@
     <Compile Include="Services\LogService.cs" />
     <Compile Include="Services\TaskService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utils\AllowCrossSiteJSON.cs" />
     <Compile Include="Utils\ObjectMapping.cs" />
     <Compile Include="Utils\StringExtensions.cs" />
   </ItemGroup>

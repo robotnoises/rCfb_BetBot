@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Newtonsoft.Json;
 
 namespace RedditBet.API.Models
 {
@@ -17,7 +17,8 @@ namespace RedditBet.API.Models
         public string PotentialChallengers { get; set; }
         public DateTime? EventDate { get; set; }
         public DateTime? CutoffDate { get; set; }
-        public bool IsConfirmed { get; set; }
+        public bool SolicitorConfirmed { get; set; }
+        public bool ChallengerConfirmed { get; set; }
         public int Score { get; set; }
         
         public virtual List<TempPageData> TempPages { get; set; }
@@ -49,6 +50,10 @@ namespace RedditBet.API.Models
         public DateTime? EventDate { get; set; }
         [JsonProperty("cutoff_data")]
         public DateTime? CutoffDate { get; set; }
+        [JsonProperty("solicitor_confirmed")]
+        public bool SolicitorConfirmed { get; set; }
+        [JsonProperty("challenger_confirmed")]
+        public bool ChallengerConfirmed { get; set; }
     }
 
     public class BetCollection
